@@ -13,20 +13,21 @@ const useStyles = makeStyles((theme) => ({
     footer: {
         textAlign: "center",
         background: "#113163",
-        color: "#fff"
     },
     cont: {
-        marginTop: "20px"
+        marginTop: "20px",
+        color: "#fff"
     },
     text: {
         fontFamily: "Rationale",
+        color: "#fff"
     },
     icons: {
         width: "50px"
     }
 }));
 
-export default function Footer() {
+export default function Ppfooter() {
     const classes = useStyles();
     return (
         <React.Fragment>

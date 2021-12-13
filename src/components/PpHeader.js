@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Header() {
+export default function PPHeader() {
   const classes = useStyles();
 
     return (

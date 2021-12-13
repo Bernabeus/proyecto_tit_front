@@ -71,12 +71,6 @@ const useStyles = makeStyles((theme) => ({
     },
     text2: {
         fontFamily: "Rationale",
-        marginLeft: "160px",
-        marginTop: "-20px",
-        color: "#113163"
-    },
-    text3: {
-        fontFamily: "Rationale",
         marginTop: "20px",
         marginLeft: "60px",
         marginRight: "60px",
@@ -88,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Body() {
+export default function Ppbody() {
   const classes = useStyles();
 
     return (
@@ -166,19 +160,12 @@ export default function Body() {
                 </Grid>
             <Grid container spacing={0}>
                 <Grid item xs={12} sm={6}>
-                    <Grid item xs={12} sm={6}>
                         <Typography variant="h2" gutterBottom className={classes.text1}>
-                            NUESTRO
+                            NUESTRO CURSO
                         </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography variant="h2" noWrap className={classes.text2}>
-                            CURSO
-                        </Typography>
-                    </Grid>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h3" gutterBottom className={classes.text3}>
+                    <Typography variant="h3" gutterBottom className={classes.text2}>
                         Es perfecto para obtener conocimientos sobre ciberseguridad
                         y mejora tu protección.
                     </Typography>

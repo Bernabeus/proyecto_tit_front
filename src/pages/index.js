@@ -1,6 +1,6 @@
-import Header from "@/components/Header";
-import Body from "@/components/Body";
-import Footer from "@/components/Footer";
+import Header from "@/components/PpHeader";
+import Body from "@/components/PpBody";
+import Footer from "@/components/PpFooter";
 import style from "@/styles/Main.module.css";
 
 const IndexPage = () => {
