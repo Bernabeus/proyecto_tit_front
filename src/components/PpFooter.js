@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
     cont: {
         marginTop: "20px",
-        color: "#fff"
+        color: "#fff",
     },
     text: {
         fontFamily: "Rationale",

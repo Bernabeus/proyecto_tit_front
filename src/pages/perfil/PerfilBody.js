@@ -12,26 +12,30 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles((theme) => ({
     container: {
         backgroundColor: "#fff",
         border: "1px solid #000000",
     },
+    cont1: {
+        display: "flex",
+        alignItems: "center",
+        margin: "0 auto",
+        width: 1000,
+        height: 400,
+    },
     contP: {
         backgroundColor: "#009A7E",
         border: "2px solid #000000",
-        width: 1000,
-        height: 400,
         borderRadius: 100,
-        marginBottom: 60,
-        marginTop: 60,
-        marginLeft: 100,
+        height: 320,
         alignContent: "center"
     },
     contP1: {
         textAlign: "center",
-        alignItems: "center"
+        alignContent: "center"
     },
     text: {
         fontFamily: "Rationale",
@@ -49,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
         borderTopLeftRadius: 59,
         borderTopRightRadius: 59,
         borderBottomRightRadius: 59,
-        borderBottomLeftRadius: 59,
+        borderBottomLeftRadius: 59
     },
     boxTemaTi: {
         borderBottom: "3px solid #000",
@@ -70,6 +74,12 @@ const useStyles = makeStyles((theme) => ({
     heading: {
         fontFamily: "Rationale",
         color: "#113163"
+    },
+    progr:{
+        width: 300,
+        height: 20
+    },
+    text23: {
     }
 }));
 
@@ -80,9 +90,10 @@ export default function PerfilBody() {
     <React.Fragment>
         <CssBaseline />
             <Container >
-            <Grid spacing={0} className={classes.container}>
+            <Grid className={classes.container}>
+                <Grid  className={classes.cont1}>
                 <Grid container className={classes.contP}>
-                    <Grid containeritem xs={12} sm={6} className={classes.contP1}>
+                    <Grid containeritem xs={6} className={classes.contP1}>
                         <Grid item xs={12} className={classes.boxP}>
                             <Box>
                                 <Image
@@ -98,16 +109,18 @@ export default function PerfilBody() {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6}>
                         <Grid item xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
                                 Nombre: 
                             </Typography>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} className={classes.text23}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
                                 Experiencia:
+                                <LinearProgress variant="determinate" className={classes.progr} value={40} ></LinearProgress>
                             </Typography>
+                            
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
@@ -125,8 +138,8 @@ export default function PerfilBody() {
                             </Typography>
                         </Grid>
                     </Grid>
+                    </Grid>
                 </Grid>
-
                 <Accordion className={classes.accord}>
                     <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}

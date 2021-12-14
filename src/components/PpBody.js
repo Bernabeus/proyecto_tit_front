@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     box: {
         background: "#113163",
         height: 10,
+    
     },
     box2: {
         background: "#113163",
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     box1: {
         marginTop: "80px",
-        marginBottom: "80px"
+        marginBottom: "80px",
     },
     buttons: {
         textAlign: "center",
@@ -95,7 +96,7 @@ export default function Ppbody() {
                     </Grid>
                 <Grid container spacing={2} className={classes.buttons}>
                     <Grid item xs={12} sm={6}>
-                        <Button variant="outlined" className={classes.buttonIn}>
+                        <Button variant="outlined" className={classes.buttonIn} onClick={handleOpenI}>
                             Iniciar Sesión
                         </Button>
                     </Grid>
