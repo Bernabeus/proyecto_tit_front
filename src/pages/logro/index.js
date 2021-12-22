@@ -8,7 +8,7 @@ const LogroPage = () => {
     <div className={style.container}>
       <Header></Header>
       <Body></Body>
-      <Footer></Footer>
+      <Header></Header>
     </div>
   );
 };

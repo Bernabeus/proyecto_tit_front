@@ -8,22 +8,13 @@ const useStyles = makeStyles((theme) => ({
     header: {
         textAlign: "center",
         background: "#113163",
-        height: 100,
+        height: 70,
         alignContent: "center",
     },
 }));
 
 export default function Header() {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     return (
         <React.Fragment>
