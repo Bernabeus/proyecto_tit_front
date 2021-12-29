@@ -6,15 +6,11 @@ import "@fontsource/rationale";
 import Box from '@material-ui/core/Box';
 import Image from "next/image";
 import medalla from "../../../public/images/medalla.png";
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
-import { useAuth } from "@/contexts/auth.js";
 import { useState } from "react";
 import User from "../../api/user";
+import Themes from "@/components/ThemeComponent.js";
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,54 +40,19 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Rationale",
         color: "#fff"
     },
-    boxTema: {
-        width: 230,
-        height: 300, 
-        borderRadius: 70,
-        border: "3px solid #000",
-        textAlign: "center",
-        marginTop: 30,
-        marginLeft: 30,
-        marginBottom: 30,
-        borderTopLeftRadius: 59,
-        borderTopRightRadius: 59,
-        borderBottomRightRadius: 59,
-        borderBottomLeftRadius: 59
-    },
-    boxTemaTi: {
-        borderBottom: "3px solid #000",
-        backgroundColor: "#009A7E",
-        borderTopLeftRadius: 75,
-        borderTopRightRadius: 75,
-    },
-    boxTemaTe: {
-        backgroundColor: "#113163",
-        height: 239,
-        borderBottomRightRadius: 57,
-        borderBottomLeftRadius: 57,
-    },
-    accord: {
-        backgroundColor: "#b6b6b6",
-        marginBottom:40,
-    },
-    heading: {
-        fontFamily: "Rationale",
-        color: "#113163"
-    },
     progr:{
         width: 300,
         height: 20
     },
-    text23: {
-    }
 }));
 
 export default function PerfilBody() {
     const classes = useStyles();
-    const [ user, setUser] = useState([]);
+    const [ user, setUser ] = useState([]);
+
     useEffect(() => {
         getAuthenticatedUser();
-        console.log(user.id);
+        
     }, []);
 
     async function getAuthenticatedUser() {
@@ -151,89 +112,14 @@ export default function PerfilBody() {
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
-                                Progreso del curso: {user ? user.progress: ''} %
+                                Progreso del curso: {user ? user.progress: '' }%
                             </Typography>
                         </Grid>
                     </Grid>
                     </Grid>
+                    
                 </Grid>
-                <Accordion className={classes.accord}>
-                    <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    >
-                        <Typography variant="h3" className={classes.heading}>Básico</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Grid item={true} xs={12}>
-                            <Box className={classes.boxTema}>
-                                <Grid className={classes.boxTemaTi}>
-                                    <Typography variant="h4" gutterBottom className={classes.text}>
-                                        Titulo
-                                    </Typography>
-                                </Grid>
-                                <Grid className={classes.boxTemaTe}>
-                                    <Typography variant="h4" gutterBottom className={classes.text}>
-                                        Texto
-                                    </Typography>
-                                </Grid>
-                            </Box>
-                        </Grid>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion className={classes.accord}>
-                    <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    >
-                        <Typography variant="h3" className={classes.heading}>Intermedio</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Grid item={true} xs={12}>
-                            <Box className={classes.boxTema}>
-                                <Grid className={classes.boxTemaTi}>
-                                    <Typography variant="h4" gutterBottom className={classes.text}>
-                                        Titulo
-                                    </Typography>
-                                </Grid>
-                                <Grid className={classes.boxTemaTe}>
-                                    <Typography variant="h4" gutterBottom className={classes.text}>
-                                        Texto
-                                    </Typography>
-                                </Grid>
-                            </Box>
-                        </Grid>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion className={classes.accord}>
-                    <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    >
-                        <Typography variant="h3" className={classes.heading}>Avanzado</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Grid item={true} xs={12}>
-                            <Box className={classes.boxTema}>
-                                <Grid className={classes.boxTemaTi}>
-                                    <Typography variant="h4" gutterBottom className={classes.text}>
-                                        Titulo
-                                    </Typography>
-                                </Grid>
-                                <Grid className={classes.boxTemaTe}>
-                                    <Typography variant="h4" gutterBottom className={classes.text}>
-                                        Texto
-                                    </Typography>
-                                </Grid>
-                            </Box>
-                        </Grid>
-                    </AccordionDetails>
-                </Accordion>
+                <Themes></Themes>
             </Grid>
         </Container>
     </React.Fragment>

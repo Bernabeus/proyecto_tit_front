@@ -1,5 +1,4 @@
 import Header from "@/components/LogroHeader.js";
-import Footer from "@/components/PpFooter.js";
 import Body from "./LogroBody.js";
 import style from "@/styles/Main.module.css";
 

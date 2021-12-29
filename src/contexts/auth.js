@@ -24,7 +24,7 @@ import PropTypes from "prop-types";
 
     function useAuthProvider() {
     const [user, setUser] = useState(null);
-    const [userI, setUserI] = useState([]);
+    const [userI, setUserI] = useState(null);
 
     const handleUser = (user) => {
         if (user) {
@@ -44,8 +44,12 @@ import PropTypes from "prop-types";
 
     async function register(data) {
         try {
-            const response = await User.register(data);
-            //console.log("response", response);
+            const res = await User.register(data);
+            const respo = {
+                email: data.email,
+                password: data.password
+            };
+            const response = await User.login(respo);
             handleUser(response.data);
             return response;
         } catch (error) {
@@ -61,11 +65,10 @@ import PropTypes from "prop-types";
         }
     };
 
+
     async function login(data) {
         try {
-            
             const response = await User.login(data);
-            setUserI(data);
             handleUser(response.data.user);
             return response;
         } catch (error) {
