@@ -22,13 +22,14 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         margin: "0 auto",
-        width: 1000,
+        
         height: 400,
     },
     contP: {
         backgroundColor: "#009A7E",
         border: "2px solid #000000",
         borderRadius: 100,
+        width: "100%",
         height: 320,
         alignContent: "center"
     },

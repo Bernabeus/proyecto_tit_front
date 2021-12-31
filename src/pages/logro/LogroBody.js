@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "@/components/LogroHeader.js";
-import Footer from "@/components/PpFooter.js";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import "@fontsource/rationale";

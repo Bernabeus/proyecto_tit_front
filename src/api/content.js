@@ -10,6 +10,10 @@ const Content = {
         return api.get(`contents/${id}`);
     },
 
+    contentTheme: (theme) => {
+        return api.get(`themes/${theme}/contents`);
+    },
+
     create: (data) => {
         return api.post("/contents", data);
     },
