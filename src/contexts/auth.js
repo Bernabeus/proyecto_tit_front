@@ -24,14 +24,13 @@ import PropTypes from "prop-types";
 
     function useAuthProvider() {
     const [user, setUser] = useState(null);
-    const [userI, setUserI] = useState(null);
 
     const handleUser = (user) => {
         if (user) {
             // si tengo sesión activa
             setUser(user);
             cookie.set("auth", true, {
-                expires: 10, // dia
+                expires: 1, // dia
             });
             return user;
         } else {

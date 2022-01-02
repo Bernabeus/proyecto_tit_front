@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -15,33 +15,37 @@ const useStyles = makeStyles((theme) => ({
         //display: "none",
         display: "flex",
         justifyContent: "center",
-        alignitems: "center",
-        margin: "0 auto"
+        alignItems: "center",
+        textAlign: "center",
+        marginTop: 30,
     },
     pregunta: {
-        backgroundColor: "#fff"
+        backgroundColor: "#009A7E"
     },
     respuesta: {
-        backgroundColor: "#fff"
+        backgroundColor: "#009A7E",
+        marginTop: 100,
+        fontFamily: "Rationale",
     },
     checkP: {
         color: "blue",
     },  
-    preguntatext: {
+    text: {
         fontFamily: "Rationale",
         //alignitems: "center",
     },
 }));
 
 const PreguComponente = () => {
+    const classes = useStyles();
   return (
     <Grid container>
         <Grid container className={classes.containerPreg}>
             <Grid item={true} xs={12} className={classes.pregunta}>
                 <Typography
-                    variant="h4"
+                    variant="h3"
                     gutterBottom
-                    className={classes.preguntatext}
+                    className={classes.text}
                 >
                     Pregunta:
                 </Typography>
@@ -61,7 +65,7 @@ const PreguComponente = () => {
                 <Typography
                 variant="h4"
                 gutterBottom
-                className={classes.preguntatext}
+                className={classes.text}
                 >
                     Seleccion
                 </Typography>
@@ -69,9 +73,9 @@ const PreguComponente = () => {
             </Grid>
             <Grid item={true} xs={12} className={classes.respuesta}>
                 <Typography
-                    variant="h4"
+                    variant="h3"
                     gutterBottom
-                    className={classes.respuestatext}
+                    className={classes.text}
                 >
                     Respuesta:
                 </Typography>

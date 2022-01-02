@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Ppfooter = () => {
+export default function Ppfooter() {
     const classes = useStyles();
     const { user } = useAuth();
     if (!user) {
@@ -78,4 +78,3 @@ const Ppfooter = () => {
     </React.Fragment>
     );
 };
-export default Ppfooter;

@@ -50,10 +50,9 @@ const useStyles = makeStyles((theme) => ({
 export default function PerfilBody() {
     const classes = useStyles();
     const [ user, setUser ] = useState([]);
-
+    
     useEffect(() => {
         getAuthenticatedUser();
-        
     }, []);
 
     async function getAuthenticatedUser() {
@@ -70,6 +69,7 @@ export default function PerfilBody() {
         <CssBaseline />
             <Container >
             <Grid className={classes.container}>
+                {user && 
                 <Grid  className={classes.cont1}>
                 <Grid container className={classes.contP}>
                     <Grid container item={true} xs={6} className={classes.contP1}>
@@ -91,7 +91,7 @@ export default function PerfilBody() {
                     <Grid item={true} xs={6}>
                         <Grid item={true} xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
-                                Nombre: {user ? user.name: ''}
+                                Nombre: {user && user.name}
                             </Typography>
                         </Grid>
                         <Grid item={true} xs={12} className={classes.text23}>
@@ -118,9 +118,9 @@ export default function PerfilBody() {
                         </Grid>
                     </Grid>
                     </Grid>
-                    
                 </Grid>
-                <Themes></Themes>
+                }
+                <Themes />
             </Grid>
         </Container>
     </React.Fragment>

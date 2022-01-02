@@ -1,5 +1,5 @@
 import Container from "@material-ui/core/Container";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
@@ -38,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
 export default function ContenidoHeader() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [themeT, setthemeT] = useState(null);
+
+    useEffect(() => {
+        
+      }, []);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -54,7 +59,7 @@ export default function ContenidoHeader() {
             <Grid container spacing={0} className={classes.header}>
                 <Grid xs={11} className={classes.container}>
                     <Typography variant="h3" gutterBottom className={classes.text}>
-                        Titulo del contenido
+                        Titulo
                     </Typography>
                 </Grid>
                 <Grid xs={1} className={classes.grid}>

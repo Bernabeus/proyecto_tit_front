@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import "@fontsource/rationale";
@@ -13,11 +13,13 @@ import ContentDetails from "../api/contentDetails";
 import Button from "@material-ui/core/Button";
 import User from "../api/user";
 import Link from "next/link";
+//import {Link} from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   accord: {
     backgroundColor: "#b6b6b6",
+    height: "100%",
     marginBottom: 25,
   },
   accordD: {
@@ -59,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
   accordTema: {
+    float: "top",
     backgroundColor: "#113163",
     width: "100%",
     border: "3px solid #000",
@@ -93,17 +96,15 @@ export default function PPHeader() {
   const [theme, setTheme] = useState([]);
   const [contentT, setContentT] = useState([]);
   const [day, setDay] = useState(null);
-  const [tId, setTId] = useState(0);
 
   useEffect(() => {
     themeData();
     dateN();
-    
-  }, []);
+  }, [contentT]);
 
   useEffect(() => {
     getAuthenticatedUser();
-  }, [day, contentT]);
+  }, [day]);
 
   async function themeData() {
     try {
@@ -139,21 +140,30 @@ export default function PPHeader() {
   }
 
   async function contentTheme(id) {
-    const contentTh = await Content.contentTheme(id);
-    console.log("contenidos", contentTh.data);
-    contDetail(id, contentTh.data[0].id);
+    try {
+      const contentTh = await Content.contentTheme(id);
+      setContentT(contentTh.data);
+      console.log("contenidos", contentT);
+      contDetail(id, contentTh.data[0].id);
+    } catch(error){
+
+    }
   }
 
   async function contDetail(idT, contentId) {
-    const data = {
-      content_id: contentId,
-      user_id: user.id,
-      theme_id: idT,
-      date: day,
-    };
-    console.log("datos", data);
-    const content = await ContentDetails.create(data);
-    return content;
+    try{
+      const data = {
+        content_id: contentId,
+        user_id: user.id,
+        theme_id: idT,
+        date: day,
+      };
+      const content = await ContentDetails.create(data);
+      console.log("datos", content);
+      return content.data;
+    } catch(error){
+
+    }
   }
 
   async function getAuthenticatedUser() {
@@ -163,7 +173,7 @@ export default function PPHeader() {
       return response;
     } catch (error) {
     }
-}
+  }
 
   return (
     <React.Fragment>
@@ -216,7 +226,7 @@ export default function PPHeader() {
                     </AccordionDetails>
                   </Accordion>
                    )  : theme[index].advance === "Bloqueado" ? (
-                    <Accordion  disabled className={classes.accordTemaD}>
+                    <Accordion className={classes.accordTemaD}>
                     <AccordionSummary className={classes.accordTemaTituloD}
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
