@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "30px",
         border: "3px solid #000000",
         textDecorationLine: "underline",
-        color: "#113163"
+        color: "#113163",
     },
     buttonRe: {
         fontFamily: "Rationale",
@@ -96,7 +96,7 @@ export default function Ppbody() {
                     </Grid>
                 <Grid container spacing={2} className={classes.buttons}>
                     <Grid item xs={12} sm={6}>
-                        <Button variant="outlined" className={classes.buttonIn} onClick={handleOpenI}>
+                        <Button variant="outlined" className={classes.buttonIn} >
                             Iniciar Sesión
                         </Button>
                     </Grid>
