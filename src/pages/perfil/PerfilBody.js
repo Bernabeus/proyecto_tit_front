@@ -30,10 +30,7 @@ const useStyles = makeStyles((theme) => ({
         border: "2px solid #000000",
         borderRadius: 100,
         width: "100%",
-        height: 320,
-        alignContent: "center"
-    },
-    contP1: {
+        alignContent: "center",
         textAlign: "center",
         alignContent: "center"
     },
@@ -41,9 +38,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Rationale",
         color: "#fff"
     },
-    progr:{
-        width: 300,
-        height: 20
+    boxTema: {
     },
 }));
 

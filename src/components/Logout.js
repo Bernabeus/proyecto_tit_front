@@ -5,6 +5,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
+import Link from "next/link";
+import Typography from '@material-ui/core/Typography';
 import MenuItem from "@material-ui/core/MenuItem";
 import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 
@@ -18,9 +20,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 25,
     color: "#113163",
     fontFamily: "Rationale",
+    
   },
   icono: {
     color: "#fff"
+},
+textL: {
+  fontFamily: "Rationale",
 }
 }));
 
@@ -41,6 +47,7 @@ const Logout = () => {
     logout();
   };
 
+
   return (
     <Grid className={classes.grid}> 
       <IconButton
@@ -59,6 +66,19 @@ const Logout = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <MenuItem onClick={handleClose}>
+          <Button className={classes.button} >
+          <Link href="/informacion">
+          <Typography
+                    variant="h5"
+                    gutterBottom
+                    className={classes.textL}
+                  >
+                    Información del curso
+                  </Typography>
+            </Link>
+          </Button>
+        </MenuItem>
         <MenuItem onClick={handleClose}>
           <Button className={classes.button} onClick={handleLogout}>
             Cerrar sesión

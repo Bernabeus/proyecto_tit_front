@@ -3,8 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { useRouter } from "next/router";
 import Image from "next/image";
 import "@fontsource/rationale";
+import Content from "../api/content";
 
 const useStyles = makeStyles((theme) => ({   
     containerCont: {
@@ -30,6 +32,22 @@ const useStyles = makeStyles((theme) => ({
 
 const ConteComponente = () => {
     const classes = useStyles();
+    const router = useRouter();
+    const { id } = router.query;
+    const [contentsTheme, setContentsTheme] = useState(null);
+
+    useEffect(() => {
+        contentTheme();
+      }, [id]);
+
+      async function contentTheme() {
+        try {
+            const contentTh = await Content.contentTheme(id);
+            setContentsTheme(contentTh.data[0].description);
+        } catch(error){
+    
+        }
+      }
 
   return (
         <Grid container className={classes.containerCont}>
@@ -40,7 +58,7 @@ const ConteComponente = () => {
             </Grid>
             <Grid item xs={4} className={classes.contenido}>
                 <Typography variant="h4" gutterBottom className={classes.text}>
-                    Contenido
+                {contentsTheme && contentsTheme}
                 </Typography>
             </Grid>
         </Grid>
@@ -49,4 +67,4 @@ const ConteComponente = () => {
 
 export default ConteComponente;
 
-//<Image src={ruta1} height={400} width={380} />
+//

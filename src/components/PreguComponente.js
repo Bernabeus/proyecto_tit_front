@@ -7,8 +7,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import PanoramaFishEyeIcon from '@material-ui/icons/PanoramaFishEye';
 import "@fontsource/rationale";
-
-//const fetcher = (url) => api.get(url).then((res) => res.data);
+import { useRouter } from "next/router";
+import Content from "../api/content";
+import Button from "@material-ui/core/Button";
+import Link from "next/link";
 
 const useStyles = makeStyles((theme) => ({
     containerPreg: {
@@ -34,10 +36,33 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Rationale",
         //alignitems: "center",
     },
+    btnC: {
+        background: "#000",
+        textAlign: "center",
+        width: 150,
+        fontFamily: "Rationale",
+      },
 }));
 
 const PreguComponente = () => {
     const classes = useStyles();
+    const router = useRouter();
+    const { id } = router.query;
+    const [contentsTheme, setContentsTheme] = useState(null);
+    console.log("contenido", contentsTheme);
+    useEffect(() => {
+        contentTheme();
+      }, [id]);
+
+      async function contentTheme() {
+        try {
+            const contentTh = await Content.contentTheme(id);
+            setContentsTheme(contentTh.data[0]);
+        } catch(error){
+    
+        }
+      }
+
   return (
     <Grid container>
         <Grid container className={classes.containerPreg}>
@@ -47,7 +72,7 @@ const PreguComponente = () => {
                     gutterBottom
                     className={classes.text}
                 >
-                    Pregunta:
+                    Pregunta: {contentsTheme && contentsTheme.question} 
                 </Typography>
             <Grid item={true} xs={6} className={classes.pregunta}>
                 <FormControlLabel
@@ -62,6 +87,7 @@ const PreguComponente = () => {
                 />
             </Grid>
             <Grid item={true} xs={6} className={classes.pregunta}>
+
                 <Typography
                 variant="h4"
                 gutterBottom
@@ -77,8 +103,21 @@ const PreguComponente = () => {
                     gutterBottom
                     className={classes.text}
                 >
-                    Respuesta:
+                    Respuesta: {contentsTheme && contentsTheme.feedback}
                 </Typography>
+                <Grid>
+                <Link href={`/logro/${id}`}>
+                    <Button variant="contained" className={classes.btnC}>
+                        <Typography
+                        variant="h5"
+                        gutterBottom
+                        className={classes.text}
+                        >
+                            Siguiente Contenido
+                        </Typography>
+                    </Button>
+                </Link>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

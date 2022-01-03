@@ -8,6 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import Link from "next/link";
 import MenuItem from "@material-ui/core/MenuItem";
+import ContentDetails from "../api/contentDetails";
+import Theme from "../api/theme";
 import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 
 
@@ -41,7 +43,7 @@ export default function ContenidoHeader() {
     const [themeT, setthemeT] = useState(null);
 
     useEffect(() => {
-        
+        contentsDetailA()
       }, []);
 
     const handleClick = (event) => {
@@ -52,6 +54,24 @@ export default function ContenidoHeader() {
         setAnchorEl(null);
     };
 
+    async function contentsDetailA() {
+        try{
+            const contentDetail = await ContentDetails.contentsDetailsAll();
+            themeInf(contentDetail.data[0].theme_id);
+        }catch(error){
+        }
+    }
+
+    async function themeInf(idTh) {
+        try{
+            const theme = await Theme.theme(idTh);
+            console.log("tema", theme);
+            setthemeT(theme);
+        }catch(error){
+
+        }
+    }
+
     return (
         <React.Fragment>
         <CssBaseline />
@@ -59,7 +79,7 @@ export default function ContenidoHeader() {
             <Grid container spacing={0} className={classes.header}>
                 <Grid xs={11} className={classes.container}>
                     <Typography variant="h3" gutterBottom className={classes.text}>
-                        Titulo
+                    {themeT && themeT.data.title}
                     </Typography>
                 </Grid>
                 <Grid xs={1} className={classes.grid}>

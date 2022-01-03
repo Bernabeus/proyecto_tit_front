@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PerfilHeader() {
     const classes = useStyles();
-
     return (
         <React.Fragment>
         <CssBaseline />

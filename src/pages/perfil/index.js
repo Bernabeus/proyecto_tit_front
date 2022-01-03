@@ -6,9 +6,9 @@ import style from "@/styles/Main.module.css";
 const PerfilPage = () => {
   return (
     <div className={style.container}>
-      <Header></Header>
-      <Body></Body>
-      <Footer></Footer>
+      <Header />
+      <Body />
+      <Footer />
     </div>
   );
 };

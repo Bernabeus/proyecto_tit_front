@@ -142,25 +142,35 @@ export default function PPHeader() {
   async function contentTheme(id) {
     try {
       const contentTh = await Content.contentTheme(id);
-      setContentT(contentTh.data);
-      console.log("contenidos", contentT);
-      contDetail(id, contentTh.data[0].id);
+      contentsDetailA(id, contentTh.data[0].id);
     } catch(error){
 
     }
   }
 
-  async function contDetail(idT, contentId) {
+  async function contentsDetailA(id, contentId) {
+    const contentDetail = await ContentDetails.contentsDetailsAll();
+    contDetail(id, contentId, contentDetail);
+  }
+
+  async function contDetail(idT, contentId, contentDetail) {
     try{
+      console.log("contenido del CD", contentDetail);
       const data = {
         content_id: contentId,
         user_id: user.id,
         theme_id: idT,
         date: day,
       };
-      const content = await ContentDetails.create(data);
-      console.log("datos", content);
-      return content.data;
+
+      let content = [];
+      if(contentDetail.data.length === 0){
+        content = await ContentDetails.create(data);
+      }else {
+        content = await ContentDetails.update(contentDetail.data[0].id, data); 
+      };
+      console.log("contenido de detalle", content);
+      
     } catch(error){
 
     }
@@ -212,7 +222,7 @@ export default function PPHeader() {
                       </Grid>
                       <Grid xs={5} className={classes.boxTemaTe}>
                         <Button variant="contained" className={classes.btnC} onClick={() => contentTheme(temas.id)}>
-                          <Link href="/contenido">
+                          <Link href={`/contenido/${temas.id}`}>
                             <Typography
                               variant="h5"
                               gutterBottom
@@ -226,7 +236,7 @@ export default function PPHeader() {
                     </AccordionDetails>
                   </Accordion>
                    )  : theme[index].advance === "Bloqueado" ? (
-                    <Accordion className={classes.accordTemaD}>
+                    <Accordion disabled className={classes.accordTemaD}>
                     <AccordionSummary className={classes.accordTemaTituloD}
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"

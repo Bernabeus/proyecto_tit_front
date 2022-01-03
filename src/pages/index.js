@@ -5,6 +5,7 @@ import style from "@/styles/Main.module.css";
 import { useAuth } from "@/contexts/auth";
 import PerfilHeader from "@/components/PerfilHeader.js";
 import PerfilBody from "./perfil/PerfilBody.js";
+import PerfilFooter from "../components/Footer.js";
 
 const IndexPage = () => {
   const { user } = useAuth();
@@ -15,7 +16,7 @@ const IndexPage = () => {
       <div className={style.container}>
       <PerfilHeader />
       <PerfilBody />
-      <Footer />
+      <PerfilFooter />
         </div>
       : 
       <div className={style.container}>
