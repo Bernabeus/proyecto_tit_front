@@ -70,6 +70,7 @@ const LoginPage = () => {
           const userData = {
             ...formData,
           };
+          //const datas = posthemeDe();
           const response = await login(userData);
           setUserInfo(response.data);
           setResult("Usuario logueado en");

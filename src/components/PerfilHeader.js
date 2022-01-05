@@ -4,12 +4,17 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from "@material-ui/core/Grid";
 import Logout from "@/components/Logout";
 import { makeStyles } from "@material-ui/core/styles";
+import Image from "next/image";
+import logo from "../../public/images/logo1.png";
 
 const useStyles = makeStyles((theme) => ({
     header: {
         alignItems: "center",
         background: "#113163",
-        height: 80,
+        height: 140,
+    },
+    img: {
+        marginTop: "-15px"
     }
 }));
 
@@ -20,8 +25,19 @@ export default function PerfilHeader() {
         <CssBaseline />
             <Container>
             <Grid container spacing={0} className={classes.header}>
-                <Grid xs={1}></Grid>
-                <Grid xs={10}></Grid>
+                <Grid xs={5}>
+
+                </Grid>
+                <Grid xs={2} className={classes.img}> 
+                <Image
+                    src={logo} 
+                    height={160}
+                    width={160} 
+                    /></Grid>
+                <Grid xs={4} >
+                    
+                </Grid>
+                
                 <Grid xs={1}><Logout /></Grid>
             </Grid>
         </Container>

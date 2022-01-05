@@ -151,7 +151,7 @@ const Ppbody = () => {
                     </Grid>
                 <Grid container spacing={2} className={classes.buttons}>
                     <Grid item={true} xs={12} sm={6}>
-                        <Button variant="outlined" className={classes.buttonIn} onClick={handleOpenI}>
+                        <Button variant="outlined" color="primary" className={classes.buttonIn} onClick={handleOpenI}>
                             Iniciar Sesión
                         </Button>
                         <Modal

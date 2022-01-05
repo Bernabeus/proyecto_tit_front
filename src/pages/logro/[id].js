@@ -42,6 +42,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontFamily: "Rationale",
   },
+  textL: {
+    float: "center",
+    fontFamily: "Rationale",
+  },
   textB: {
     fontFamily: "Rationale",
   },
@@ -94,8 +98,7 @@ const LogroPage = () => {
     async function AchievementInf() {
         try{
             const achievementI = await Achievements.achievement(id);
-            console.log("logro", achievementI);
-            setAchievement(achievementI);
+            setAchievement(achievementI.data);
         }catch(error){
         }
     }
@@ -119,7 +122,7 @@ const LogroPage = () => {
           <Grid xs={8} container spacing={0} className={classes.cont1}>
             <Grid xs={12}>
               <Typography variant="h3" gutterBottom className={classes.text}>
-                
+              {achievement && achievement.title}
               </Typography>
             </Grid>
             <Grid xs={12} className={classes.medal}>
@@ -135,7 +138,41 @@ const LogroPage = () => {
                     <ListItemIcon>
                       <Brightness1Icon style={{ fontSize: 10 }} />
                     </ListItemIcon>
-                    <ListItemText  primary="Conocimientos" />
+                    <ListItemText>
+                    <Typography variant="h5" gutterBottom className={classes.textL}>
+                    {achievement && achievement.item_1}
+                    </Typography>     
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem > 
+                    <ListItemIcon>
+                      <Brightness1Icon style={{ fontSize: 10 }} />
+                    </ListItemIcon>
+                    <ListItemText>
+                    <Typography variant="h5" gutterBottom className={classes.textL}>
+                    {achievement && achievement.item_2}
+                    </Typography>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem > 
+                    <ListItemIcon>
+                      <Brightness1Icon style={{ fontSize: 10 }} />
+                    </ListItemIcon>
+                    <ListItemText>
+                    <Typography variant="h5" gutterBottom className={classes.textL}>
+                    {achievement && achievement.item_3}
+                    </Typography>
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem > 
+                    <ListItemIcon>
+                      <Brightness1Icon style={{ fontSize: 10 }} />
+                    </ListItemIcon>
+                    <ListItemText>
+                    <Typography variant="h5" gutterBottom className={classes.textL}>
+                    {achievement && achievement.item_4}
+                    </Typography>
+                    </ListItemText>
                   </ListItem>
                 </List>
               </Grid>

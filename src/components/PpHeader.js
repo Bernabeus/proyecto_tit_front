@@ -6,6 +6,9 @@ import "@fontsource/rationale";
 import styles from "@/styles/Main.module.css";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
+import Image from "next/image";
+import logo from "../../public/images/logo2.png";
+import logo1 from "../../public/images/logo3.png";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -18,6 +21,15 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         height: 120,
         color: "#113163"
+    },
+    titleO: {
+        textAlign: "left",
+        height: 160,
+        color: "#113163"
+    },
+    titleL: {
+        background: "#113163",
+        height: 160
     },
     title1: {
         textAlign: "right",
@@ -40,6 +52,14 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         fontFamily: "Rationale"
+    },
+    img: {
+        marginTop: "-10px",
+        marginLeft: 40
+    },
+    img1: {
+        marginTop: "-10px",
+        //marginRight: 60
     }
 }));
 
@@ -51,15 +71,27 @@ export default function PPHeader() {
         <CssBaseline />
             <Container className={styles.header}>
             <Grid container spacing={0} className={classes.container}>
-                <Grid item={true} xs={12} sm={6} className={classes.title3}>
-                    <Typography variant="h4" className={classes.title1}>
-                        LO
-                    </Typography>
+                <Grid item={true} xs={12} sm={4} className={classes.titleL}>
                 </Grid>
-                <Grid item={true} xs={12} sm={6} className={classes.title2}>
-                    <Typography variant="h4" className={classes.title2}>
-                        GO
-                    </Typography>
+                <Grid item={true} xs={12} sm={2} className={classes.titleL}>
+                    <Grid className={classes.img}>
+                <Image
+                    src={logo} 
+                    height={160}
+                    width={160} 
+                    />
+                    </Grid>
+                </Grid>
+                <Grid item={true} xs={12} sm={2} className={classes.titleO}>
+                <Grid className={classes.img1}>
+                    <Image
+                    src={logo1} 
+                    height={160}
+                    width={160} 
+                    />
+                    </Grid>
+                </Grid>
+                <Grid item={true} xs={12} sm={4} className={classes.titleO}>
                 </Grid>
                 <Grid item={true} xs={12} sm={6} className={classes.title3}>
                     <Typography variant="h3" className={classes.title1}>

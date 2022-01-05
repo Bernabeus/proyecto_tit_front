@@ -18,18 +18,21 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import StarIcon from '@mui/icons-material/Star';
+import logo from "../../../public/images/logo1.png";
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 
 
 const useStyles = makeStyles((theme) => ({
     cont: {
-        height: 80,
+        height: 160,
         backgroundColor: "#113163",
         marginBottom: 20,
         border: "3px solid #000000",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+    },
+    img: { 
     },
     title: {
         fontFamily: "Rationale",
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#113163",
         textDecorationLine: "underline",
         marginTop: "-15px",
-        marginLeft: 140,
+        marginLeft: "-60px",
     },
     titleCover: {
         fontFamily: "Rationale",
@@ -110,7 +113,14 @@ const InformationPage = () => {
     return (
         <Grid container>
             <Grid container item xs={12} className={classes.cont}>
-                <Grid xs={11}>
+                <Grid xs={2} className={classes.img}> 
+                <Image
+                    src={logo} 
+                    height={160}
+                    width={160} 
+                    />
+                </Grid>
+                <Grid xs={8}>
                 <Typography variant="h4" gutterBottom className={classes.title}>
                     Información general del curso
                 </Typography>

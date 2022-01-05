@@ -14,20 +14,28 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import Link from "next/link";
 import MenuItem from "@material-ui/core/MenuItem";
+import Image from "next/image";
+import logo from "../../../public/images/logo.png";
 import ContentDetails from "../../api/contentDetails";
 import Theme from "../../api/theme";
+import Content from "../../api/content.js";
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 
 const useStyles = makeStyles((theme) => ({
     headerH: {
         textAlign: "center",
         background: "#113163",
-        height: 100,
+        height: 160,
         alignContent: "center",
     },
     textH: {
         fontFamily: "Rationale",
         color: "#fff",
+        marginRight: 140
+    },
+    containerH: {
+        marginTop: 50
     },
     buttonH: {
         fontSize: 25,
@@ -38,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff"
     },
     gridH: {
-        marginTop: "-5px",
+        marginTop: 40
     },
     container: {
         backgroundColor: "#fff",
@@ -75,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
     },
     seccion: {
         justifyContent: "center",
+    },
+    containerPregunta: {
+        height: "100%"
     }
 }));
 
@@ -86,10 +97,12 @@ export default function contentPage() {
     const [stateComponent, setStateComponent] = useState(1);
     const [contentShow, setContentShow] = useState(null);
     const [themeT, setThemeT] = useState(null);
+    const [contentsTheme, setContentsTheme] = useState([]);
     
 
     useEffect(() => {
         themeInf()
+        contentTheme()
       }, [id]);
 
     const handleClick = (event) => {
@@ -116,12 +129,28 @@ export default function contentPage() {
         }
     }
 
+    async function contentTheme() {
+        try {
+            const contentTh = await Content.contentTheme(id);
+            setContentsTheme(contentTh.data[0]);
+        } catch(error){
+    
+        }
+      }
+
+
     return (
     <React.Fragment>
         <CssBaseline />
             <Container >
             <Grid container spacing={0} className={classes.headerH}>
-                <Grid xs={11} className={classes.containerH}>
+            <Grid xs={2} className={classes.img}> 
+                <Image
+                    src={logo} 
+                    height={160}
+                    width={160} 
+                    /></Grid>
+                <Grid xs={9} className={classes.containerH}>
                     <Typography variant="h3" gutterBottom className={classes.textH}>
                     {themeT && themeT.data.title}
                     </Typography>
@@ -165,16 +194,17 @@ export default function contentPage() {
                     </Grid> 
                     <Grid container className={classes.seccion}>
                         <Typography variant="h4" gutterBottom className={classes.text}>
+                        <ArrowForwardIosIcon style={{ fontSize: 20 }} />
                             SECCION DEL CONTENIDO
                         </Typography>    
                     </Grid> 
-                    <Grid container>
+                    <Grid container >
                          <ConteComponente />         
                     </Grid>
                 </Grid>
             </Grid>: 
             <Grid spacing={0} className={classes.container}>
-            <Grid spacing={0} className={classes.cont1}>
+            <Grid spacing={0} className={classes.containerPregunta}>
             <Grid>
                 <Grid  className={classes.buttonA}>
                     <Button  variant="contained" onClick={() =>  handleChangeComponent(1) }  className={classes.btnA}>
@@ -184,6 +214,7 @@ export default function contentPage() {
                 </Grid> 
                 <Grid container className={classes.seccion}>
                         <Typography variant="h4" gutterBottom className={classes.text}>
+                        <ArrowForwardIosIcon style={{ fontSize: 20 }} />
                             SECCION DE LA PREGUNTA
                         </Typography>    
                     </Grid>  

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     text: {
         fontFamily: "Rationale",
         alignItems: "center",
-        color: "#000",
+        color: "#fff",
     },
     
 }));

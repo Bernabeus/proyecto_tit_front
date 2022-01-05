@@ -11,6 +11,9 @@ import { useRouter } from "next/router";
 import Content from "../api/content";
 import Button from "@material-ui/core/Button";
 import Link from "next/link";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles((theme) => ({
     containerPreg: {
@@ -20,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         textAlign: "center",
         marginTop: 30,
+        width: "100%"
     },
     pregunta: {
         backgroundColor: "#009A7E"
@@ -30,10 +34,12 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Rationale",
     },
     checkP: {
-        color: "blue",
+        color: "#113163",
+        marginLeft: 150
     },  
     text: {
         fontFamily: "Rationale",
+        color: "#fff"
         //alignitems: "center",
     },
     btnC: {
@@ -41,7 +47,16 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "center",
         width: 150,
         fontFamily: "Rationale",
-      },
+    },
+    link:{
+        marginRigth: 100
+    },
+    textB: {
+        fontFamily: "Rationale",
+    },
+    btn:{
+        marginTop: 20,
+    }
 }));
 
 const PreguComponente = () => {
@@ -74,8 +89,12 @@ const PreguComponente = () => {
                 >
                     Pregunta: {contentsTheme && contentsTheme.question} 
                 </Typography>
-            <Grid item={true} xs={6} className={classes.pregunta}>
-                <FormControlLabel
+
+                <Grid className={classes.list}>
+                <List className={classes.listT}>
+                  <ListItem > 
+                    <ListItemText>
+                    {<FormControlLabel
                 control={
                     <Checkbox
                     icon={<PanoramaFishEyeIcon />}
@@ -83,18 +102,90 @@ const PreguComponente = () => {
                     className={classes.checkP}
                     />
                 }
-                label="Seleccion de pregunta"
-                />
-            </Grid>
-            <Grid item={true} xs={6} className={classes.pregunta}>
-
-                <Typography
-                variant="h4"
+                label={<Typography
+                    variant="h5"
+                    gutterBottom
+                    className={classes.text}
+                    >
+                        {contentsTheme && contentsTheme.answer_1}
+                    </Typography>}
+                />}
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem > 
+                    <ListItemText>
+                    {<FormControlLabel
+                control={
+                    <Checkbox
+                    icon={<PanoramaFishEyeIcon />}
+                    checkedIcon={<LensIcon />}
+                    className={classes.checkP}
+                    />
+                }
+                label={<Typography
+                    variant="h5"
+                    gutterBottom
+                    className={classes.text}
+                    >
+                        {contentsTheme && contentsTheme.answer_2}
+                    </Typography>}
+                />}
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem > 
+                    <ListItemText>
+                    {<FormControlLabel
+                control={
+                    <Checkbox
+                    icon={<PanoramaFishEyeIcon />}
+                    checkedIcon={<LensIcon />}
+                    className={classes.checkP}
+                    />
+                }
+                label={<Typography
+                    variant="h5"
+                    gutterBottom
+                    className={classes.text}
+                    >
+                        {contentsTheme && contentsTheme.answer_3}
+                    </Typography>}
+                />}
+                    </ListItemText>
+                  </ListItem>
+                  <ListItem > 
+                    <ListItemText>
+                    {<FormControlLabel
+                control={
+                    <Checkbox
+                    icon={<PanoramaFishEyeIcon />}
+                    checkedIcon={<LensIcon />}
+                    className={classes.checkP}
+                    />
+                }
+                label={
+                    <Typography
+                variant="h5"
                 gutterBottom
                 className={classes.text}
                 >
-                    Seleccion
+                    {contentsTheme && contentsTheme.answer_4}
                 </Typography>
+                    }
+                />}
+                    </ListItemText>
+                  </ListItem>
+                </List>
+              </Grid>
+            <Grid item={true} xs={6} className={classes.pregunta}>
+                <Button variant="contained" className={classes.btn}>
+                        <Typography
+                        variant="h5"
+                        gutterBottom
+                        className={classes.textB}
+                        >
+                            Seleccionar respuesta
+                        </Typography>
+                    </Button>
             </Grid>
             </Grid>
             <Grid item={true} xs={12} className={classes.respuesta}>

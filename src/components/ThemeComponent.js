@@ -13,8 +13,9 @@ import ContentDetails from "../api/contentDetails";
 import Button from "@material-ui/core/Button";
 import User from "../api/user";
 import Link from "next/link";
-//import {Link} from "react-router-dom";
+import ThemeDetails from "../api/themeDetails";
 import { makeStyles } from "@material-ui/core/styles";
+import Loading from "@/components/Loading";
 
 const useStyles = makeStyles((theme) => ({
   accord: {
@@ -86,6 +87,10 @@ const useStyles = makeStyles((theme) => ({
   },
   grid: {
     width: "100%",
+  },
+  divO: {
+    display: "none",
+    border: "3px solid #000",
   }
 }));
 
@@ -94,17 +99,35 @@ export default function PPHeader() {
   const [ user, setUser ] = useState([]);
   const [themeDiff, setThemeDiff] = useState([]);
   const [theme, setTheme] = useState([]);
-  const [contentT, setContentT] = useState([]);
+  const [themeDet, setThemeDet] = useState([]);
   const [day, setDay] = useState(null);
 
   useEffect(() => {
     themeData();
     dateN();
-  }, [contentT]);
+  }, []);
 
   useEffect(() => {
-    getAuthenticatedUser();
+    themeDetail()
+    getAuthenticatedUser()
   }, [day]);
+
+  async function themeDetail() {
+    try {
+      const themeD = await ThemeDetails.themeDetailsAll();
+      const arrayTheme = themeD.data.sort(function(a, b){
+        if( a.theme_id > b.theme_id){
+          return 1;
+        }
+        if( a.theme_id < b.theme_id){
+          return -1;
+        }
+        return 0
+      });
+      setThemeDet(arrayTheme);
+    } catch(error){
+    }
+  }
 
   async function themeData() {
     try {
@@ -199,43 +222,46 @@ export default function PPHeader() {
               {tema ? tema : ""}
             </Typography>
           </AccordionSummary>
-          {theme.map((temas, index) => (
+          {theme.filter(them => them.difficulty === tema).map((temas, index) => (
             <AccordionDetails className={classes.accordC}>
-                {theme[index].difficulty === tema ? (
                 <Grid className={classes.grid}>
-                    {theme[index].advance === "Iniciado" ? (
-                  <Accordion className={classes.accordTema}>
-                    <AccordionSummary className={classes.accordTemaTitulo}
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography variant="h3" className={classes.textB}>
-                        {temas.title}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails className={classes.accordTemaTe}>
-                      <Grid xs={7} className={classes.boxTemaCont}>
-                      <Typography variant="h4" className={classes.textB}>
-                      {temas.description}
-                      </Typography>
-                      </Grid>
-                      <Grid xs={5} className={classes.boxTemaTe}>
-                        <Button variant="contained" className={classes.btnC} onClick={() => contentTheme(temas.id)}>
-                          <Link href={`/contenido/${temas.id}`}>
-                            <Typography
-                              variant="h5"
-                              gutterBottom
-                              className={classes.textB}
-                            >
-                              Ingresar
-                            </Typography>
+                  {themeDet[index] ? (
+                    <Grid className={classes.grid}> 
+                  {themeDet[index].theme_advance === "Iniciado" ? (
+                      <Accordion className={classes.accordTema}>
+                      <AccordionSummary className={classes.accordTemaTitulo}
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                      >
+                        <Typography variant="h3" className={classes.textB}>
+                          {temas.title}
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails className={classes.accordTemaTe}>
+                        <Grid xs={7} className={classes.boxTemaCont}>
+                        <Typography variant="h4" className={classes.textB}>
+                        {temas.description}
+                        </Typography>
+                        </Grid>
+                        <Grid xs={5} className={classes.boxTemaTe}>
+                        <Link href={`/contenido/${temas.id}`}>
+                          <Button variant="contained" className={classes.btnC} onClick={() => contentTheme(temas.id)}>
+                            
+                              <Typography
+                                variant="h5"
+                                gutterBottom
+                                className={classes.textB}
+                              >
+                                Ingresar
+                              </Typography>
+                            
+                          </Button>
                           </Link>
-                        </Button>
-                      </Grid>
-                    </AccordionDetails>
-                  </Accordion>
-                   )  : theme[index].advance === "Bloqueado" ? (
+                        </Grid>
+                      </AccordionDetails>
+                    </Accordion>
+                   )  : themeDet[index].theme_advance === "Bloqueado" ? (
                     <Accordion disabled className={classes.accordTemaD}>
                     <AccordionSummary className={classes.accordTemaTituloD}
                       expandIcon={<ExpandMoreIcon />}
@@ -252,13 +278,13 @@ export default function PPHeader() {
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
-                   ) : (<div>
-
+                   ) : (<div>null
                    </div>)}
                   </Grid>
-                ) : ""}
+                ) : (<Loading />)} 
+                </Grid>  
             </AccordionDetails>
-          ))}
+            ))}
         </Accordion>
       ))}
     </React.Fragment>

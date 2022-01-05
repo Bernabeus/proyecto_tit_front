@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import cookie from "js-cookie";
 import User from "../api/user.js";
+import ThemeDetails from "../api/themeDetails.js";
 import PropTypes from "prop-types";
 
     export const AuthContext = createContext(null);
@@ -25,6 +26,7 @@ import PropTypes from "prop-types";
     function useAuthProvider() {
     const [user, setUser] = useState(null);
 
+
     const handleUser = (user) => {
         if (user) {
             // si tengo sesión activa
@@ -48,8 +50,10 @@ import PropTypes from "prop-types";
                 email: data.email,
                 password: data.password
             };
+            
             const response = await User.login(respo);
             handleUser(response.data);
+            posthemeDe(res);
             return response;
         } catch (error) {
             if (error.response) {
@@ -63,6 +67,45 @@ import PropTypes from "prop-types";
             console.log(error.config);
         }
     };
+
+    function posthemeDe(res) {
+        const dataTheme =[
+            {
+                user_id: res.data.user.id,
+                theme_id: 1,
+                theme_advance: "Iniciado",
+            },
+            {
+                user_id: res.data.user.id,
+                theme_id: 2,
+                theme_advance: "Bloqueado",
+            },
+            {
+                user_id: res.data.user.id,
+                theme_id: 3,
+                theme_advance: "Bloqueado",
+            },
+            {
+                user_id: res.data.user.id,
+                theme_id: 4,
+                theme_advance: "Bloqueado",
+            },
+            {
+                user_id: res.data.user.id,
+                theme_id: 5,
+                theme_advance: "Bloqueado",
+            },
+            {
+                user_id: res.data.user.id,
+                theme_id: 6,
+                theme_advance: "Bloqueado",
+            },
+        ];
+
+        for (var i = 0; i < dataTheme.length; i++) {
+            ThemeDetails.create(dataTheme[i]);
+        }
+      }
 
 
     async function login(data) {
@@ -130,5 +173,6 @@ import PropTypes from "prop-types";
         register,
         login,
         logout,
+        posthemeDe,
     };
 }

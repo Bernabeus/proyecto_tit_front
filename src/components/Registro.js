@@ -77,7 +77,6 @@ const RegisterPage = () => {
     const { register } = useAuth();
     const classes = useStyles();
 
-
     const onSubmit = async (formData) => {
         setUserInfo(null);
         setResult("Enviando los datos...");
