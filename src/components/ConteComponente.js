@@ -30,11 +30,11 @@ const useStyles = makeStyles((theme) => ({
     
 }));
 
-const ConteComponente = () => {
+const ConteComponente = (props) => {
     const classes = useStyles();
     const router = useRouter();
     const { id } = router.query;
-    const [contentsTheme, setContentsTheme] = useState(null);
+    const [contentsTheme, setContentsTheme] = useState([]);
 
     useEffect(() => {
         contentTheme();
@@ -42,12 +42,13 @@ const ConteComponente = () => {
 
       async function contentTheme() {
         try {
-            const contentTh = await Content.contentTheme(id);
-            setContentsTheme(contentTh.data[0].description);
+            const contentTh = await Content.content(id);
+            setContentsTheme(contentTh.data);
         } catch(error){
     
         }
       }
+
 
   return (
         <Grid container className={classes.containerCont}>
@@ -58,7 +59,7 @@ const ConteComponente = () => {
             </Grid>
             <Grid item xs={4} className={classes.contenido}>
                 <Typography variant="h4" gutterBottom className={classes.text}>
-                {contentsTheme && contentsTheme}
+                {contentsTheme && contentsTheme.description}
                 </Typography>
             </Grid>
         </Grid>
@@ -66,5 +67,3 @@ const ConteComponente = () => {
 };
 
 export default ConteComponente;
-
-//

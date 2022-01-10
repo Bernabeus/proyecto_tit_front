@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/auth";
 import Routes from "../constants/routes";
 import { useRouter } from "next/router";
-//import Loading from "@/components/Loading";
+import Loading from "@/components/Loading";
 //import styles from "../styles/Home.module.css";
 
 /**
@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
  */
 export default function withAuthRedirect({
   WrappedComponent,
-  //LoadingComponent = Loading,
+  LoadingComponent = Loading,
   expectedAuth,
   location,
 }) {
@@ -28,13 +28,13 @@ export default function withAuthRedirect({
     const router = useRouter();
 
     if (user === null) {
-      return "";
+      return <LoadingComponent />;
     }
 
     const isAuthenticated = !!user;
     const shouldRedirect = expectedAuth !== isAuthenticated;
     if (shouldRedirect) {
-      router.push(location || Routes.LOGIN);
+      router.push(location || Routes.INFORMACION);
       return null;
     }
     return <WrappedComponent {...props} />;

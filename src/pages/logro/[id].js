@@ -43,10 +43,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Rationale",
   },
   textL: {
-    float: "center",
-    fontFamily: "Rationale",
-  },
-  textB: {
+    justifyContent: "left",
     fontFamily: "Rationale",
   },
   medal: {
@@ -89,6 +86,7 @@ const LogroPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [achievement, setAchievement] = useState([]);
+  const [achievementI, setAchievementI] = useState([]);
 
   useEffect(() => {
     AchievementInf()
@@ -99,9 +97,19 @@ const LogroPage = () => {
         try{
             const achievementI = await Achievements.achievement(id);
             setAchievement(achievementI.data);
+            achievementItems(achievementI.data);
         }catch(error){
         }
     }
+
+    function achievementItems(logro) {
+      let arrayAchievementI = [];
+      arrayAchievementI.push(logro.item_1);
+      arrayAchievementI.push(logro.item_2);
+      arrayAchievementI.push(logro.item_3);
+      arrayAchievementI.push(logro.item_4);
+      setAchievementI(arrayAchievementI);
+  }
 
 
   return (
@@ -115,7 +123,7 @@ const LogroPage = () => {
               src={izq}
               height={1099}
               width={205}
-              className={classes.imgI}
+              className={classes.img}
             />
           </Grid>
           <Grid className={classes.box1}></Grid>
@@ -134,61 +142,37 @@ const LogroPage = () => {
               </Typography>
               <Grid className={classes.list}>
                 <List className={classes.text}>
-                  <ListItem > 
-                    <ListItemIcon>
+                {achievementI.map((logro, index) => (
+                  <ListItem key={index}> 
+                  <ListItemIcon>
                       <Brightness1Icon style={{ fontSize: 10 }} />
                     </ListItemIcon>
                     <ListItemText>
-                    <Typography variant="h5" gutterBottom className={classes.textL}>
-                    {achievement && achievement.item_1}
-                    </Typography>     
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem > 
-                    <ListItemIcon>
-                      <Brightness1Icon style={{ fontSize: 10 }} />
-                    </ListItemIcon>
-                    <ListItemText>
-                    <Typography variant="h5" gutterBottom className={classes.textL}>
-                    {achievement && achievement.item_2}
+                    <Typography
+                    variant="h5"
+                    gutterBottom
+                    className={classes.textL}
+                    >
+                      {logro}
                     </Typography>
                     </ListItemText>
                   </ListItem>
-                  <ListItem > 
-                    <ListItemIcon>
-                      <Brightness1Icon style={{ fontSize: 10 }} />
-                    </ListItemIcon>
-                    <ListItemText>
-                    <Typography variant="h5" gutterBottom className={classes.textL}>
-                    {achievement && achievement.item_3}
-                    </Typography>
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem > 
-                    <ListItemIcon>
-                      <Brightness1Icon style={{ fontSize: 10 }} />
-                    </ListItemIcon>
-                    <ListItemText>
-                    <Typography variant="h5" gutterBottom className={classes.textL}>
-                    {achievement && achievement.item_4}
-                    </Typography>
-                    </ListItemText>
-                  </ListItem>
+                  ))}
                 </List>
               </Grid>
             </Grid>
             <Grid xs={12} className={classes.contButton}>
-              <Button variant="contained" className={classes.btnS}>
-                <Link href="/">
+            <Link href="/">
+              <Button variant="contained" className={classes.btnS}>          
                   <Typography
                     variant="h5"
                     gutterBottom
-                    className={classes.textB}
+                    className={classes.textL}
                   >
                     Regresar al curso
-                  </Typography>
-                </Link>
+                  </Typography>          
               </Button>
+              </Link>
             </Grid>
           </Grid>
           <Grid xs={2} className={classes.cont3}>

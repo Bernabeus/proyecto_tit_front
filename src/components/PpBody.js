@@ -14,8 +14,8 @@ import ruta5 from "../../public/images/imagen5.jpg";
 import Modal from "@material-ui/core/Modal";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
-import LoginPage from "./Login";
-import RegisterPage from "./Registro";
+import LoginPage from "../pages/Login";
+import RegisterPage from "../pages/Registro";
 
 const useStyles = makeStyles((theme) => ({
     box: {

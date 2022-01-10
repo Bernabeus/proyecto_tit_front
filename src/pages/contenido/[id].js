@@ -16,7 +16,6 @@ import Link from "next/link";
 import MenuItem from "@material-ui/core/MenuItem";
 import Image from "next/image";
 import logo from "../../../public/images/logo.png";
-import ContentDetails from "../../api/contentDetails";
 import Theme from "../../api/theme";
 import Content from "../../api/content.js";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -97,13 +96,15 @@ export default function contentPage() {
     const [stateComponent, setStateComponent] = useState(1);
     const [contentShow, setContentShow] = useState(null);
     const [themeT, setThemeT] = useState(null);
-    const [contentsTheme, setContentsTheme] = useState([]);
+    const [contTheme, setContTheme] = useState([]);
     
 
     useEffect(() => {
-        themeInf()
         contentTheme()
       }, [id]);
+
+      useEffect(() => {
+      }, [contTheme]);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -121,23 +122,25 @@ export default function contentPage() {
         setStateComponent(state);
     }
 
-    async function themeInf() {
-        try{
-            const theme = await Theme.theme(id);
-            setThemeT(theme);
-        }catch(error){
-        }
-    }
-
     async function contentTheme() {
         try {
-            const contentTh = await Content.contentTheme(id);
-            setContentsTheme(contentTh.data[0]);
+            const contTheme = await Content.content(id);
+            themeInf(contTheme.data.theme_id);
+            setContTheme(contTheme.data);
         } catch(error){
     
         }
       }
 
+    async function themeInf(idT) {
+        try{
+            const theme = await Theme.theme(idT);
+            setThemeT(theme.data);
+            return theme;
+        }catch(error){
+            
+        }
+    }
 
     return (
     <React.Fragment>
@@ -152,7 +155,7 @@ export default function contentPage() {
                     /></Grid>
                 <Grid xs={9} className={classes.containerH}>
                     <Typography variant="h3" gutterBottom className={classes.textH}>
-                    {themeT && themeT.data.title}
+                    {themeT && themeT.title}
                     </Typography>
                 </Grid>
                 <Grid xs={1} className={classes.gridH}>

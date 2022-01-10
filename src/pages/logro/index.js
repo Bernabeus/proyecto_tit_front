@@ -1,13 +1,10 @@
-import Header from "@/components/LogroHeader.js";
-import Body from "./LogroBody.js";
+import LogroPage from "./[id].js";
 import style from "@/styles/Main.module.css";
 
 const LogroPage = () => {
   return (
     <div className={style.container}>
-      <Header></Header>
-      <Body></Body>
-      <Header></Header>
+      <LogroPage></LogroPage>
     </div>
   );
 };

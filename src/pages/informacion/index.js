@@ -3,11 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Image from "next/image";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
 import Link from "next/link";
-import MenuItem from "@material-ui/core/MenuItem";
-import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 import portada from "../../../public/images/portadaInfo.jpg";
 import banner from "../../../public/images/banner.jpg";
 import Divider from "@material-ui/core/Divider";
@@ -20,6 +16,7 @@ import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import StarIcon from '@mui/icons-material/Star';
 import logo from "../../../public/images/logo1.png";
 import ShowChartIcon from '@mui/icons-material/ShowChart';
+import Button from "@material-ui/core/Button";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -91,9 +88,15 @@ const useStyles = makeStyles((theme) => ({
     imageBanner: {
         textAlign: "center",
     },
-    icono: {
-        color: "#fff"
+    btnC: {
+        border: "2px solid #000000",
+        backgroundColor: "#009A7E",
     },
+    textBtn: {
+        color: "#fff",
+        fontFamily: "Rationale",
+    }
+
 }));
 
 
@@ -120,36 +123,20 @@ const InformationPage = () => {
                     width={160} 
                     />
                 </Grid>
-                <Grid xs={8}>
+                <Grid xs={7}>
                 <Typography variant="h4" gutterBottom className={classes.title}>
                     Información general del curso
                 </Typography>
                 </Grid>
-                <Grid xs={1} >
-                    <IconButton
-                        aria-label="more"
-                        aria-controls="long-menu"
-                        aria-haspopup="true"
-                        className={classes.icono}
-                        onClick={handleClick}
-                    >
-                        <ArrowDropDownCircleRoundedIcon  style={{ fontSize: 45 }}/>
-                    </IconButton>
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        <MenuItem onClick={handleClose}>
-                            <Link href="/">
-                                <Typography variant="h5" gutterBottom className={classes.contentOne}>
-                                Regresar a la página de temas
-                                </Typography>       
+                <Grid xs={2} >
+                <Link href="/">
+                    <Button variant="contained" className={classes.btnC}>
+                    <Typography variant="h6" gutterBottom className={classes.textBtn}>
+                                 Ir a la pagina principal
+                                </Typography>  
+                    </Button>            
                             </Link>
-                        </MenuItem>
-                    </Menu>
+
                     <Divider className={classes.dividerTransparent} />
                     </Grid>
                 
@@ -166,7 +153,6 @@ const InformationPage = () => {
                     height={300}
                     width={900}
                 />
-
                 <Divider className={classes.dividerTransparent} />
             </Grid>
             <Grid item xs={12} className={classes.contentStyle}>
@@ -187,10 +173,10 @@ const InformationPage = () => {
 
             </Grid>
             <Grid item xs={12} className={classes.contentStyle} >
-                <Typography variant="h5" gutterBottom className={classes.textList}><SecurityIcon />Conozca qué es la ciberseguridad y su impacto en la actualidad.</Typography>
-                <Typography variant="h5" gutterBottom className={classes.textList}><NoEncryptionIcon />Conozca las amenazas, los ataques y las vulnerabilidades más comunes.</Typography>
-                <Typography variant="h5" gutterBottom className={classes.textList}><AddModeratorIcon /> Obtenga información sobre cómo las empresas protegen sus operaciones de los ataques.</Typography>
-                <Typography variant="h5" gutterBottom className={classes.textList}><VpnKeyIcon />Conozca las últimas tendencias laborales y por qué sigue creciendo el campo de la ciberseguridad.</Typography>
+                <Typography variant="h5" gutterBottom className={classes.textList}><SecurityIcon />Conozceras qué es la ciberseguridad y su impacto en la actualidad.</Typography>
+                <Typography variant="h5" gutterBottom className={classes.textList}><NoEncryptionIcon />Conozceras las amenazas, los ataques y las vulnerabilidades más comunes.</Typography>
+                <Typography variant="h5" gutterBottom className={classes.textList}><AddModeratorIcon /> Obtendras información sobre cómo las empresas protegen sus operaciones de los ataques.</Typography>
+                <Typography variant="h5" gutterBottom className={classes.textList}><VpnKeyIcon />Conozceras las últimas tendencias laborales y por qué sigue creciendo el campo de la ciberseguridad.</Typography>
             </Grid>
             <Grid item xs={12} className={classes.bannerContent}>
                 <Divider className={classes.dividerTransparent} />

@@ -103,12 +103,12 @@ export default function PPHeader() {
   const [day, setDay] = useState(null);
 
   useEffect(() => {
+    themeDetail();
     themeData();
     dateN();
   }, []);
 
   useEffect(() => {
-    themeDetail()
     getAuthenticatedUser()
   }, [day]);
 
@@ -178,7 +178,6 @@ export default function PPHeader() {
 
   async function contDetail(idT, contentId, contentDetail) {
     try{
-      console.log("contenido del CD", contentDetail);
       const data = {
         content_id: contentId,
         user_id: user.id,
@@ -192,7 +191,7 @@ export default function PPHeader() {
       }else {
         content = await ContentDetails.update(contentDetail.data[0].id, data); 
       };
-      console.log("contenido de detalle", content);
+      
       
     } catch(error){
 

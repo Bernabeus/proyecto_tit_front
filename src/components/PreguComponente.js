@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import PanoramaFishEyeIcon from '@material-ui/icons/PanoramaFishEye';
 import "@fontsource/rationale";
+import style from "@/styles/Main.module.css";
 import { useRouter } from "next/router";
 import Content from "../api/content";
 import Button from "@material-ui/core/Button";
@@ -14,6 +15,8 @@ import Link from "next/link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { useAuth } from "@/contexts/auth";
+import AchievementDetails from "src/api/achievementDetails";
 
 const useStyles = makeStyles((theme) => ({
     containerPreg: {
@@ -26,12 +29,13 @@ const useStyles = makeStyles((theme) => ({
         width: "100%"
     },
     pregunta: {
-        backgroundColor: "#009A7E"
+        backgroundColor: "#009A7E",
+        marginBottom: 50,
     },
     respuesta: {
         backgroundColor: "#009A7E",
-        marginTop: 100,
         fontFamily: "Rationale",
+        marginBottom: 50
     },
     checkP: {
         color: "#113163",
@@ -40,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
     text: {
         fontFamily: "Rationale",
         color: "#fff"
+        //alignitems: "center",
+    },
+    textP: {
+        fontFamily: "Rationale",
+        color: "#113163"
         //alignitems: "center",
     },
     btnC: {
@@ -56,43 +65,127 @@ const useStyles = makeStyles((theme) => ({
     },
     btn:{
         marginTop: 20,
+    },
+    linkA: {
+        textDecoration: "none"
     }
 }));
 
 const PreguComponente = () => {
     const classes = useStyles();
     const router = useRouter();
+    const { user } = useAuth();
     const { id } = router.query;
-    const [contentsTheme, setContentsTheme] = useState(null);
-    console.log("contenido", contentsTheme);
+    const [contents, setContents] = useState(null);
+    const [contentsA, setContentsA] = useState([]);
+    const [idcontentN, setIdContentN] = useState(null);
+    const [answer, setAnswer] = useState(null);
+    const [checked, setChecked] = useState(0);
+    const [option, setOption] = useState(0);
+    const [nextContent, setNextContent] = useState(null);
+
     useEffect(() => {
-        contentTheme();
+        contentT(); 
       }, [id]);
 
-      async function contentTheme() {
+    useEffect(() => {
+    }, [contents]);
+     
+    async function contentT() {
         try {
-            const contentTh = await Content.contentTheme(id);
-            setContentsTheme(contentTh.data[0]);
+            const contentTh = await Content.content(id);
+            contentsTheme(contentTh.data.theme_id,);
+            setContents(contentTh.data);
+            contentAnswer(contentTh.data);    
         } catch(error){
     
         }
       }
+      
+    async function contentsTheme(idTheme) {
+        try {
+            const contentsTheme = await Content.contentTheme(idTheme);
+            const contenidos = contentsTheme.data;
+            var idCont = -1;
+            if(id == contenidos[contenidos.length - 1].id){
+                setNextContent(true);
+            } else {
+                for(const element in contenidos){
+                    if(id == contenidos[element].id){
+                        idCont = element;
+                    }
+                }
+                setIdContentN(contenidos[++idCont].id);                
+                setNextContent(false);
+            }
+        } catch(error){
+    
+        }
+      }
+    
+    function contentAnswer(cont) {
+        let arrayContentA = [];
+        arrayContentA.push(cont.answer_1);
+        arrayContentA.push(cont.answer_2);
+        arrayContentA.push(cont.answer_3);
+        arrayContentA.push(cont.answer_4);
+        setAnswer(arrayContentA[0]);
+        let arrayD = arrayContentA;
+        arrayD = arrayD.sort(function() {
+            return Math.random() - 0.5
+        });  
+        setContentsA(arrayD);
+    }
 
-  return (
+    function select(content) {
+        let resp = 1;
+        if(content == answer){
+            resp = 2; 
+        }
+        setChecked(resp);
+    } 
+
+    function selectAnswer(){
+        setOption(checked);
+    } 
+
+    async function achievementD() {
+        const achievementDetail = await AchievementDetails.achievementsDetailsAll();
+        createAchievementDetail(achievementDetail);
+      }
+
+    async function createAchievementDetail(achievem){
+        const data = {
+            achievement_id: contents.theme_id,
+            user_id: user.user.id,
+            content_id: contents.id,
+            theme_id: contents.theme_id,
+        };
+
+        let achievement = [];
+        if(achievem.data.length === 0){
+            achievement = await AchievementDetails.create(data);
+        }else {
+            achievement = await AchievementDetails.update(achievem.data[0].id, data); 
+        };
+    }
+      
+    return (
     <Grid container>
         <Grid container className={classes.containerPreg}>
             <Grid item={true} xs={12} className={classes.pregunta}>
                 <Typography
                     variant="h3"
                     gutterBottom
-                    className={classes.text}
+                    className={classes.textP}
                 >
-                    Pregunta: {contentsTheme && contentsTheme.question} 
+                    Pregunta: {contents && contents.question} 
                 </Typography>
 
                 <Grid className={classes.list}>
                 <List className={classes.listT}>
-                  <ListItem > 
+                {contentsA.map((contenido, index) => (
+                  <ListItem key={index}> 
                     <ListItemText>
                     {<FormControlLabel
                 control={
@@ -100,6 +193,7 @@ const PreguComponente = () => {
                     icon={<PanoramaFishEyeIcon />}
                     checkedIcon={<LensIcon />}
                     className={classes.checkP}
+                    onClick={() =>  select(contenido) }
                     />
                 }
                 label={<Typography
@@ -107,109 +201,84 @@ const PreguComponente = () => {
                     gutterBottom
                     className={classes.text}
                     >
-                        {contentsTheme && contentsTheme.answer_1}
+                        {contenido}
                     </Typography>}
                 />}
                     </ListItemText>
                   </ListItem>
-                  <ListItem > 
-                    <ListItemText>
-                    {<FormControlLabel
-                control={
-                    <Checkbox
-                    icon={<PanoramaFishEyeIcon />}
-                    checkedIcon={<LensIcon />}
-                    className={classes.checkP}
-                    />
-                }
-                label={<Typography
-                    variant="h5"
-                    gutterBottom
-                    className={classes.text}
-                    >
-                        {contentsTheme && contentsTheme.answer_2}
-                    </Typography>}
-                />}
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem > 
-                    <ListItemText>
-                    {<FormControlLabel
-                control={
-                    <Checkbox
-                    icon={<PanoramaFishEyeIcon />}
-                    checkedIcon={<LensIcon />}
-                    className={classes.checkP}
-                    />
-                }
-                label={<Typography
-                    variant="h5"
-                    gutterBottom
-                    className={classes.text}
-                    >
-                        {contentsTheme && contentsTheme.answer_3}
-                    </Typography>}
-                />}
-                    </ListItemText>
-                  </ListItem>
-                  <ListItem > 
-                    <ListItemText>
-                    {<FormControlLabel
-                control={
-                    <Checkbox
-                    icon={<PanoramaFishEyeIcon />}
-                    checkedIcon={<LensIcon />}
-                    className={classes.checkP}
-                    />
-                }
-                label={
-                    <Typography
-                variant="h5"
-                gutterBottom
-                className={classes.text}
-                >
-                    {contentsTheme && contentsTheme.answer_4}
-                </Typography>
-                    }
-                />}
-                    </ListItemText>
-                  </ListItem>
+                  
+                  ))}
                 </List>
               </Grid>
-            <Grid item={true} xs={6} className={classes.pregunta}>
-                <Button variant="contained" className={classes.btn}>
-                        <Typography
-                        variant="h5"
-                        gutterBottom
-                        className={classes.textB}
-                        >
-                            Seleccionar respuesta
-                        </Typography>
-                    </Button>
+              <Grid item={true} xs={6} className={classes.pregunta}>
+                  <Button variant="contained" className={classes.btn} onClick={() =>  selectAnswer() }>
+                          <Typography
+                          variant="h5"
+                          gutterBottom
+                          className={classes.textB}
+                          >
+                              Seleccionar respuesta
+                          </Typography>
+                      </Button>
+              </Grid>
             </Grid>
-            </Grid>
-            <Grid item={true} xs={12} className={classes.respuesta}>
+                    
+            {option === 2 ? 
+                <Grid xs={12} className={classes.respuesta}>
                 <Typography
-                    variant="h3"
+                    variant="h4"
                     gutterBottom
                     className={classes.text}
                 >
-                    Respuesta: {contentsTheme && contentsTheme.feedback}
+                    Respuesta: {contents && contents.feedback}
                 </Typography>
+                { nextContent === true ?
                 <Grid>
-                <Link href={`/logro/${id}`}>
-                    <Button variant="contained" className={classes.btnC}>
+                    <Grid>
+                    <Typography
+                        variant="h4"
+                        gutterBottom
+                        className={classes.textP}
+                        >
+                            TEMA COMPLETADO
+                        </Typography>
+                    </Grid>
+                    <Link href={`/logro/${contents.theme_id}`}>
+                    <Button variant="contained" className={classes.btnC} onClick={() => achievementD()}>
                         <Typography
                         variant="h5"
                         gutterBottom
                         className={classes.text}
                         >
-                            Siguiente Contenido
+                            Consigue tu logro
                         </Typography>
                     </Button>
-                </Link>
+                    </Link>
                 </Grid>
-            </Grid>
+                : <Grid>
+                    <a href={`/contenido/${idcontentN}`} className={style.etA}>
+                <Button variant="contained" className={classes.btnC}>
+                    <Typography
+                    variant="h5"
+                    gutterBottom
+                    className={classes.text}
+                    >
+                        Siguiente Contenido
+                    </Typography>
+                </Button>
+                </a>
+                </Grid>}
+             </Grid>
+             : option === 1 ? <Grid xs={12} className={classes.respuesta}>
+             <Typography
+                 variant="h4"
+                 gutterBottom
+                 className={classes.text}
+             >
+                 Larespuesta es incorrecta
+             </Typography>
+          </Grid>
+          : '' }
         </Grid>
     </Grid>
   );

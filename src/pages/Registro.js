@@ -9,8 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { useAuth } from "@/contexts/auth";
 import React from "react";
-import withoutAuth from "../hocs/withoutAuth";
+import Link from "next/link";
+import InformationPage from "./informacion/index";
 import { makeStyles } from "@material-ui/core/styles";
+import withoutAuth from "@/hocs/withoutAuth";
 
 const schema = yup.object().shape({
     email: yup
@@ -88,6 +90,7 @@ const RegisterPage = () => {
         setUserInfo(response.data);
         setResult("Usuario registrado correctamente");
         reset();
+        
         } catch (e) {
             const { response } = e;
             setResult("Ocurrió un error :(");
@@ -103,6 +106,8 @@ const RegisterPage = () => {
         }
         }
     };
+
+    
 
     return (
         <Grid className={classes.fields}>
@@ -201,16 +206,17 @@ const RegisterPage = () => {
                 ))}
             </ul>
             )}
+            
             <Button 
             type="submit" 
             variant="outlined" 
             className={classes.button}
             >
-                Registrarse
-            </Button>
+                Registrarse 
+            </Button>  
         </form>
         </Grid>
     );
 };
 
-export default RegisterPage;
+export default withoutAuth(RegisterPage);

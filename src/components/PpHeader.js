@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         color: "#113163"
     },
     titleL: {
+        float: "rigth",
         background: "#113163",
         height: 160
     },
@@ -54,12 +55,10 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Rationale"
     },
     img: {
-        marginTop: "-10px",
-        marginLeft: 40
+        textAlign: "right"
     },
     img1: {
-        marginTop: "-10px",
-        //marginRight: 60
+        marginTop: "-6px"
     }
 }));
 
@@ -71,27 +70,23 @@ export default function PPHeader() {
         <CssBaseline />
             <Container className={styles.header}>
             <Grid container spacing={0} className={classes.container}>
-                <Grid item={true} xs={12} sm={4} className={classes.titleL}>
-                </Grid>
-                <Grid item={true} xs={12} sm={2} className={classes.titleL}>
+                <Grid item={true} xs={12} sm={6} className={classes.titleL}>
                     <Grid className={classes.img}>
                 <Image
                     src={logo} 
                     height={160}
-                    width={160} 
+                    width={175} 
                     />
                     </Grid>
                 </Grid>
-                <Grid item={true} xs={12} sm={2} className={classes.titleO}>
+                <Grid item={true} xs={12} sm={6} className={classes.titleO}>
                 <Grid className={classes.img1}>
                     <Image
                     src={logo1} 
-                    height={160}
+                    height={180}
                     width={160} 
                     />
                     </Grid>
-                </Grid>
-                <Grid item={true} xs={12} sm={4} className={classes.titleO}>
                 </Grid>
                 <Grid item={true} xs={12} sm={6} className={classes.title3}>
                     <Typography variant="h3" className={classes.title1}>

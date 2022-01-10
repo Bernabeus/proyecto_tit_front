@@ -10,13 +10,10 @@ import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { useAuth } from "@/contexts/auth";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from "./Loading";
+import style from "@/styles/Main.module.css";
 import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
-    footer: {
-        textAlign: "center",
-        background: "#113163",
-    },
     cont: {
         marginTop: "20px",
         color: "#fff",
@@ -38,7 +35,7 @@ export default function Ppfooter() {
             <React.Fragment>
             <CssBaseline />
                 <Container>
-                <Grid container spacing={0} className={classes.footer}>
+                <Grid container spacing={0} className={style.footer}>
                     <Grid item={true} xs={12} sm={6} className={classes.cont}>
                         <Typography variant="h3" gutterBottom className={classes.text}>
                             CONTÁCTANOS

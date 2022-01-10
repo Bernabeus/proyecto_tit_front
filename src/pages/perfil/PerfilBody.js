@@ -65,7 +65,7 @@ export default function PerfilBody() {
             <Container >
             <Grid className={classes.container}>
                 {user && 
-                <Grid  className={classes.cont1}>
+                <Grid  className={classes.cont1} style={{ marginLeft: '35px', marginRight: '35px' }}>
                 <Grid container className={classes.contP}>
                     <Grid container item={true} xs={6} className={classes.contP1}>
                         <Grid item={true} xs={12} className={classes.boxP}>

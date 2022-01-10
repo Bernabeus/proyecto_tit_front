@@ -45,15 +45,10 @@ import PropTypes from "prop-types";
 
     async function register(data) {
         try {
-            const res = await User.register(data);
-            const respo = {
-                email: data.email,
-                password: data.password
-            };
-            
-            const response = await User.login(respo);
+            const response = await User.register(data);
+            console.log(response);
             handleUser(response.data);
-            posthemeDe(res);
+            posthemeDe(response);
             return response;
         } catch (error) {
             if (error.response) {
@@ -67,6 +62,7 @@ import PropTypes from "prop-types";
             console.log(error.config);
         }
     };
+
 
     function posthemeDe(res) {
         const dataTheme =[
@@ -111,6 +107,7 @@ import PropTypes from "prop-types";
     async function login(data) {
         try {
             const response = await User.login(data);
+            console.log(response);
             handleUser(response.data.user);
             return response;
         } catch (error) {
