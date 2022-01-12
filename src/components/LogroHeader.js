@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         background: "#113163",
         height: 160,
         alignContent: "center",
+        border: "1px solid #fff",
     },
 }));
 

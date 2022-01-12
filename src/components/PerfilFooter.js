@@ -10,7 +10,12 @@ const useStyles = makeStyles((theme) => ({
     text: {
         fontFamily: "Rationale",
         color: "#fff",
+    },
+    container: {
+        borderRight: "1px solid #fff",
+        borderLeft: "1px solid #fff",
     }
+
 }));
 
 export default function PerfilFooter() {
@@ -20,8 +25,8 @@ export default function PerfilFooter() {
         <CssBaseline />
             <Container>
             <Grid container spacing={0} className={style.footer}>
-                <Grid item xs={12}>
-                    <Typography variant="h5" gutterBottom className={style.text}>
+                <Grid item xs={12} className={classes.container}>
+                    <Typography variant="h5" gutterBottom className={classes.text}>
                         Escuela de Formación de Tecnólogos - Escuela Politécnica Nacional
                     </Typography>
                 </Grid>

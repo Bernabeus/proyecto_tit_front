@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         backgroundColor: "#fff",
-        border: "1px solid #000000"
+        border: "1px solid #fff"
     },
     paper: {
         position: "absolute",

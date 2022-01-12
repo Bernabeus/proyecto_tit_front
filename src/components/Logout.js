@@ -80,9 +80,11 @@ const Logout = () => {
           </Button>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Button className={classes.button} onClick={handleLogout}>
+        <Link href="/">
+        <Button className={classes.button} onClick={handleLogout}>
             Cerrar sesión
           </Button>
+            </Link>
         </MenuItem>
       </Menu>
     </Grid>

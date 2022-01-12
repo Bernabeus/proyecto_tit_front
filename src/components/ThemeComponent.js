@@ -11,11 +11,12 @@ import Theme from "../api/theme";
 import Content from "../api/content";
 import ContentDetails from "../api/contentDetails";
 import Button from "@material-ui/core/Button";
-import User from "../api/user";
+import { useAuth } from "@/contexts/auth";
 import Link from "next/link";
 import ThemeDetails from "../api/themeDetails";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from "@/components/Loading";
+import StarIcon from '@material-ui/icons/Star';
 
 const useStyles = makeStyles((theme) => ({
   accord: {
@@ -85,6 +86,20 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     width: "100%",
   },
+  accordTemaF: {
+    float: "top",
+    backgroundColor: "#009A7E",
+    width: "100%",
+    border: "3px solid #000",
+  },
+  accordTemaTeF: {
+    backgroundColor: "#113163",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    width: "100%",
+  },
   grid: {
     width: "100%",
   },
@@ -96,20 +111,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PPHeader() {
   const classes = useStyles();
-  const [ user, setUser ] = useState([]);
+  const { user } = useAuth();
   const [themeDiff, setThemeDiff] = useState([]);
   const [theme, setTheme] = useState([]);
   const [themeDet, setThemeDet] = useState([]);
   const [day, setDay] = useState(null);
-
+  
   useEffect(() => {
-    themeDetail();
     themeData();
+    themeDetail();
     dateN();
   }, []);
 
   useEffect(() => {
-    getAuthenticatedUser()
   }, [day]);
 
   async function themeDetail() {
@@ -124,11 +138,11 @@ export default function PPHeader() {
         }
         return 0
       });
+      
       setThemeDet(arrayTheme);
     } catch(error){
     }
   }
-
   async function themeData() {
     try {
       const themes = await Theme.themeAll();
@@ -191,19 +205,8 @@ export default function PPHeader() {
       }else {
         content = await ContentDetails.update(contentDetail.data[0].id, data); 
       };
-      
-      
     } catch(error){
 
-    }
-  }
-
-  async function getAuthenticatedUser() {
-    try {
-      const response = await User.getAuthenticatedUser();
-      setUser(response.data.user);
-      return response;
-    } catch (error) {
     }
   }
 
@@ -221,12 +224,13 @@ export default function PPHeader() {
               {tema ? tema : ""}
             </Typography>
           </AccordionSummary>
-          {theme.filter(them => them.difficulty === tema).map((temas, index) => (
-            <AccordionDetails className={classes.accordC}>
-                <Grid className={classes.grid}>
-                  {themeDet[index] ? (
+          {theme.map((temas, index) => (
+            <AccordionDetails className={classes.accordC} key={temas.id}>
+              {themeDet[index] ? (
+              <Grid className={classes.grid}>
+                {temas.difficulty === tema ? (
                     <Grid className={classes.grid}> 
-                  {themeDet[index].theme_advance === "Iniciado" ? (
+                  {themeDet[index].theme_advance === 'Iniciado' ? (
                       <Accordion className={classes.accordTema}>
                       <AccordionSummary className={classes.accordTemaTitulo}
                         expandIcon={<ExpandMoreIcon />}
@@ -260,7 +264,7 @@ export default function PPHeader() {
                         </Grid>
                       </AccordionDetails>
                     </Accordion>
-                   )  : themeDet[index].theme_advance === "Bloqueado" ? (
+                   )  : themeDet[index].theme_advance === 'Bloqueado' ? (
                     <Accordion disabled className={classes.accordTemaD}>
                     <AccordionSummary className={classes.accordTemaTituloD}
                       expandIcon={<ExpandMoreIcon />}
@@ -273,15 +277,50 @@ export default function PPHeader() {
                     </AccordionSummary>
                     <AccordionDetails className={classes.accordTemaTe}>
                     <Typography variant="h3" className={classes.textBD}>
-                        Se le dijo que estaria bloqueado
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
-                   ) : (<div>null
-                   </div>)}
+                   ) : themeDet[index].theme_advance === 'Terminado' ? (
+                    <Accordion className={classes.accordTemaF}>
+                    <AccordionSummary className={classes.accordTemaTitulo}
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography variant="h3" className={classes.textB}>
+                        {temas.title} (TERMINADO)
+                      </Typography>
+                      <StarIcon style={{ fontSize: 60, color: "#E3B102" }}></StarIcon>
+                      
+                    </AccordionSummary>
+                    <AccordionDetails className={classes.accordTemaTeF}>
+                      <Grid xs={7} className={classes.boxTemaCont}>
+                      <Typography variant="h4" className={classes.textB}>
+                      {temas.description}
+                      </Typography>
+                      </Grid>
+                      <Grid xs={5} className={classes.boxTemaTe}>
+                      <Link href={`/contenido/${temas.id}`}>
+                        <Button variant="contained" className={classes.btnC} onClick={() => contentTheme(temas.id)}>
+                          
+                            <Typography
+                              variant="h5"
+                              gutterBottom
+                              className={classes.textB}
+                            >
+                              Ingresar
+                            </Typography>
+                          
+                        </Button>
+                        </Link>
+                      </Grid>
+                    </AccordionDetails>
+                  </Accordion>
+                 ) : ''}
+                  </Grid>
+                ): (<div className={classes.spa}></div>)}
                   </Grid>
                 ) : (<Loading />)} 
-                </Grid>  
             </AccordionDetails>
             ))}
         </Accordion>

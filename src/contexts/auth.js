@@ -26,7 +26,6 @@ import PropTypes from "prop-types";
     function useAuthProvider() {
     const [user, setUser] = useState(null);
 
-
     const handleUser = (user) => {
         if (user) {
             // si tengo sesión activa
@@ -67,32 +66,32 @@ import PropTypes from "prop-types";
     function posthemeDe(res) {
         const dataTheme =[
             {
-                user_id: res.data.user.id,
+                user_id: res.data.id,
                 theme_id: 1,
                 theme_advance: "Iniciado",
             },
             {
-                user_id: res.data.user.id,
+                user_id: res.data.id,
                 theme_id: 2,
                 theme_advance: "Bloqueado",
             },
             {
-                user_id: res.data.user.id,
+                user_id: res.data.id,
                 theme_id: 3,
                 theme_advance: "Bloqueado",
             },
             {
-                user_id: res.data.user.id,
+                user_id: res.data.id,
                 theme_id: 4,
                 theme_advance: "Bloqueado",
             },
             {
-                user_id: res.data.user.id,
+                user_id: res.data.id,
                 theme_id: 5,
                 theme_advance: "Bloqueado",
             },
             {
-                user_id: res.data.user.id,
+                user_id: res.data.id,
                 theme_id: 6,
                 theme_advance: "Bloqueado",
             },
@@ -107,8 +106,7 @@ import PropTypes from "prop-types";
     async function login(data) {
         try {
             const response = await User.login(data);
-            console.log(response);
-            handleUser(response.data.user);
+            handleUser(response.data);
             return response;
         } catch (error) {
             if (error.response) {

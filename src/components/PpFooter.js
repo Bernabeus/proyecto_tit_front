@@ -11,7 +11,7 @@ import { useAuth } from "@/contexts/auth";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from "./Loading";
 import style from "@/styles/Main.module.css";
-import Footer from "./Footer";
+import Footer from "./PerfilFooter";
 
 const useStyles = makeStyles((theme) => ({
     cont: {
@@ -37,7 +37,7 @@ export default function Ppfooter() {
                 <Container>
                 <Grid container spacing={0} className={style.footer}>
                     <Grid item={true} xs={12} sm={6} className={classes.cont}>
-                        <Typography variant="h3" gutterBottom className={classes.text}>
+                        <Typography variant="h3" gutterBottom className={style.text}>
                             CONTÁCTANOS
                         </Typography>
                     </Grid>

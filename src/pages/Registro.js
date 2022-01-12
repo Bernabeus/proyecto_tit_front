@@ -9,10 +9,15 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { useAuth } from "@/contexts/auth";
 import React from "react";
-import Link from "next/link";
-import InformationPage from "./informacion/index";
+import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
-import withoutAuth from "@/hocs/withoutAuth";
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const schema = yup.object().shape({
     email: yup
@@ -58,13 +63,36 @@ const useStyles = makeStyles((theme) => ({
         color: "#113163",
         background: "#fff",
     },
-    controller: {
-
+    textfieldF: {
+        color: "#113163",
+        background: "#e3e3e4",
+        fontFamily: "Rationale",
+    },
+    contr : {
+        marginBottom: "-15px",
+        marginTop: "-15px"
+    },
+    contr2 : {
+        marginTop: "-28px"
     }
     
 }));
 
 const RegisterPage = () => {
+    const [values, setValues] = useState({
+        amount: '',
+        password: '',
+        weight: '',
+        weightRange: '',
+        showPassword: false,
+      });
+      const [valuesR, setValuesR] = useState({
+        amount: '',
+        password: '',
+        weight: '',
+        weightRange: '',
+        showPassword: false,
+      });
     const {
         handleSubmit,
         formState: { errors },
@@ -74,6 +102,7 @@ const RegisterPage = () => {
         resolver: yupResolver(schema),
     });
     const [result, setResult] = useState("");
+    const router = useRouter();
     const [errorsList, setErrorsList] = useState([]);
     const [userInfo, setUserInfo] = useState(null);
     const { register } = useAuth();
@@ -90,7 +119,7 @@ const RegisterPage = () => {
         setUserInfo(response.data);
         setResult("Usuario registrado correctamente");
         reset();
-        
+        router.push("/informacion");
         } catch (e) {
             const { response } = e;
             setResult("Ocurrió un error :(");
@@ -107,10 +136,39 @@ const RegisterPage = () => {
         }
     };
 
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+      };
     
+      const handleClickShowPassword = () => {
+        setValues({
+          ...values,
+          showPassword: !values.showPassword,
+        });
+      };
+
+      const handleChangeR = (prop) => (event) => {
+        setValuesR({ ...valuesR, [prop]: event.target.value });
+      };
+    
+      const handleClickShowPasswordR = () => {
+        setValuesR({
+          ...valuesR,
+          showPassword: !valuesR.showPassword,
+        });
+      };
+
+      const handleMouseDownPasswordR = (event) => {
+        event.preventDefault();
+      };
+    
+      const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+      };
+  
 
     return (
-        <Grid className={classes.fields}>
+        <Grid spacing={0} className={classes.fields}>
         <Typography variant="h4" gutterBottom className={classes.text}>
                 Registro
             </Typography>
@@ -126,8 +184,7 @@ const RegisterPage = () => {
                     {...field}
                     className={classes.textfield}
                     label="Nombre"
-                    variant="outlined"
-                    size="small"
+                    variant="filled"
                 />
                 )}
             />          
@@ -145,59 +202,101 @@ const RegisterPage = () => {
                         className={classes.textfield}
                         type="email"
                         label="Correo electrónico"
-                        variant="outlined"
-                        size="small"
+                        variant="filled"
                     />
                     )}
                 />
                 <p style={{ color:"#fff" }}>{errors.email?.message}</p>
             </Grid>
-            <Grid>
+            <Grid className={classes.contr}>
             <Controller
                 name="password"
                 control={control}
-                className={classes.controller}
+                className={classes.controllerF}
                 defaultValue=""
                 render={({ field }) => (
-                <TextField
+
+                    <FormControl 
                     {...field}
-                    className={classes.textfield}
-                    type="password"
-                    label="Contraseña"
-                    variant="outlined"
-                    size="small"
-                />
+                          sx={{ m: 2, width: '36ch' }}
+                             variant="filled"
+                             
+                             className={classes.textfieldF}
+                          >
+                    <InputLabel style={{ marginTop:"-5px" }}
+                    >Contraseña</InputLabel>
+                    <OutlinedInput
+                      
+                      id="outlined-adornment-password"
+                      type={values.showPassword ? 'text' : 'password'}
+                      value={values.password}
+                      onChange={handleChange('password')}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Contraseña"
+                    />
+                  </FormControl>
                 )}
             />
             <p style={{ color:"#fff" }}>{errors.password?.message}</p>
             </Grid>
-            <Grid>
+            <Grid className={classes.contr2}>
+
             <Controller
                 name="password_confirmation"
                 control={control}
-                className={classes.controller}
+                className={classes.controllerF}
                 defaultValue=""
                 render={({ field }) => (
-                <TextField
-                    {...field}
-                    className={classes.textfield}
-                    type="password"
-                    label="Confirma tu contraseña"
-                    variant="outlined"
-                    size="small"
-                />
+
+                    <FormControl 
+          {...field}
+                sx={{ m: 2, width: '36ch' }}
+                   variant="filled"
+                   className={classes.textfieldF}
+                >
+          <InputLabel style={{ marginTop:"-5px" }}
+          >Confirma tu contraseña</InputLabel>
+          <OutlinedInput
+            
+            id="outlined-adornment-password"
+            type={valuesR.showPassword ? 'text' : 'password'}
+            value={valuesR.password}
+            onChange={handleChangeR('password')}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPasswordR}
+                  onMouseDown={handleMouseDownPasswordR}
+                  edge="end"
+                >
+                  {valuesR.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Confirma tu contraseña"
+          />
+        </FormControl>
+
+                
                 )}
             />
             <p style={{ color:"#fff" }}>{errors.password_confirmation?.message}</p>
             </Grid>
 
             <p style={{ color:"#fff" }}>{result}</p>
-            {userInfo && (
-            <div>
-                <div>Nombre: {userInfo.name}</div>
-                <div>Token: {userInfo.token}</div>
-            </div>
-            )}
+
 
             {errorsList.length > 0 && (
             <ul>
@@ -219,4 +318,16 @@ const RegisterPage = () => {
     );
 };
 
-export default withoutAuth(RegisterPage);
+export default RegisterPage;
+
+/*
+<TextField
+                    {...field}
+                    className={classes.textfield}
+                    type="password"
+                    label="Confirma tu contraseña"
+                    variant="filled"
+                    size="small"
+                />
+
+*/

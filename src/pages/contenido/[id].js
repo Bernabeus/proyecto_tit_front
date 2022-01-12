@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from '@material-ui/core/Typography';
 import ConteComponente from "@/components/ConteComponente";
 import PreguComponente from "@/components/PreguComponente";
-import Footer from "@/components/Footer.js";
+import Footer from "@/components/PerfilFooter.js";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import Link from "next/link";
@@ -18,6 +18,7 @@ import Image from "next/image";
 import logo from "../../../public/images/logo.png";
 import Theme from "../../api/theme";
 import Content from "../../api/content.js";
+import style from "@/styles/Main.module.css";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         background: "#113163",
         height: 160,
         alignContent: "center",
+        border: "1px solid #fff",
     },
     textH: {
         fontFamily: "Rationale",
@@ -49,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         backgroundColor: "#fff",
-        border: "1px solid #000000",
+        border: "1px solid #fff",
         backgroundColor: "#009A7E",
     },
     cont1: {
@@ -145,6 +147,7 @@ export default function contentPage() {
     return (
     <React.Fragment>
         <CssBaseline />
+        <div className={style.container}>
             <Container >
             <Grid container spacing={0} className={classes.headerH}>
             <Grid xs={2} className={classes.img}> 
@@ -176,7 +179,7 @@ export default function contentPage() {
                         onClose={handleClose}
                     >
                         <MenuItem onClick={handleClose}>
-                            <Link href="/">
+                            <Link href="/perfil">
                                 <Typography variant="h5" gutterBottom className={classes.buttonH}>
                                 Regresar a la página de temas
                                 </Typography>       
@@ -230,6 +233,7 @@ export default function contentPage() {
     
         </Container>
         <Footer />
+        </div>
     </React.Fragment>
     );
 };

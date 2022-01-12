@@ -5,7 +5,7 @@ import style from "@/styles/Main.module.css";
 import { useAuth } from "@/contexts/auth";
 import PerfilHeader from "@/components/PerfilHeader.js";
 import PerfilBody from "./perfil/PerfilBody.js";
-import PerfilFooter from "../components/Footer.js";
+import PerfilFooter from "../components/PerfilFooter.js";
 
 const IndexPage = () => {
   const { user } = useAuth();

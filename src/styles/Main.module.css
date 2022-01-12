@@ -1,9 +1,9 @@
 .header {
-    font-family: "Rationale";
+    font-family: Rationale;
 }
 
 .container {
-    background-color: #e2e2e2;
+    background-color: #000;
 }
 
 .etA {
@@ -13,4 +13,14 @@
 .footer {
     text-align: center;
     background-color: #113163;
+}
+
+.text {
+    font-family: Rationale;
+    color: #fff;
+}
+
+.Typography {
+    font-family: Rationale;
+    color: #fff;
 }

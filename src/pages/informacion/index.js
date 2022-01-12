@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Image from "next/image";
-import Link from "next/link";
+import style from "@/styles/Main.module.css";
 import portada from "../../../public/images/portadaInfo.jpg";
 import banner from "../../../public/images/banner.jpg";
 import Divider from "@material-ui/core/Divider";
@@ -129,13 +129,13 @@ const InformationPage = () => {
                 </Typography>
                 </Grid>
                 <Grid xs={2} >
-                <Link href="/">
+                <a href="/perfil"  className={style.etA}>
                     <Button variant="contained" className={classes.btnC}>
                     <Typography variant="h6" gutterBottom className={classes.textBtn}>
                                  Ir a la pagina principal
                                 </Typography>  
                     </Button>            
-                            </Link>
+                </a>
 
                     <Divider className={classes.dividerTransparent} />
                     </Grid>

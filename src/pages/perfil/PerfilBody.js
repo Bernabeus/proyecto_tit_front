@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -8,8 +8,7 @@ import Image from "next/image";
 import medalla from "../../../public/images/medalla.png";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
-import { useState } from "react";
-import User from "../../api/user";
+import { useAuth } from "@/contexts/auth";
 import Themes from "@/components/ThemeComponent.js";
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -21,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
     cont1: {
         display: "flex",
         alignItems: "center",
-        margin: "0 auto",
-        
+        margin: "0 auto",      
         height: 400,
     },
     contP: {
@@ -38,37 +36,26 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Rationale",
         color: "#fff"
     },
-    boxTema: {
+    boxP: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
     },
 }));
 
 export default function PerfilBody() {
     const classes = useStyles();
-    const [ user, setUser ] = useState([]);
-    
-    useEffect(() => {
-        getAuthenticatedUser();
-    }, []);
-
-    async function getAuthenticatedUser() {
-        try {
-          const response = await User.getAuthenticatedUser();
-          setUser(response.data.user);
-          return response;
-        } catch (error) {
-        }
-    }
+    const { user } = useAuth();
 
     return (
     <React.Fragment>
         <CssBaseline />
             <Container >
             <Grid className={classes.container}>
-                {user && 
                 <Grid  className={classes.cont1} style={{ marginLeft: '35px', marginRight: '35px' }}>
                 <Grid container className={classes.contP}>
-                    <Grid container item={true} xs={6} className={classes.contP1}>
-                        <Grid item={true} xs={12} className={classes.boxP}>
+                    <Grid container item={true} xs={4} className={classes.contP1}>
+                        <Grid xs={12} className={classes.boxP}>
                             <Box>
                                 <Image
                                 src={medalla} 
@@ -77,13 +64,8 @@ export default function PerfilBody() {
                                 />
                             </Box>
                         </Grid>
-                        <Grid item={true} xs={12}>
-                            <Typography variant="h4" gutterBottom className={classes.text}>
-                                Nombre del maximo logro
-                            </Typography>
-                        </Grid>
                     </Grid>
-                    <Grid item={true} xs={6}>
+                    <Grid xs={8}>
                         <Grid item={true} xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
                                 Nombre: {user && user.name}
@@ -114,7 +96,6 @@ export default function PerfilBody() {
                     </Grid>
                     </Grid>
                 </Grid>
-                }
                 <Themes />
             </Grid>
         </Container>

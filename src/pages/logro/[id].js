@@ -20,18 +20,22 @@ import Brightness1Icon from "@material-ui/icons/Brightness1";
 import Header from "@/components/LogroHeader.js";
 import style from "@/styles/Main.module.css";
 import Achievements from "src/api/achievement";
+import ThemeDetails from "src/api/themeDetails";
 
 const useStyles = makeStyles((theme) => ({
+  containerC: {
+    height: "100%"
+  },
   container: {
     width: "100%",
     backgroundColor: "#fff",
-    border: "1px solid #000000",
+    borderRight: "1px solid #fff",
+    borderLeft: "1px solid #fff",
     display: "flex",
-    marginBottom: "-7px",
+    height: "100%"
   },
   cont1: {
     width: "100%",
-    height: 1100,
     backgroundColor: "#B7B1B1",
     alignItems: "center",
     alignContent: "center",
@@ -78,6 +82,9 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
       height: "100%",
+  },
+  cont2: {
+    height: "100%",
   }
 }));
 
@@ -111,14 +118,56 @@ const LogroPage = () => {
       setAchievementI(arrayAchievementI);
   }
 
+  async function ThemeSearch() {
+    try{
+        const themeS = await ThemeDetails.themeDetailsAll();
+        const arrayTheme = themeS.data.sort(function(a, b){
+          if( a.theme_id > b.theme_id){
+            return 1;
+          }
+          if( a.theme_id < b.theme_id){
+            return -1;
+          }
+          return 0
+        });
+        var idA = id;
+        var idAs = idA;
+        const themeIdA = arrayTheme[--idA].id;
+        const themeIdS = arrayTheme[id].id;
+        const themeAdvanceA = arrayTheme[idAs].theme_advance;
+        console.log("temas", arrayTheme);
+        ThemeComplete(themeAdvanceA, themeIdA, themeIdS);
+    }catch(error){
+    }
+  }
+
+    function ThemeComplete(themeAdvanceA, themeIdA, themeIdS) {
+      var idS = id;
+      const dataA = {
+        theme_id: id,
+        theme_advance: 'Terminado', 
+      };
+      const dataS = {
+        theme_id: ++idS,
+        theme_advance: 'Iniciado', 
+      };
+      if(themeAdvanceA == 'Iniciado'){
+        const themeA =  ThemeDetails.update(themeIdA, dataA);
+        const themeS =  ThemeDetails.update(themeIdS, dataS);
+      }
+    }
+
 
   return (
     <React.Fragment>
+      <div className={style.container}>
     <Header />
-      <Container className={style.container}>
+      <Container className={classes.containerC}>
         <CssBaseline />
-        <Grid spacing={0} className={classes.container}>
-          <Grid xs={2} className={classes.cont2}>
+        <Grid spacing={0} direction="row"
+  justifyContent="center"
+  alignItems="stretch" className={classes.container}>
+          <Grid xs container className={classes.cont2}>
             <Image
               src={izq}
               height={1099}
@@ -126,7 +175,6 @@ const LogroPage = () => {
               className={classes.img}
             />
           </Grid>
-          <Grid className={classes.box1}></Grid>
           <Grid xs={8} container spacing={0} className={classes.cont1}>
             <Grid xs={12}>
               <Typography variant="h3" gutterBottom className={classes.text}>
@@ -162,8 +210,8 @@ const LogroPage = () => {
               </Grid>
             </Grid>
             <Grid xs={12} className={classes.contButton}>
-            <Link href="/">
-              <Button variant="contained" className={classes.btnS}>          
+            <Link href="/perfil">
+              <Button variant="contained" className={classes.btnS} onClick={() =>  ThemeSearch() }>          
                   <Typography
                     variant="h5"
                     gutterBottom
@@ -175,7 +223,7 @@ const LogroPage = () => {
               </Link>
             </Grid>
           </Grid>
-          <Grid xs={2} className={classes.cont3}>
+          <Grid xs container className={classes.cont2}>
             <Image 
             className={classes.img}
             src={der} 
@@ -186,6 +234,7 @@ const LogroPage = () => {
         </Grid>
       </Container>
       <Header />
+      </div>
     </React.Fragment>
   );
 };

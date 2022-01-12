@@ -2,21 +2,18 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import LensIcon from '@material-ui/icons/Lens';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import PanoramaFishEyeIcon from '@material-ui/icons/PanoramaFishEye';
 import "@fontsource/rationale";
 import style from "@/styles/Main.module.css";
 import { useRouter } from "next/router";
 import Content from "../api/content";
 import Button from "@material-ui/core/Button";
 import Link from "next/link";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import { useAuth } from "@/contexts/auth";
 import AchievementDetails from "src/api/achievementDetails";
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
     containerPreg: {
@@ -57,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
         width: 150,
         fontFamily: "Rationale",
     },
-    link:{
-        marginRigth: 100
+    radioGr:{
+        marginLeft: 100
     },
     textB: {
         fontFamily: "Rationale",
@@ -68,8 +65,61 @@ const useStyles = makeStyles((theme) => ({
     },
     linkA: {
         textDecoration: "none"
-    }
+    },
+    root: {
+        '&:hover': {
+          backgroundColor: 'transparent',
+        },
+      },
+      icon: {
+        borderRadius: '50%',
+        width: 16,
+        height: 16,
+        boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+        backgroundColor: '#f5f8fa',
+        backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))',
+        '$root.Mui-focusVisible &': {
+          outline: '2px auto rgba(19,124,189,.6)',
+          outlineOffset: 2,
+        },
+        'input:hover ~ &': {
+          backgroundColor: '#ebf1f5',
+        },
+        'input:disabled ~ &': {
+          boxShadow: 'none',
+          background: 'rgba(206,217,224,.5)',
+        },
+      },
+      checkedIcon: {
+        backgroundColor: '#137cbd',
+        backgroundImage: 'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
+        '&:before': {
+          display: 'block',
+          width: 16,
+          height: 16,
+          backgroundImage: 'radial-gradient(#fff,#fff 28%,transparent 32%)',
+          content: '""',
+        },
+        'input:hover ~ &': {
+          backgroundColor: '#106ba3',
+        },
+      },
 }));
+
+function StyledRadio(props) {
+    const classes = useStyles();
+  
+    return (
+      <Radio
+        className={classes.root}
+        disableRipple
+        color="default"
+        checkedIcon={<span className={clsx(classes.icon, classes.checkedIcon)} />}
+        icon={<span className={classes.icon} />}
+        {...props}
+      />
+    );
+  }
 
 const PreguComponente = () => {
     const classes = useStyles();
@@ -80,7 +130,8 @@ const PreguComponente = () => {
     const [contentsA, setContentsA] = useState([]);
     const [idcontentN, setIdContentN] = useState(null);
     const [answer, setAnswer] = useState(null);
-    const [checked, setChecked] = useState(0);
+    const [value, setValue] = useState('');
+    const [valueDisabled, setValueDisabled] = useState(null);
     const [option, setOption] = useState(0);
     const [nextContent, setNextContent] = useState(null);
 
@@ -137,17 +188,18 @@ const PreguComponente = () => {
         setContentsA(arrayD);
     }
 
-    function select(content) {
-        let resp = 1;
-        if(content == answer){
+    const handleRadioChange = (event) => {
+        setValue(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        var resp = 1;
+        if (value == answer) {
             resp = 2; 
         }
-        setChecked(resp);
-    } 
-
-    function selectAnswer(){
-        setOption(checked);
-    } 
+        setOption(resp);
+      };
 
     async function achievementD() {
         const achievementDetail = await AchievementDetails.achievementsDetailsAll();
@@ -155,9 +207,10 @@ const PreguComponente = () => {
       }
 
     async function createAchievementDetail(achievem){
+
         const data = {
             achievement_id: contents.theme_id,
-            user_id: user.user.id,
+            user_id: user.id,
             content_id: contents.id,
             theme_id: contents.theme_id,
         };
@@ -181,48 +234,37 @@ const PreguComponente = () => {
                 >
                     Pregunta: {contents && contents.question} 
                 </Typography>
+                <form onSubmit={handleSubmit}>
+                    <Grid className={classes.radioGr}>
+                    <RadioGroup defaultValue="" value={value} onChange={handleRadioChange}  name="customized-radios">
+                    {contentsA.map((contenido) => (
+                        <FormControlLabel value={contenido} control={<StyledRadio />} label={
+                        <Typography
+                        variant="h5"
+                        gutterBottom
+                        className={classes.text}
+                        >
+                            {contenido}
+                        </Typography>               
+                    } />
+                    ))}
+                    </RadioGroup>
 
-                <Grid className={classes.list}>
-                <List className={classes.listT}>
-                {contentsA.map((contenido, index) => (
-                  <ListItem key={index}> 
-                    <ListItemText>
-                    {<FormControlLabel
-                control={
-                    <Checkbox
-                    icon={<PanoramaFishEyeIcon />}
-                    checkedIcon={<LensIcon />}
-                    className={classes.checkP}
-                    onClick={() =>  select(contenido) }
-                    />
-                }
-                label={<Typography
-                    variant="h5"
-                    gutterBottom
-                    className={classes.text}
-                    >
-                        {contenido}
-                    </Typography>}
-                />}
-                    </ListItemText>
-                  </ListItem>
-                  
-                  ))}
-                </List>
-              </Grid>
-              <Grid item={true} xs={6} className={classes.pregunta}>
-                  <Button variant="contained" className={classes.btn} onClick={() =>  selectAnswer() }>
-                          <Typography
-                          variant="h5"
-                          gutterBottom
-                          className={classes.textB}
-                          >
-                              Seleccionar respuesta
-                          </Typography>
-                      </Button>
-              </Grid>
+                    </Grid>
+                    <Grid item={true} xs={6} className={classes.pregunta}>
+                        <Button type="submit" variant="contained" className={classes.btn} >
+                                <Typography
+                                variant="h5"
+                                gutterBottom
+                                className={classes.textB}
+                                >
+                                    Seleccionar respuesta
+                                </Typography>
+                            </Button>
+                    </Grid>
+                </form>
             </Grid>
-                    
+
             {option === 2 ? 
                 <Grid xs={12} className={classes.respuesta}>
                 <Typography
