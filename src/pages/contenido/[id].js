@@ -19,6 +19,7 @@ import logo from "../../../public/images/logo.png";
 import Theme from "../../api/theme";
 import Content from "../../api/content.js";
 import style from "@/styles/Main.module.css";
+import ContentDetails from "../../api/contentDetails";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 
@@ -96,16 +97,18 @@ export default function contentPage() {
     const { id } = router.query;
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [stateComponent, setStateComponent] = useState(1);
-    const [contentShow, setContentShow] = useState(null);
+    const [contentDetailA, setContentDetailA] = useState([]);
     const [themeT, setThemeT] = useState(null);
     const [contTheme, setContTheme] = useState([]);
-    
+    const [day, setDay] = useState(null);
 
     useEffect(() => {
-        contentTheme()
-      }, [id]);
+        contentTheme();
+        dateN();
+      }, [id, day]);
 
       useEffect(() => {
+
       }, [contTheme]);
 
     const handleClick = (event) => {
@@ -116,12 +119,37 @@ export default function contentPage() {
         setAnchorEl(null);
     };
 
-    const handleChangeContent = (content) => { 
-        setContentShow(content);
-    }
 
     const handleChangeComponent = (state) => {
         setStateComponent(state);
+    }
+
+    async function dateN() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+    
+        if (dd < 10) {
+          dd = "0" + dd;
+        }
+    
+        if (mm < 10) {
+          mm = "0" + mm;
+        }
+    
+        today = yyyy + "/" + mm + "/" + dd;
+        setDay(today);
+      }
+    
+    async function contentsDetailA() {
+        const contentDetail = await ContentDetails.contentsDetailsAll();
+        contentNow(contentDetail.data[0].id);
+      }
+
+    function contentNow(idC) {
+       const content = ContentDetails.update(idC, contentDetailA); 
+        
     }
 
     async function contentTheme() {
@@ -138,6 +166,12 @@ export default function contentPage() {
         try{
             const theme = await Theme.theme(idT);
             setThemeT(theme.data);
+            const data = {
+                content_id: id,
+                theme_id: theme.data.id,
+                date: day,
+              };  
+            setContentDetailA(data);
             return theme;
         }catch(error){
             
@@ -180,7 +214,7 @@ export default function contentPage() {
                     >
                         <MenuItem onClick={handleClose}>
                             <Link href="/perfil">
-                                <Typography variant="h5" gutterBottom className={classes.buttonH}>
+                                <Typography variant="h5" gutterBottom className={classes.buttonH} onClick={() => contentsDetailA()}>
                                 Regresar a la página de temas
                                 </Typography>       
                             </Link>

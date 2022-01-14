@@ -3,9 +3,7 @@ import Body from "@/components/PpBody";
 import Footer from "@/components/PpFooter";
 import style from "@/styles/Main.module.css";
 import { useAuth } from "@/contexts/auth";
-import PerfilHeader from "@/components/PerfilHeader.js";
-import PerfilBody from "./perfil/PerfilBody.js";
-import PerfilFooter from "../components/PerfilFooter.js";
+import Loading from "@/components/Loading";
 
 const IndexPage = () => {
   const { user } = useAuth();
@@ -14,9 +12,7 @@ const IndexPage = () => {
       {
       user ?
       <div className={style.container}>
-      <PerfilHeader />
-      <PerfilBody />
-      <PerfilFooter />
+        <Loading></Loading>
         </div>
       : 
       <div className={style.container}>

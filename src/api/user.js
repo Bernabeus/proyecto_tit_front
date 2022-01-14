@@ -19,6 +19,10 @@ const User = {
     getAuthenticatedUser: () => {
         return api.get("/user");
     },
+
+    update: (id, data) => {
+        return api.put(`users/${id}`, data);
+    },
 };
 
 export default User;

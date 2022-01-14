@@ -8,7 +8,6 @@ import Image from "next/image";
 import medalla from "../../../public/images/medalla.png";
 import izq from "../../../public/images/izq.gif";
 import der from "../../../public/images/der.gif";
-import Link from "next/link";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -21,6 +20,8 @@ import Header from "@/components/LogroHeader.js";
 import style from "@/styles/Main.module.css";
 import Achievements from "src/api/achievement";
 import ThemeDetails from "src/api/themeDetails";
+import Collapse from '@material-ui/core/Collapse';
+
 
 const useStyles = makeStyles((theme) => ({
   containerC: {
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
   },
   text: {
+    color: "#000",
     float: "center",
     textAlign: "center",
     fontFamily: "Rationale",
@@ -85,6 +87,17 @@ const useStyles = makeStyles((theme) => ({
   },
   cont2: {
     height: "100%",
+  },
+  contAlert: {
+    marginTop: 20,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#000",
+    color: "#fff",
+    marginLeft: 150,
+    marginRight: 150,
+    //height: 50
   }
 }));
 
@@ -94,12 +107,13 @@ const LogroPage = () => {
   const { id } = router.query;
   const [achievement, setAchievement] = useState([]);
   const [achievementI, setAchievementI] = useState([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     AchievementInf()
   }, [id]);
 
-
+    //Recogiendo la informacion del logro correspondiente
     async function AchievementInf() {
         try{
             const achievementI = await Achievements.achievement(id);
@@ -108,7 +122,7 @@ const LogroPage = () => {
         }catch(error){
         }
     }
-
+    //Creando un arreglo con los items de logros
     function achievementItems(logro) {
       let arrayAchievementI = [];
       arrayAchievementI.push(logro.item_1);
@@ -118,8 +132,10 @@ const LogroPage = () => {
       setAchievementI(arrayAchievementI);
   }
 
+  //Ordenando los datos de la tabla detailstheme y actualizando la informacion del siguiente tema, habilitandolo
   async function ThemeSearch() {
     try{
+        setOpen(true);
         const themeS = await ThemeDetails.themeDetailsAll();
         const arrayTheme = themeS.data.sort(function(a, b){
           if( a.theme_id > b.theme_id){
@@ -132,16 +148,31 @@ const LogroPage = () => {
         });
         var idA = id;
         var idAs = idA;
-        const themeIdA = arrayTheme[--idA].id;
-        const themeIdS = arrayTheme[id].id;
-        const themeAdvanceA = arrayTheme[idAs].theme_advance;
-        console.log("temas", arrayTheme);
-        ThemeComplete(themeAdvanceA, themeIdA, themeIdS);
+        if(idA < 6 ){
+          const themeIdA = arrayTheme[--idA].id;
+          const themeIdS = arrayTheme[id].id;
+          const themeAdvanceA = arrayTheme[idAs].theme_advance;
+          ThemeComplete(themeAdvanceA, themeIdA, themeIdS);
+        }else {
+          const themeIdA = arrayTheme[5].id;
+          const themeAdvanceA = arrayTheme[5].theme_advance;
+          ThemeCompleteFinal(themeAdvanceA, themeIdA);
+        }
     }catch(error){
     }
   }
 
-    function ThemeComplete(themeAdvanceA, themeIdA, themeIdS) {
+  async function ThemeCompleteFinal(themeAdvanceA, themeIdA) {
+    var idS = id;
+    const dataA = {
+      theme_id: id,
+      theme_advance: 'Terminado', 
+    };
+    const themeA = await ThemeDetails.update(themeIdA, dataA);
+    router.push("/perfil");
+  }
+
+    async function ThemeComplete(themeAdvanceA, themeIdA, themeIdS) {
       var idS = id;
       const dataA = {
         theme_id: id,
@@ -151,10 +182,14 @@ const LogroPage = () => {
         theme_id: ++idS,
         theme_advance: 'Iniciado', 
       };
-      if(themeAdvanceA == 'Iniciado'){
-        const themeA =  ThemeDetails.update(themeIdA, dataA);
-        const themeS =  ThemeDetails.update(themeIdS, dataS);
-      }
+      
+      const themeA = await ThemeDetails.update(themeIdA, dataA);
+      themeNex(themeIdS, dataS);
+    }
+
+    async function themeNex(themeIdS, dataS, themeIdA) {
+      const themeS = await ThemeDetails.update(themeIdS, dataS);
+      router.push("/perfil");
     }
 
 
@@ -162,11 +197,14 @@ const LogroPage = () => {
     <React.Fragment>
       <div className={style.container}>
     <Header />
+    
       <Container className={classes.containerC}>
         <CssBaseline />
         <Grid spacing={0} direction="row"
   justifyContent="center"
   alignItems="stretch" className={classes.container}>
+
+   
           <Grid xs container className={classes.cont2}>
             <Image
               src={izq}
@@ -209,8 +247,7 @@ const LogroPage = () => {
                 </List>
               </Grid>
             </Grid>
-            <Grid xs={12} className={classes.contButton}>
-            <Link href="/perfil">
+            <Grid xs={12} className={classes.contButton}>    
               <Button variant="contained" className={classes.btnS} onClick={() =>  ThemeSearch() }>          
                   <Typography
                     variant="h5"
@@ -219,11 +256,23 @@ const LogroPage = () => {
                   >
                     Regresar al curso
                   </Typography>          
-              </Button>
-              </Link>
+              </Button>    
+            </Grid>
+            <Grid xs={12}>
+            <Grid className={classes.contAlert}>
+            <Collapse in={open}>
+            <Typography
+                    variant="h5"
+                    gutterBottom
+                    className={classes.textL}
+                  >
+                    Procesando datos espere un momento...
+                  </Typography> 
+            </Collapse>
             </Grid>
           </Grid>
-          <Grid xs container className={classes.cont2}>
+          </Grid>
+          <Grid xs container className={classes.cont2} >
             <Image 
             className={classes.img}
             src={der} 
@@ -231,6 +280,7 @@ const LogroPage = () => {
             width={205} 
             />
           </Grid>
+          
         </Grid>
       </Container>
       <Header />

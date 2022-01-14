@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import ContentDetails from "../api/contentDetails";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import "@fontsource/rationale";
 import style from "@/styles/Main.module.css";
@@ -14,6 +15,7 @@ import AchievementDetails from "src/api/achievementDetails";
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import clsx from 'clsx';
+import User from "src/api/user";
 
 const useStyles = makeStyles((theme) => ({
     containerPreg: {
@@ -28,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
     pregunta: {
         backgroundColor: "#009A7E",
         marginBottom: 50,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    btnPreg: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
     },
     respuesta: {
         backgroundColor: "#009A7E",
@@ -62,6 +72,10 @@ const useStyles = makeStyles((theme) => ({
     },
     btn:{
         marginTop: 20,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+
     },
     linkA: {
         textDecoration: "none"
@@ -104,6 +118,10 @@ const useStyles = makeStyles((theme) => ({
           backgroundColor: '#106ba3',
         },
       },
+      textDis: {
+        color: "#000",
+        fontFamily: "Rationale",
+      },
 }));
 
 function StyledRadio(props) {
@@ -129,9 +147,10 @@ const PreguComponente = () => {
     const [contents, setContents] = useState(null);
     const [contentsA, setContentsA] = useState([]);
     const [idcontentN, setIdContentN] = useState(null);
+    const [stateRes, setStateRes] = useState(1);
     const [answer, setAnswer] = useState(null);
     const [value, setValue] = useState('');
-    const [valueDisabled, setValueDisabled] = useState(null);
+    const [btnDisabled, setBtnDisabled] = useState(false);
     const [option, setOption] = useState(0);
     const [nextContent, setNextContent] = useState(null);
 
@@ -141,7 +160,8 @@ const PreguComponente = () => {
 
     useEffect(() => {
     }, [contents]);
-     
+
+    //Conseguir el contenido dependiendo del tema actual
     async function contentT() {
         try {
             const contentTh = await Content.content(id);
@@ -153,6 +173,7 @@ const PreguComponente = () => {
         }
       }
       
+    
     async function contentsTheme(idTheme) {
         try {
             const contentsTheme = await Content.contentTheme(idTheme);
@@ -174,6 +195,7 @@ const PreguComponente = () => {
         }
       }
     
+      //Se agrupan en un arreglo las respuestas opciones 
     function contentAnswer(cont) {
         let arrayContentA = [];
         arrayContentA.push(cont.answer_1);
@@ -192,15 +214,23 @@ const PreguComponente = () => {
         setValue(event.target.value);
     };
 
+    //Determina si fue escogida la respuesta correcta
     const handleSubmit = (event) => {
         event.preventDefault();
-        var resp = 1;
+        var resp = 0;
         if (value == answer) {
             resp = 2; 
+            handleChangeResult(2);
+        } else {
+            resp = 1; 
+            handleChangeResult(2);
         }
+
+
         setOption(resp);
       };
 
+    //Buscaba y determinaba el logro que seria dado
     async function achievementD() {
         const achievementDetail = await AchievementDetails.achievementsDetailsAll();
         createAchievementDetail(achievementDetail);
@@ -221,12 +251,112 @@ const PreguComponente = () => {
         }else {
             achievement = await AchievementDetails.update(achievem.data[0].id, data); 
         };
+        contentTerTheme();
     }
+
+    //subida de nivel,experiencia,rango y progreso al terminar un tema
+    async function contentTerTheme(){
+        const dataRank = [
+            {
+              rank:'Sargento en la Ciberseguridad',
+              experience: 16
+            },
+            {
+              rank:"Subteniente en la Ciberseguridad",
+              experience: 32
+            },
+            {
+              rank:"Coronel en la Ciberseguridad",
+              experience: 48
+            },
+            {
+              rank:"Teniente en la Ciberseguridad",
+              experience: 64
+            },
+            {
+              rank:"Coronel en la Ciberseguridad",
+              experience: 80
+            },
+            {
+                rank:"Capitán General en la Ciberseguridad",
+                experience: 100
+            }
+          ];
+
+          let exp = 0;
+          var rankA = "";
+          for(var i = 1; i <= 6; i++){
+            if(contents.theme_id == i){
+              rankA = dataRank[i-1].rank;
+              exp = dataRank[i-1].experience;
+            }
+          } 
+        
+        let prog = 0;
+        const lvl = user.level + 1;
+        if(contents.theme_id==6){
+            prog = user.progress + (20);
+        }else{
+            prog = user.progress + (16);
+        }
+
+        const userId = user.id;
+        const data = {
+            experience: exp,
+            progress: prog,
+            level: lvl,
+            rank: rankA
+        };
+
+        const userA = await User.update(userId, data);
+        contentsDetailA()
+    }
+      
+    //subida de nivel,experiencia y progreso al terminar un contenido
+    async function contentNext(){
+        const exp = user.experience + (2);
+        const userId = user.id;
+        const data = {
+            experience: exp
+        };
+        const userA = await User.update(userId, data);
+    }
+
+    //actualizar posicion actual del tema al terminarlo
+    async function contentsDetailA() {
+        const contentDetail = await ContentDetails.contentsDetailsAll();
+        contentNow(contentDetail.data[0].id);
+    }
+
+    async function contentNow(idContent) {     
+        const idC = 0;
+        idC = ++id;
+        const idT = 0;
+        idT = ++contents.theme_id;
+        if(idT<=6){
+            const data = {
+                content_id: idC,
+                theme_id: idT,
+              };  
+           const content = await ContentDetails.update(idContent, data); 
+        } 
+    }
+
+    //Desabilitar todas las opciones
+    const handleChangeResult = (state) => {
+        setStateRes(state);
+        setBtnDisabled(true);
+    }
+
+    
+
       
     return (
     <Grid container>
         <Grid container className={classes.containerPreg}>
-            <Grid item={true} xs={12} className={classes.pregunta}>
+            <Grid xs={12} className={classes.pregunta}>
+                <Grid xs={1}></Grid>
+                <Grid xs={4}>
                 <Typography
                     variant="h3"
                     gutterBottom
@@ -234,7 +364,10 @@ const PreguComponente = () => {
                 >
                     Pregunta: {contents && contents.question} 
                 </Typography>
+                </Grid>
+                <Grid xs={7}>
                 <form onSubmit={handleSubmit}>
+                {stateRes === 1 ?
                     <Grid className={classes.radioGr}>
                     <RadioGroup defaultValue="" value={value} onChange={handleRadioChange}  name="customized-radios">
                     {contentsA.map((contenido) => (
@@ -250,9 +383,27 @@ const PreguComponente = () => {
                     ))}
                     </RadioGroup>
 
-                    </Grid>
-                    <Grid item={true} xs={6} className={classes.pregunta}>
-                        <Button type="submit" variant="contained" className={classes.btn} >
+                    </Grid>:
+                        <Grid className={classes.radioGr}>
+                        <RadioGroup defaultValue="" value="disabled" onChange={handleRadioChange}  name="customized-radios">
+                        {contentsA.map((contenido) => (
+                            <FormControlLabel value={contenido} control={<StyledRadio />} label={
+                            <Typography
+                            variant="h5"
+                            gutterBottom
+                            className={classes.textDis}
+                            >
+                                {contenido}
+                            </Typography>               
+                        } />
+                        ))}
+                        </RadioGroup>
+    
+                        </Grid>
+                    
+                    }
+                    <Grid item={true} xs={6} className={classes.btnPreg}>
+                        <Button type="submit" variant="contained" disabled={btnDisabled} className={classes.btn} >
                                 <Typography
                                 variant="h5"
                                 gutterBottom
@@ -263,16 +414,24 @@ const PreguComponente = () => {
                             </Button>
                     </Grid>
                 </form>
+                </Grid>
             </Grid>
 
             {option === 2 ? 
                 <Grid xs={12} className={classes.respuesta}>
                 <Typography
+                variant="h4"
+                gutterBottom
+                className={classes.text}
+                >
+                    Respuesta correcta:
+                </Typography>
+                <Typography
                     variant="h4"
                     gutterBottom
                     className={classes.text}
                 >
-                    Respuesta: {contents && contents.feedback}
+                    {contents && contents.feedback}
                 </Typography>
                 { nextContent === true ?
                 <Grid>
@@ -299,7 +458,7 @@ const PreguComponente = () => {
                 </Grid>
                 : <Grid>
                     <a href={`/contenido/${idcontentN}`} className={style.etA}>
-                <Button variant="contained" className={classes.btnC}>
+                <Button variant="contained" className={classes.btnC} onClick={() => contentNext()}>
                     <Typography
                     variant="h5"
                     gutterBottom
@@ -317,7 +476,7 @@ const PreguComponente = () => {
                  gutterBottom
                  className={classes.text}
              >
-                 Larespuesta es incorrecta
+                 La respuesta es incorrecta, regrese al contenido. 
              </Typography>
           </Grid>
           : '' }
@@ -327,3 +486,10 @@ const PreguComponente = () => {
 };
 
 export default PreguComponente;
+
+
+/*
+
+
+</a>
+*/

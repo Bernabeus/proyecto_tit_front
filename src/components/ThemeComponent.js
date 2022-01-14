@@ -17,6 +17,7 @@ import ThemeDetails from "../api/themeDetails";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from "@/components/Loading";
 import StarIcon from '@material-ui/icons/Star';
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   accord: {
@@ -106,7 +107,20 @@ const useStyles = makeStyles((theme) => ({
   divO: {
     display: "none",
     border: "3px solid #000",
-  }
+  },
+  cont1: {
+    display: "flex",
+    alignItems: "center",
+    margin: "0 auto",      
+    height: 200,
+    marginTop:"-20px",
+    marginBottom: 30,
+    backgroundColor: "#113163",
+    border: "2px solid #009A7E",
+    borderRadius: 100,
+    textAlign: "center",
+    fontFamily: "Rationale",
+},
 }));
 
 export default function PPHeader() {
@@ -116,6 +130,7 @@ export default function PPHeader() {
   const [theme, setTheme] = useState([]);
   const [themeDet, setThemeDet] = useState([]);
   const [day, setDay] = useState(null);
+  const router = useRouter();
   
   useEffect(() => {
     themeData();
@@ -124,6 +139,7 @@ export default function PPHeader() {
   }, []);
 
   useEffect(() => {
+    
   }, [day]);
 
   async function themeDetail() {
@@ -176,43 +192,66 @@ export default function PPHeader() {
     setDay(today);
   }
 
-  async function contentTheme(id) {
-    try {
-      const contentTh = await Content.contentTheme(id);
-      contentsDetailA(id, contentTh.data[0].id);
-    } catch(error){
-
-    }
-  }
-
-  async function contentsDetailA(id, contentId) {
+  async function contentsDetailA(idT) {
     const contentDetail = await ContentDetails.contentsDetailsAll();
-    contDetail(id, contentId, contentDetail);
+    contentTheme(idT, contentDetail);
   }
 
-  async function contDetail(idT, contentId, contentDetail) {
-    try{
-      const data = {
-        content_id: contentId,
-        user_id: user.id,
-        theme_id: idT,
-        date: day,
-      };
-
-      let content = [];
-      if(contentDetail.data.length === 0){
-        content = await ContentDetails.create(data);
-      }else {
-        content = await ContentDetails.update(contentDetail.data[0].id, data); 
-      };
+  async function contentTheme(idT, contentDetail) {
+    try {
+      const contentTh = await Content.contentTheme(idT);
+      contDetail(idT, contentTh, contentDetail);
     } catch(error){
 
     }
+  }
+
+  async function contDetail(idT, content, contentDetail) {
+    console.log("contenidos", contentDetail);
+    console.log("content", content);
+    
+      let contents = [];
+      var idU;
+      if(contentDetail.data.length === 0){
+        const contentId = content.data[0].id;   
+        const data = {
+          content_id: contentId,
+          user_id: user.id,
+          theme_id: idT,
+          date: day,
+        };
+        contents = await ContentDetails.create(data);
+        idU = contentId;
+      }else {
+        const contentAId = contentDetail.data[0].content_id;
+        const dataA = {
+          content_id: contentAId,
+          user_id: user.id,
+          theme_id: idT,
+          date: day,
+        };
+        contents = await ContentDetails.update(contentDetail.data[0].id, dataA); 
+        idU = contentAId;
+        
+      };
+      router.push(`/contenido/${idU}`);
   }
 
   return (
     <React.Fragment>
       <CssBaseline />
+      {themeDet[5] &&
+      <div>
+        {themeDet[themeDet.length-1].theme_advance === 'Terminado' && 
+      <Grid  className={classes.cont1} style={{ marginLeft: '55px', marginRight: '35px' }}>
+        <Typography variant="h3" className={classes.textB}>
+            FELICIDADES POR COMPLETAR EL CURSO DE FUNDAMENTOS DE CIBERSEGURIDAD
+        </Typography>
+      </Grid>
+      }
+      </div>
+      }
+      
       {themeDiff.map((tema) => (
         <Accordion className={classes.accord}>
           <AccordionSummary className={classes.headingT}
@@ -227,9 +266,9 @@ export default function PPHeader() {
           {theme.map((temas, index) => (
             <AccordionDetails className={classes.accordC} key={temas.id}>
               {themeDet[index] ? (
-              <Grid className={classes.grid}>
+              <Grid  className={classes.grid}>
                 {temas.difficulty === tema ? (
-                    <Grid className={classes.grid}> 
+                    <Grid spacing={0} className={classes.grid}> 
                   {themeDet[index].theme_advance === 'Iniciado' ? (
                       <Accordion className={classes.accordTema}>
                       <AccordionSummary className={classes.accordTemaTitulo}
@@ -248,19 +287,17 @@ export default function PPHeader() {
                         </Typography>
                         </Grid>
                         <Grid xs={5} className={classes.boxTemaTe}>
-                        <Link href={`/contenido/${temas.id}`}>
-                          <Button variant="contained" className={classes.btnC} onClick={() => contentTheme(temas.id)}>
+                          <Button variant="contained" className={classes.btnC} onClick={() => contentsDetailA(temas.id)}>
                             
                               <Typography
                                 variant="h5"
                                 gutterBottom
                                 className={classes.textB}
                               >
-                                Ingresar
+                                INGRESAR AL TEMA
                               </Typography>
                             
                           </Button>
-                          </Link>
                         </Grid>
                       </AccordionDetails>
                     </Accordion>
@@ -280,7 +317,7 @@ export default function PPHeader() {
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
-                   ) : themeDet[index].theme_advance === 'Terminado' ? (
+                   ) : themeDet[index].theme_advance === 'Terminado' && (
                     <Accordion className={classes.accordTemaF}>
                     <AccordionSummary className={classes.accordTemaTitulo}
                       expandIcon={<ExpandMoreIcon />}
@@ -296,13 +333,12 @@ export default function PPHeader() {
                     <AccordionDetails className={classes.accordTemaTeF}>
                       <Grid xs={7} className={classes.boxTemaCont}>
                       <Typography variant="h4" className={classes.textB}>
-                      {temas.description}
+                        Ingresa aqui para volver a mirar los contenidos de este tema.
                       </Typography>
                       </Grid>
                       <Grid xs={5} className={classes.boxTemaTe}>
-                      <Link href={`/contenido/${temas.id}`}>
-                        <Button variant="contained" className={classes.btnC} onClick={() => contentTheme(temas.id)}>
-                          
+                      <Link href={`/contenidoT/${temas.id}`}>
+                        <Button variant="contained" className={classes.btnC}>
                             <Typography
                               variant="h5"
                               gutterBottom
@@ -310,13 +346,12 @@ export default function PPHeader() {
                             >
                               Ingresar
                             </Typography>
-                          
                         </Button>
                         </Link>
                       </Grid>
                     </AccordionDetails>
                   </Accordion>
-                 ) : ''}
+                 )}
                   </Grid>
                 ): (<div className={classes.spa}></div>)}
                   </Grid>

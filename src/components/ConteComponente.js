@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import "@fontsource/rationale";
 import Content from "../api/content";
+import medalla from "../../public/images/medalla.png";
 
 const useStyles = makeStyles((theme) => ({   
     containerCont: {
@@ -54,7 +55,12 @@ const ConteComponente = (props) => {
         <Grid container className={classes.containerCont}>
             <Grid container item={true} xs={6} className={classes.img}>
                 <Box>
-                    
+                <Image
+              src={medalla}
+              height={300}
+              width={205}
+              className={classes.img}
+            />
                 </Box>
             </Grid>
             <Grid item xs={4} className={classes.contenido}>
