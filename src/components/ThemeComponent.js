@@ -207,8 +207,6 @@ export default function PPHeader() {
   }
 
   async function contDetail(idT, content, contentDetail) {
-    console.log("contenidos", contentDetail);
-    console.log("content", content);
     
       let contents = [];
       var idU;

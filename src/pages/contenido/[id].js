@@ -20,6 +20,9 @@ import Theme from "../../api/theme";
 import Content from "../../api/content.js";
 import style from "@/styles/Main.module.css";
 import ContentDetails from "../../api/contentDetails";
+import ThemeDetails from "src/api/themeDetails";
+import Locked from "@/components/Locked";
+import User from "../../api/user";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 
@@ -101,9 +104,10 @@ export default function contentPage() {
     const [themeT, setThemeT] = useState(null);
     const [contTheme, setContTheme] = useState([]);
     const [day, setDay] = useState(null);
+    const [lockedContent, setLockedContent] = useState(false);
 
     useEffect(() => {
-        contentTheme();
+        getAuthenticatedUser();
         dateN();
       }, [id, day]);
 
@@ -152,16 +156,117 @@ export default function contentPage() {
         
     }
 
-    async function contentTheme() {
+    async function getAuthenticatedUser() {
+    try {
+      const response = await User.getAuthenticatedUser();
+      contentTheme(response.data);
+      return response;
+    } catch (error) {
+    }
+  }
+
+    async function contentTheme(user) {
         try {
             const contTheme = await Content.content(id);
-            themeInf(contTheme.data.theme_id);
+            themeDetailA(contTheme.data.theme_id, user);
             setContTheme(contTheme.data);
         } catch(error){
-    
+
         }
       }
 
+    async function themeDetailA(idT, user) {
+        try {
+          const themeS = await ThemeDetails.themeDetailsAll();
+          const arrayTheme = themeS.data.sort(function(a, b){
+            if( a.theme_id > b.theme_id){
+              return 1;
+            }
+            if( a.theme_id < b.theme_id){
+              return -1;
+            }
+            return 0
+          });
+          var idThemeAc = idT;
+          idThemeAc = --idThemeAc;
+          
+            if(user.experience == 0 && id == 1){
+                setLockedContent(true);
+            }
+            else if(user.experience == 2 && id == 2){
+            setLockedContent(true);
+            }
+            else if(user.experience == 4 && id == 3){
+            setLockedContent(true);
+            }
+            else if(user.experience == 6 && id == 4){
+            setLockedContent(true);
+            }
+            else if(user.experience == 18 && id == 5){
+            setLockedContent(true);
+            }
+            else if(user.experience == 20 && id == 6){
+            setLockedContent(true);
+            }
+            else if(user.experience == 22 && id == 7){
+            setLockedContent(true);
+            }
+            else if(user.experience == 24 && id == 8){
+            setLockedContent(true);
+            }
+            else if(user.experience == 26 && id == 9){
+            setLockedContent(true);
+            }
+            else if(user.experience == 34 && id == 10){
+            setLockedContent(true);
+            }
+            else if(user.experience == 36 && id == 11){
+            setLockedContent(true);
+            }
+            else if(user.experience == 38 && id == 12){
+            setLockedContent(true);
+            }
+            else if(user.experience == 40 && id == 13){
+            setLockedContent(true);
+            }
+            else if(user.experience == 50 && id == 14){
+            setLockedContent(true);
+            }
+            else if(user.experience == 52 && id == 15){
+            setLockedContent(true);
+            }
+            else if(user.experience == 54 && id == 16){
+            setLockedContent(true);
+            }
+            else if(user.experience == 66 && id == 17){
+            setLockedContent(true);
+            }
+            else if(user.experience == 68 && id == 18){
+            setLockedContent(true);
+            }
+            else if(user.experience == 70 && id == 19){
+            setLockedContent(true);
+            }
+            else if(user.experience == 82 && id == 20){
+            setLockedContent(true);
+            }
+            else if(user.experience == 84 && id == 21){
+            setLockedContent(true);
+            }
+            else if(user.experience == 86 && id == 22){
+            setLockedContent(true);
+            }
+            else if(user.experience == 88 && id == 23){
+            setLockedContent(true);
+            }
+    
+          themeInf(idT);
+        }catch(error){
+  
+        }
+      }
+
+    
     async function themeInf(idT) {
         try{
             const theme = await Theme.theme(idT);
@@ -183,6 +288,8 @@ export default function contentPage() {
         <CssBaseline />
         <div className={style.container}>
             <Container >
+            {lockedContent == true ? 
+            <Grid>
             <Grid container spacing={0} className={classes.headerH}>
             <Grid xs={2} className={classes.img}> 
                 <Image
@@ -264,7 +371,21 @@ export default function contentPage() {
             </Grid>
         </Grid>       
     }    
-    
+    </Grid>: 
+        <Grid>
+        <Grid container spacing={0} className={classes.headerH}>
+            <Grid xs={2} className={classes.img}> 
+                <Image
+                    src={logo} 
+                    height={160}
+                    width={160} 
+                    /></Grid>
+                <Grid xs={10} className={classes.containerH}>             
+                </Grid>
+            </Grid>
+        <Locked />
+        </Grid>
+        }
         </Container>
         <Footer />
         </div>

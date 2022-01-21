@@ -5,7 +5,7 @@ import "@fontsource/rationale";
 import { useRouter } from "next/router";
 import Container from "@material-ui/core/Container";
 import Image from "next/image";
-import medalla from "../../../public/images/medalla.png";
+import defecto from "../../../public/images/defecto.png";
 import izq from "../../../public/images/izq.gif";
 import der from "../../../public/images/der.gif";
 import List from "@material-ui/core/List";
@@ -21,6 +21,10 @@ import style from "@/styles/Main.module.css";
 import Achievements from "src/api/achievement";
 import ThemeDetails from "src/api/themeDetails";
 import Collapse from '@material-ui/core/Collapse';
+const url = "http://localhost:8000/storage";
+import Locked from "@/components/Locked";
+import User from "../../api/user";
+import ContentDetails from "../../api/contentDetails";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -106,17 +110,81 @@ const LogroPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [achievement, setAchievement] = useState([]);
+  const [themeD, setThemeD] = useState([]);
   const [achievementI, setAchievementI] = useState([]);
+  const [user, setUser] = useState([]);
+  const [achiImage, setAchiImage] = useState(null);
   const [open, setOpen] = useState(false);
+  const [lockedAchievement, setLockedAchievement] = useState(false);
+  
 
   useEffect(() => {
-    AchievementInf()
+    getAuthenticatedUser();
   }, [id]);
+
+  async function getAuthenticatedUser() {
+    try {
+      const response = await User.getAuthenticatedUser();
+      themeDetailA(response.data);
+      setUser(response.data);
+      return response;
+    } catch (error) {
+    }
+  }
+
+    async function themeDetailA(user) {
+      try {
+        const themeS = await ThemeDetails.themeDetailsAll();
+        const arrayTheme = themeS.data.sort(function(a, b){
+          if( a.theme_id > b.theme_id){
+            return 1;
+          }
+          if( a.theme_id < b.theme_id){
+            return -1;
+          }
+          return 0
+        });
+        var idActual = id;
+        idActual = --idActual;
+        const themeAdvanceA = arrayTheme[idActual].theme_advance;
+
+        if(user.experience == 16 && id == 1){
+          setLockedAchievement(true);
+        }
+        else if(user.experience == 32 && id == 2){
+          setLockedAchievement(true);
+        }
+        else if(user.experience == 48 && id == 3){
+          setLockedAchievement(true);
+        }
+        else if(user.experience == 64 && id == 4){
+          setLockedAchievement(true);
+        }
+        else if(user.experience == 80 && id == 5){
+          setLockedAchievement(true);
+        }
+        else if(user.experience == 100 && id == 6){
+          setLockedAchievement(true);
+        }
+        AchievementInf();
+        setThemeD(arrayTheme);
+      }catch(error){
+
+      }
+    }
 
     //Recogiendo la informacion del logro correspondiente
     async function AchievementInf() {
         try{
             const achievementI = await Achievements.achievement(id);
+            let aImage = achievementI.data.image;
+            let imgUrl = aImage.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            setAchiImage(url + imgUrl);
             setAchievement(achievementI.data);
             achievementItems(achievementI.data);
         }catch(error){
@@ -136,26 +204,16 @@ const LogroPage = () => {
   async function ThemeSearch() {
     try{
         setOpen(true);
-        const themeS = await ThemeDetails.themeDetailsAll();
-        const arrayTheme = themeS.data.sort(function(a, b){
-          if( a.theme_id > b.theme_id){
-            return 1;
-          }
-          if( a.theme_id < b.theme_id){
-            return -1;
-          }
-          return 0
-        });
         var idA = id;
         var idAs = idA;
         if(idA < 6 ){
-          const themeIdA = arrayTheme[--idA].id;
-          const themeIdS = arrayTheme[id].id;
-          const themeAdvanceA = arrayTheme[idAs].theme_advance;
+          const themeIdA = themeD[--idA].id;
+          const themeIdS = themeD[id].id;
+          const themeAdvanceA = themeD[idAs].theme_advance;
           ThemeComplete(themeAdvanceA, themeIdA, themeIdS);
         }else {
-          const themeIdA = arrayTheme[5].id;
-          const themeAdvanceA = arrayTheme[5].theme_advance;
+          const themeIdA = themeD[5].id;
+          const themeAdvanceA = themeD[5].theme_advance;
           ThemeCompleteFinal(themeAdvanceA, themeIdA);
         }
     }catch(error){
@@ -187,9 +245,43 @@ const LogroPage = () => {
       themeNex(themeIdS, dataS);
     }
 
-    async function themeNex(themeIdS, dataS, themeIdA) {
+    async function themeNex(themeIdS, dataS) {
       const themeS = await ThemeDetails.update(themeIdS, dataS);
+      contentsDetailA();
       router.push("/perfil");
+    }
+
+    //actualizar posicion actual del tema al terminarlo
+    async function contentsDetailA() {
+      const contentDetail = await ContentDetails.contentsDetailsAll();
+      contentNow(contentDetail.data[0]);
+  }
+
+    
+
+  async function contentNow(Content) {     
+      var idC = Content.content_id;
+      idC = ++idC;
+      var idT = id;
+      idT = ++idT;
+      if(idT<=6){
+          const data = {
+              content_id: idC,
+              theme_id: idT,
+            };  
+         const content = await ContentDetails.update(Content.id, data); 
+        ExpUser();
+      } 
+      
+  }
+
+  async function ExpUser(){
+        const exp = user.experience + (2);
+        const userId = user.id;
+        const data = {
+            experience: exp
+        };
+        const userA = await User.update(userId, data);
     }
 
 
@@ -201,8 +293,8 @@ const LogroPage = () => {
       <Container className={classes.containerC}>
         <CssBaseline />
         <Grid spacing={0} direction="row"
-  justifyContent="center"
-  alignItems="stretch" className={classes.container}>
+          justifyContent="center"
+          alignItems="stretch" className={classes.container}>
 
    
           <Grid xs container className={classes.cont2}>
@@ -213,65 +305,70 @@ const LogroPage = () => {
               className={classes.img}
             />
           </Grid>
+
+          {lockedAchievement == true ? 
           <Grid xs={8} container spacing={0} className={classes.cont1}>
-            <Grid xs={12}>
-              <Typography variant="h3" gutterBottom className={classes.text}>
-              {achievement && achievement.title}
-              </Typography>
-            </Grid>
-            <Grid xs={12} className={classes.medal}>
-              <Image src={medalla} height={350} width={300} />
-            </Grid>
-            <Grid xs={12} className={classes.contText}>
-              <Typography variant="h3" gutterBottom className={classes.text}>
-                Ahora sabes:
-              </Typography>
-              <Grid className={classes.list}>
-                <List className={classes.text}>
-                {achievementI.map((logro, index) => (
-                  <ListItem key={index}> 
-                  <ListItemIcon>
-                      <Brightness1Icon style={{ fontSize: 10 }} />
-                    </ListItemIcon>
-                    <ListItemText>
-                    <Typography
-                    variant="h5"
-                    gutterBottom
-                    className={classes.textL}
-                    >
-                      {logro}
-                    </Typography>
-                    </ListItemText>
-                  </ListItem>
-                  ))}
-                </List>
-              </Grid>
-            </Grid>
-            <Grid xs={12} className={classes.contButton}>    
-              <Button variant="contained" className={classes.btnS} onClick={() =>  ThemeSearch() }>          
+          <Grid xs={12}>
+            <Typography variant="h3" gutterBottom className={classes.text}>
+            {achievement && achievement.title}
+            </Typography>
+          </Grid>
+          <Grid xs={12} className={classes.medal}>
+            <Image src={achiImage ? achiImage: defecto} height={350} width={300} />
+          </Grid>
+          <Grid xs={12} className={classes.contText}>
+            <Typography variant="h3" gutterBottom className={classes.text}>
+              Ahora sabes:
+            </Typography>
+            <Grid className={classes.list}>
+              <List className={classes.text}>
+              {achievementI.map((logro, index) => (
+                <ListItem key={index}> 
+                <ListItemIcon>
+                    <Brightness1Icon style={{ fontSize: 10 }} />
+                  </ListItemIcon>
+                  <ListItemText>
                   <Typography
-                    variant="h5"
-                    gutterBottom
-                    className={classes.textL}
+                  variant="h5"
+                  gutterBottom
+                  className={classes.textL}
                   >
-                    Regresar al curso
-                  </Typography>          
-              </Button>    
-            </Grid>
-            <Grid xs={12}>
-            <Grid className={classes.contAlert}>
-            <Collapse in={open}>
-            <Typography
-                    variant="h5"
-                    gutterBottom
-                    className={classes.textL}
-                  >
-                    Procesando datos espere un momento...
-                  </Typography> 
-            </Collapse>
+                    {logro}
+                  </Typography>
+                  </ListItemText>
+                </ListItem>
+                ))}
+              </List>
             </Grid>
           </Grid>
+          <Grid xs={12} className={classes.contButton}>    
+            <Button variant="contained" className={classes.btnS} onClick={() =>  ThemeSearch() }>          
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  className={classes.textL}
+                >
+                  Presione aqui para desbloquear el siguiente tema
+                </Typography>          
+            </Button>    
           </Grid>
+          <Grid xs={12}>
+          <Grid className={classes.contAlert}>
+          <Collapse in={open}>
+          <Typography
+                  variant="h5"
+                  gutterBottom
+                  className={classes.textL}
+                >
+                  Desbloqueando nuevo tema, espere un momento
+                </Typography> 
+          </Collapse>
+          </Grid>
+        </Grid>
+        </Grid>: 
+        <Locked />
+        }
+
           <Grid xs container className={classes.cont2} >
             <Image 
             className={classes.img}

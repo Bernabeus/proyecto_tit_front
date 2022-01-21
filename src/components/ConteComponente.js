@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import "@fontsource/rationale";
 import Content from "../api/content";
-import medalla from "../../public/images/medalla.png";
+import defecto from "../../public/images/defecto.png";
+const url = "http://localhost:8000/storage";
 
 const useStyles = makeStyles((theme) => ({   
     containerCont: {
@@ -15,10 +16,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
         alignItems: "center",
         marginTop: 30,
-        //margin: "0 auto",
     },
     contenido: {
-        //border: "1px solid #000000",
         height: 500,
         alignItems: "center",
         backgroundColor: "#009A7E"
@@ -28,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         color: "#fff",
     },
-    
+    img: {
+        width: "100%"
+    }
 }));
 
 const ConteComponente = (props) => {
@@ -36,6 +37,7 @@ const ConteComponente = (props) => {
     const router = useRouter();
     const { id } = router.query;
     const [contentsTheme, setContentsTheme] = useState([]);
+    const [contentImage, setContentImage] = useState(null);
 
     useEffect(() => {
         contentTheme();
@@ -44,6 +46,14 @@ const ConteComponente = (props) => {
       async function contentTheme() {
         try {
             const contentTh = await Content.content(id);
+            let cImage = contentTh.data.image;
+            let imgUrl = cImage.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            setContentImage(url + imgUrl);
             setContentsTheme(contentTh.data);
         } catch(error){
     
@@ -56,15 +66,15 @@ const ConteComponente = (props) => {
             <Grid container item={true} xs={6} className={classes.img}>
                 <Box>
                 <Image
-              src={medalla}
-              height={300}
-              width={205}
-              className={classes.img}
+              src={contentImage ? contentImage : defecto}
+              height={500}
+              width={600}
+              className={classes.imgT}
             />
                 </Box>
             </Grid>
             <Grid item xs={4} className={classes.contenido}>
-                <Typography variant="h4" gutterBottom className={classes.text}>
+                <Typography variant="h5" gutterBottom className={classes.text}>
                 {contentsTheme && contentsTheme.description}
                 </Typography>
             </Grid>

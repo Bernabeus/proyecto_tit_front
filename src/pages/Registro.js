@@ -23,18 +23,18 @@ const schema = yup.object().shape({
     email: yup
         .string()
         .email("Ingrese un correo válido")
-        .required("Este campo obligatorio"),
+        .required("Este campo es obligatorio"),
     name: yup
         .string()
-        .required("Este campo obligatorio"),
+        .required("Este campo es obligatorio"),
     password: yup
         .string()
         .min(6, "Ingrese al menos 8 caracteres")
-        .required("Este campo obligatorio"),
+        .required("Este campo es obligatorio"),
     password_confirmation: yup
         .string()
         .oneOf([yup.ref("password"), null], "Las claves no coinciden")
-        .required("Este campo obligatorio"),
+        .required("Este campo es obligatorio"),
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -188,7 +188,7 @@ const RegisterPage = () => {
                 />
                 )}
             />          
-            <p style={{ color:"#fff" }}>{errors.name?.message}</p>
+            <p style={{ color:"#ff0000" }}>{errors.name?.message}</p>
             </Grid>
             <Grid>
                 <Controller
@@ -206,7 +206,7 @@ const RegisterPage = () => {
                     />
                     )}
                 />
-                <p style={{ color:"#fff" }}>{errors.email?.message}</p>
+                <p style={{ color:"#ff0000" }}>{errors.email?.message}</p>
             </Grid>
             <Grid className={classes.contr}>
             <Controller
@@ -248,7 +248,7 @@ const RegisterPage = () => {
                   </FormControl>
                 )}
             />
-            <p style={{ color:"#fff" }}>{errors.password?.message}</p>
+            <p style={{ color:"#ff0000" }}>{errors.password?.message}</p>
             </Grid>
             <Grid className={classes.contr2}>
 
@@ -292,10 +292,10 @@ const RegisterPage = () => {
                 
                 )}
             />
-            <p style={{ color:"#fff" }}>{errors.password_confirmation?.message}</p>
+            <p style={{ color:"#ff0000" }}>{errors.password_confirmation?.message}</p>
             </Grid>
 
-            <p style={{ color:"#fff" }}>{result}</p>
+            <p style={{ color:"#ff0000" }}>{result}</p>
 
 
             {errorsList.length > 0 && (

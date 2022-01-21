@@ -2,20 +2,19 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import ContentDetails from "../api/contentDetails";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import "@fontsource/rationale";
 import style from "@/styles/Main.module.css";
 import { useRouter } from "next/router";
 import Content from "../api/content";
 import Button from "@material-ui/core/Button";
-import Link from "next/link";
 import { useAuth } from "@/contexts/auth";
 import AchievementDetails from "src/api/achievementDetails";
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import clsx from 'clsx';
 import User from "src/api/user";
+import ContentDetails from "../api/contentDetails";
 
 const useStyles = makeStyles((theme) => ({
     containerPreg: {
@@ -50,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
     },  
     text: {
         fontFamily: "Rationale",
-        color: "#fff"
+        color: "#fff",
+        textAlign: "justify"
         //alignitems: "center",
     },
     textP: {
@@ -121,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
       textDis: {
         color: "#000",
         fontFamily: "Rationale",
+        textAlign: "justify"
       },
 }));
 
@@ -309,7 +310,7 @@ const PreguComponente = () => {
         };
 
         const userA = await User.update(userId, data);
-        contentsDetailA()
+        router.push(`/logro/${contents.theme_id}`);
     }
       
     //subida de nivel,experiencia y progreso al terminar un contenido
@@ -320,26 +321,26 @@ const PreguComponente = () => {
             experience: exp
         };
         const userA = await User.update(userId, data);
+        contentsDetailA();
     }
 
-    //actualizar posicion actual del tema al terminarlo
     async function contentsDetailA() {
         const contentDetail = await ContentDetails.contentsDetailsAll();
-        contentNow(contentDetail.data[0].id);
+        contentNow(contentDetail.data[0]);
     }
-
-    async function contentNow(idContent) {     
-        const idC = 0;
-        idC = ++id;
-        const idT = 0;
-        idT = ++contents.theme_id;
+  
+    async function contentNow(Content) {     
+        var idC = id;
+        idC = ++idC;
+        var idT = Content.theme_id;
         if(idT<=6){
             const data = {
                 content_id: idC,
                 theme_id: idT,
               };  
-           const content = await ContentDetails.update(idContent, data); 
+           const contentY = await ContentDetails.update(Content.id, data); 
         } 
+        location.replace(`/contenido/${idcontentN}`);
     }
 
     //Desabilitar todas las opciones
@@ -347,9 +348,6 @@ const PreguComponente = () => {
         setStateRes(state);
         setBtnDisabled(true);
     }
-
-    
-
       
     return (
     <Grid container>
@@ -444,7 +442,6 @@ const PreguComponente = () => {
                             TEMA COMPLETADO
                         </Typography>
                     </Grid>
-                    <Link href={`/logro/${contents.theme_id}`}>
                     <Button variant="contained" className={classes.btnC} onClick={() => achievementD()}>
                         <Typography
                         variant="h5"
@@ -454,10 +451,8 @@ const PreguComponente = () => {
                             Consigue tu logro
                         </Typography>
                     </Button>
-                    </Link>
                 </Grid>
                 : <Grid>
-                    <a href={`/contenido/${idcontentN}`} className={style.etA}>
                 <Button variant="contained" className={classes.btnC} onClick={() => contentNext()}>
                     <Typography
                     variant="h5"
@@ -467,7 +462,6 @@ const PreguComponente = () => {
                         Siguiente Contenido
                     </Typography>
                 </Button>
-                </a>
                 </Grid>}
              </Grid>
              : option === 1 ? <Grid xs={12} className={classes.respuesta}>
@@ -486,10 +480,3 @@ const PreguComponente = () => {
 };
 
 export default PreguComponente;
-
-
-/*
-
-
-</a>
-*/

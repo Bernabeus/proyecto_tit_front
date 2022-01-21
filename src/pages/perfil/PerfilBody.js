@@ -6,6 +6,7 @@ import "@fontsource/rationale";
 import Box from '@material-ui/core/Box';
 import Image from "next/image";
 import medalla from "../../../public/images/medalla.png";
+import defecto from "../../../public/images/defecto.png";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "@/contexts/auth";
@@ -14,6 +15,7 @@ import Themes from "@/components/ThemeComponent.js";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import AchievementDetails from "src/api/achievementDetails";
 import Achievements from "src/api/achievement";
+const url = "http://localhost:8000/storage";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -50,18 +52,19 @@ export default function PerfilBody() {
     const classes = useStyles();
     const { user } = useAuth();
     const [ userI, setUserI ] = useState([]);
-    const [ achieInf, setAchieInf ] = useState([]);
-    console.log(achieInf);
+    const [ achievementEx, setAchievementEx ] = useState([]);
+    const [achiImage, setAchiImage] = useState(null);
 
     useEffect(() => {
         getAuthenticatedUser();
-        AchiAll();
+        
     }, []);
 
     async function AchiAll(){
         try{
             const achievement = await AchievementDetails.achievementsDetailsAll();
             AchievementInf(achievement.data[0]);
+            setAchievementEx(achievement.data.length);
         }
         catch(error){
         }
@@ -70,7 +73,15 @@ export default function PerfilBody() {
     async function AchievementInf(dataAch) {
         try{
             const achievementI = await Achievements.achievement(dataAch.achievement_id);
-            setAchieInf(achievementI.data);
+            let aImage = achievementI.data.image;
+            
+            let imgUrl = aImage.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            setAchiImage(url + imgUrl);
         }catch(error){
         }
     }
@@ -78,9 +89,9 @@ export default function PerfilBody() {
     async function getAuthenticatedUser() {
         try {
           const response = await User.getAuthenticatedUser();
+          AchiAll();
           setUserI(response.data);
           return response;
-          {refreshInterval: 200}
         } catch (error) {
         }
     }
@@ -94,16 +105,22 @@ export default function PerfilBody() {
                 <Grid container className={classes.contP}>
                     <Grid container item={true} xs={4} className={classes.contP1}>
                         <Grid xs={12} className={classes.boxP}>
-                            {achieInf.length != 0 ? (
+                            {achievementEx != 0 ? (
                                  <Box>
                                     <Image
-                                    src={medalla} 
-                                    height={200}
-                                    width={200} 
+                                    src={achiImage ? achiImage: defecto} 
+                                    height={250}
+                                    width={250} 
                                     />
                                 </Box>
                             ): (
-                               <div></div>
+                                <Box>
+                                <Image
+                                src={medalla} 
+                                height={250}
+                                width={250} 
+                                />
+                                </Box>
                             )
                             } 
                         </Grid>
