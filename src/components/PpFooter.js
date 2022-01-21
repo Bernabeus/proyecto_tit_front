@@ -45,7 +45,6 @@ export default function Ppfooter() {
                         <Grid container spacing={0}>
                             <Grid item={true} xs={12}>
                                 <Box>
-                                    <WhatsAppIcon className={classes.icons} fontSize="large" />
                                     <FacebookIcon className={classes.icons} fontSize="large" />
                                     <MailIcon className={classes.icons} fontSize="large" />
                                 </Box>

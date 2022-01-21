@@ -17,6 +17,10 @@ const Achievements = {
     update: (id, data) => {
         return api.put(`achievements/${id}`, data);
     },
+
+    getimage: (id) => {
+        return api.get(`achievements/${id}/image`)
+    }
     
 };
 

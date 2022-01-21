@@ -23,8 +23,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const schema = yup.object().shape({
     email: yup.string().email("Ingrese un correo válido")
-    .required("Este campo obligatorio"),
-    password: yup.string().required("Este campo obligatorio"),
+    .required("Este campo es obligatorio"),
+    password: yup.string().required("Este campo es obligatorio"),
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -154,7 +154,7 @@ const LoginPage = () => {
                   />
                 )}
               />
-              <p style={{ color:"#fff" }}> {errors.email?.message}</p>
+              <p style={{ color:"#ff0000" }}> {errors.email?.message}</p>
             </Grid>
                 <Grid>
                 
@@ -199,9 +199,9 @@ const LoginPage = () => {
                    
                 )}
               />
-              <p style={{ color:"#fff" }}>{errors.password?.message}</p>
+              <p style={{ color:"#ff0000" }}>{errors.password?.message}</p>
             </Grid>
-            <p  style={{ color:"#fff" }}>{result}</p>
+            <p  style={{ color:"#ff0000" }}>{result}</p>
             {errorsList.length > 0 && (
             <ul>
                 {errorsList.map((error) => (

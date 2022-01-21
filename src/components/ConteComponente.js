@@ -7,27 +7,43 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import "@fontsource/rationale";
 import Content from "../api/content";
+import defecto from "../../public/images/defecto.png";
+const url = "http://localhost:8000/storage";
 
 const useStyles = makeStyles((theme) => ({   
     containerCont: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#113163",
+        paddingTop: 50,
+        paddingBottom: 50,
         marginTop: 30,
-        //margin: "0 auto",
+        border: "3px solid #000",
+        borderRadius: 50,
+        marginLeft:30,
+        marginRight: 30,
     },
     contenido: {
-        //border: "1px solid #000000",
         height: 500,
         alignItems: "center",
-        backgroundColor: "#009A7E"
+        backgroundColor: "#009A7E",
+        borderRadius: 50,
+        border: "3px solid #000",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingLeft: 15,
     },
     text: {
         fontFamily: "Rationale",
         alignItems: "center",
         color: "#fff",
     },
-    
+    img: {
+        width: "100%",
+        marginRight: 20
+    }
 }));
 
 const ConteComponente = (props) => {
@@ -35,6 +51,7 @@ const ConteComponente = (props) => {
     const router = useRouter();
     const { id } = router.query;
     const [contentsTheme, setContentsTheme] = useState([]);
+    const [contentImage, setContentImage] = useState(null);
 
     useEffect(() => {
         contentTheme();
@@ -43,6 +60,14 @@ const ConteComponente = (props) => {
       async function contentTheme() {
         try {
             const contentTh = await Content.content(id);
+            let cImage = contentTh.data.image;
+            let imgUrl = cImage.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            setContentImage(url + imgUrl);
             setContentsTheme(contentTh.data);
         } catch(error){
     
@@ -54,11 +79,16 @@ const ConteComponente = (props) => {
         <Grid container className={classes.containerCont}>
             <Grid container item={true} xs={6} className={classes.img}>
                 <Box>
-                    
+                <Image
+              src={contentImage ? contentImage : defecto}
+              height={500}
+              width={600}
+              className={classes.imgT}
+            />
                 </Box>
             </Grid>
             <Grid item xs={4} className={classes.contenido}>
-                <Typography variant="h4" gutterBottom className={classes.text}>
+                <Typography variant="h5" gutterBottom className={classes.text}>
                 {contentsTheme && contentsTheme.description}
                 </Typography>
             </Grid>

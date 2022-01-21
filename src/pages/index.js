@@ -1,11 +1,11 @@
 import Header from "@/components/PpHeader";
 import Body from "@/components/PpBody";
 import Footer from "@/components/PpFooter";
+import LogroHeader from "@/components/LogroHeader";
+import Locked from "@/components/Locked";
 import style from "@/styles/Main.module.css";
 import { useAuth } from "@/contexts/auth";
-import PerfilHeader from "@/components/PerfilHeader.js";
-import PerfilBody from "./perfil/PerfilBody.js";
-import PerfilFooter from "../components/PerfilFooter.js";
+import Loading from "@/components/Loading";
 
 const IndexPage = () => {
   const { user } = useAuth();
@@ -14,9 +14,9 @@ const IndexPage = () => {
       {
       user ?
       <div className={style.container}>
-      <PerfilHeader />
-      <PerfilBody />
-      <PerfilFooter />
+        <LogroHeader />
+        <Locked />
+        <Footer />
         </div>
       : 
       <div className={style.container}>

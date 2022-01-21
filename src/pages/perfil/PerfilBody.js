@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -6,11 +6,16 @@ import "@fontsource/rationale";
 import Box from '@material-ui/core/Box';
 import Image from "next/image";
 import medalla from "../../../public/images/medalla.png";
+import defecto from "../../../public/images/defecto.png";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "@/contexts/auth";
+import User from "../../api/user";
 import Themes from "@/components/ThemeComponent.js";
 import LinearProgress from '@material-ui/core/LinearProgress';
+import AchievementDetails from "src/api/achievementDetails";
+import Achievements from "src/api/achievement";
+const url = "http://localhost:8000/storage";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -46,6 +51,50 @@ const useStyles = makeStyles((theme) => ({
 export default function PerfilBody() {
     const classes = useStyles();
     const { user } = useAuth();
+    const [ userI, setUserI ] = useState([]);
+    const [ achievementEx, setAchievementEx ] = useState([]);
+    const [achiImage, setAchiImage] = useState(null);
+
+    useEffect(() => {
+        getAuthenticatedUser();
+        
+    }, []);
+
+    async function AchiAll(){
+        try{
+            const achievement = await AchievementDetails.achievementsDetailsAll();
+            AchievementInf(achievement.data[0]);
+            setAchievementEx(achievement.data.length);
+        }
+        catch(error){
+        }
+    }
+
+    async function AchievementInf(dataAch) {
+        try{
+            const achievementI = await Achievements.achievement(dataAch.achievement_id);
+            let aImage = achievementI.data.image;
+            
+            let imgUrl = aImage.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            imgUrl = imgUrl.slice(1);
+            setAchiImage(url + imgUrl);
+        }catch(error){
+        }
+    }
+
+    async function getAuthenticatedUser() {
+        try {
+          const response = await User.getAuthenticatedUser();
+          AchiAll();
+          setUserI(response.data);
+          return response;
+        } catch (error) {
+        }
+    }
 
     return (
     <React.Fragment>
@@ -56,13 +105,24 @@ export default function PerfilBody() {
                 <Grid container className={classes.contP}>
                     <Grid container item={true} xs={4} className={classes.contP1}>
                         <Grid xs={12} className={classes.boxP}>
-                            <Box>
+                            {achievementEx != 0 ? (
+                                 <Box>
+                                    <Image
+                                    src={achiImage ? achiImage: defecto} 
+                                    height={250}
+                                    width={250} 
+                                    />
+                                </Box>
+                            ): (
+                                <Box>
                                 <Image
                                 src={medalla} 
-                                height={200}
-                                width={200} 
+                                height={250}
+                                width={250} 
                                 />
-                            </Box>
+                                </Box>
+                            )
+                            } 
                         </Grid>
                     </Grid>
                     <Grid xs={8}>
@@ -80,17 +140,17 @@ export default function PerfilBody() {
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
-                                Rango: {user ? user.rank: ''}
+                                Rango: {userI ? userI.rank: ''}
                             </Typography>
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
-                                Nivel: {user ? user.level: ''}
+                                Nivel: {userI ? userI.level: ''}
                             </Typography>
                         </Grid>
                         <Grid item={true} xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
-                                Progreso del curso: {user ? user.progress: '' }%
+                                Progreso del curso: {userI ? userI.progress: '' }%
                             </Typography>
                         </Grid>
                     </Grid>

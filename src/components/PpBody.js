@@ -88,6 +88,9 @@ const useStyles = makeStyles((theme) => ({
         position: "absolute",
         width: 430,
         boxShadow: theme.shadows[5]
+    },
+    box3: {
+        background: "#113163",
     }
 }));
 
@@ -237,7 +240,7 @@ const Ppbody = () => {
                         NUESTRO CURSO
                     </Typography>
                 </Grid>
-                <Grid item={true} xs={12} sm={6}>
+                <Grid item={true} xs={12} sm={6} className={classes.box3}>
                     <Typography variant="h3" gutterBottom className={classes.text2}>
                         Es perfecto para obtener conocimientos sobre ciberseguridad
                         y mejora tu protección.
