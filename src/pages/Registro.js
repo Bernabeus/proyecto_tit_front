@@ -295,7 +295,7 @@ const RegisterPage = () => {
             <p style={{ color:"#ff0000" }}>{errors.password_confirmation?.message}</p>
             </Grid>
 
-            <p style={{ color:"#ff0000" }}>{result}</p>
+            <p style={{ color:"#000" }}>{result}</p>
 
 
             {errorsList.length > 0 && (

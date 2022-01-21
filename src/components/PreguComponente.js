@@ -15,6 +15,7 @@ import Radio from '@material-ui/core/Radio';
 import clsx from 'clsx';
 import User from "src/api/user";
 import ContentDetails from "../api/contentDetails";
+import Collapse from '@material-ui/core/Collapse';
 
 const useStyles = makeStyles((theme) => ({
     containerPreg: {
@@ -22,12 +23,18 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        textAlign: "center",
+        //textAlign: "center",
         marginTop: 30,
-        width: "100%"
+        width: "100%",
+        backgroundColor: "#113163",
+        paddingTop: 50,
+        border: "3px solid #000",
+        borderRadius: 50,
+        marginLeft:30,
+        marginRight: 30,
     },
     pregunta: {
-        backgroundColor: "#009A7E",
+        backgroundColor: "#113163",
         marginBottom: 50,
         display: "flex",
         justifyContent: "center",
@@ -39,9 +46,14 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
     },
     respuesta: {
-        backgroundColor: "#009A7E",
+        backgroundColor: "#fff",
         fontFamily: "Rationale",
-        marginBottom: 50
+        marginBottom: 50,
+        paddingTop: 20,
+        border: "3px solid #000",
+        borderRadius: 50,
+        marginLeft:30,
+        marginRight: 30,
     },
     checkP: {
         color: "#113163",
@@ -55,11 +67,11 @@ const useStyles = makeStyles((theme) => ({
     },
     textP: {
         fontFamily: "Rationale",
-        color: "#113163"
+        color: "#fff"
         //alignitems: "center",
     },
     btnC: {
-        background: "#000",
+        background: "#009A7E",
         textAlign: "center",
         width: 150,
         fontFamily: "Rationale",
@@ -123,6 +135,30 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Rationale",
         textAlign: "justify"
       },
+      contAlert: {
+    marginTop: 20,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#000",
+    color: "#fff",
+    marginLeft: 150,
+    marginRight: 150,
+    //height: 50
+  },
+  textL: {
+    justifyContent: "left",
+    fontFamily: "Rationale",
+  },
+  btnSig: {
+      display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textR: {
+      color:"#113163",
+      fontFamily: "Rationale",
+  }
 }));
 
 function StyledRadio(props) {
@@ -154,6 +190,8 @@ const PreguComponente = () => {
     const [btnDisabled, setBtnDisabled] = useState(false);
     const [option, setOption] = useState(0);
     const [nextContent, setNextContent] = useState(null);
+    const [open, setOpen] = useState(false);
+
 
     useEffect(() => {
         contentT(); 
@@ -257,6 +295,7 @@ const PreguComponente = () => {
 
     //subida de nivel,experiencia,rango y progreso al terminar un tema
     async function contentTerTheme(){
+        setOpen(true);
         const dataRank = [
             {
               rank:'Sargento en la Ciberseguridad',
@@ -312,18 +351,33 @@ const PreguComponente = () => {
         const userA = await User.update(userId, data);
         router.push(`/logro/${contents.theme_id}`);
     }
-      
-    //subida de nivel,experiencia y progreso al terminar un contenido
+
+
+    //subida de experiencia terminar un contenido
     async function contentNext(){
-        const exp = user.experience + (2);
+        try{
+        setOpen(true);
+         const response = await User.getAuthenticatedUser();
+        userExpe(response.data);
+        }catch (error) {
+    }
+        
+    }
+
+    async function userExpe(userInfo) {
+    try {
+        const exp = userInfo.experience + (2);
         const userId = user.id;
         const data = {
             experience: exp
         };
         const userA = await User.update(userId, data);
         contentsDetailA();
+     
+    } catch (error) {
     }
-
+  }
+      
     async function contentsDetailA() {
         const contentDetail = await ContentDetails.contentsDetailsAll();
         contentNow(contentDetail.data[0]);
@@ -420,55 +474,83 @@ const PreguComponente = () => {
                 <Typography
                 variant="h4"
                 gutterBottom
-                className={classes.text}
+                className={classes.textR}
                 >
                     Respuesta correcta:
                 </Typography>
                 <Typography
                     variant="h4"
                     gutterBottom
-                    className={classes.text}
+                    className={classes.textR}
                 >
                     {contents && contents.feedback}
                 </Typography>
                 { nextContent === true ?
                 <Grid>
-                    <Grid>
+                    <Grid className={classes.btnSig}>
                     <Typography
                         variant="h4"
                         gutterBottom
-                        className={classes.textP}
+                        className={classes.textR}
                         >
                             TEMA COMPLETADO
                         </Typography>
                     </Grid>
+                    <Grid>
                     <Button variant="contained" className={classes.btnC} onClick={() => achievementD()}>
                         <Typography
                         variant="h5"
                         gutterBottom
-                        className={classes.text}
+                        className={classes.textR}
                         >
                             Consigue tu logro
                         </Typography>
                     </Button>
+                    </Grid>
+                    <Grid className={classes.contAlert}>
+                        <Collapse in={open}>
+                        <Typography
+                                variant="h5"
+                                gutterBottom
+                                className={classes.textL}
+                              >
+                                CARGANDO LOGRO, ESPERE UN MOMENTO
+                              </Typography> 
+                        </Collapse>
+                        </Grid>
                 </Grid>
-                : <Grid>
+                :
+                <Grid className={classes.btnSig}> 
+                <Grid>
                 <Button variant="contained" className={classes.btnC} onClick={() => contentNext()}>
                     <Typography
                     variant="h5"
                     gutterBottom
-                    className={classes.text}
+                    className={classes.textR}
                     >
                         Siguiente Contenido
                     </Typography>
                 </Button>
-                </Grid>}
+                </Grid>
+                <Grid className={classes.contAlert}>
+                        <Collapse in={open}>
+                        <Typography
+                                variant="h5"
+                                gutterBottom
+                                className={classes.textL}
+                              >
+                                CARGANDO, ESPERE UN MOMENTO
+                              </Typography> 
+                        </Collapse>
+                        </Grid>
+                    </Grid>
+                        }
              </Grid>
              : option === 1 ? <Grid xs={12} className={classes.respuesta}>
              <Typography
                  variant="h4"
                  gutterBottom
-                 className={classes.text}
+                 className={classes.textR}
              >
                  La respuesta es incorrecta, regrese al contenido. 
              </Typography>

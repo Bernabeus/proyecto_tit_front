@@ -1,6 +1,8 @@
 import Header from "@/components/PpHeader";
 import Body from "@/components/PpBody";
 import Footer from "@/components/PpFooter";
+import LogroHeader from "@/components/LogroHeader";
+import Locked from "@/components/Locked";
 import style from "@/styles/Main.module.css";
 import { useAuth } from "@/contexts/auth";
 import Loading from "@/components/Loading";
@@ -12,7 +14,9 @@ const IndexPage = () => {
       {
       user ?
       <div className={style.container}>
-        <Loading></Loading>
+        <LogroHeader />
+        <Locked />
+        <Footer />
         </div>
       : 
       <div className={style.container}>

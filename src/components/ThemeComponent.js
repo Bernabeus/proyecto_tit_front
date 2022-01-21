@@ -18,6 +18,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Loading from "@/components/Loading";
 import StarIcon from '@material-ui/icons/Star';
 import { useRouter } from "next/router";
+import User from "../api/user";
+import Collapse from '@material-ui/core/Collapse';
+
 
 const useStyles = makeStyles((theme) => ({
   accord: {
@@ -121,6 +124,21 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontFamily: "Rationale",
 },
+contAlert: {
+    marginTop: 20,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#000",
+    color: "#fff",
+    marginLeft: 150,
+    marginRight: 150,
+    //height: 50
+  },
+  textL: {
+    justifyContent: "left",
+    fontFamily: "Rationale",
+  },
 }));
 
 export default function PPHeader() {
@@ -131,6 +149,7 @@ export default function PPHeader() {
   const [themeDet, setThemeDet] = useState([]);
   const [day, setDay] = useState(null);
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   
   useEffect(() => {
     themeData();
@@ -193,6 +212,7 @@ export default function PPHeader() {
   }
 
   async function contentsDetailA(idT) {
+    setOpen(true);
     const contentDetail = await ContentDetails.contentsDetailsAll();
     contentTheme(idT, contentDetail);
   }
@@ -200,13 +220,22 @@ export default function PPHeader() {
   async function contentTheme(idT, contentDetail) {
     try {
       const contentTh = await Content.contentTheme(idT);
-      contDetail(idT, contentTh, contentDetail);
+      getAuthenticatedUser(idT, contentTh, contentDetail);
     } catch(error){
 
     }
   }
 
-  async function contDetail(idT, content, contentDetail) {
+  async function getAuthenticatedUser(idT, content, contentDetail) {
+    try {
+      const response = await User.getAuthenticatedUser();
+      contDetail(idT, content, contentDetail, response.data);
+      //return response;
+    } catch (error) {
+    }
+  }
+
+  async function contDetail(idT, content, contentDetail, userI) {
     
       let contents = [];
       var idU;
@@ -232,7 +261,11 @@ export default function PPHeader() {
         idU = contentAId;
         
       };
+      if((userI.experience == 16) || (userI.experience == 32) || (userI.experience == 48) || (userI.experience == 64) || (userI.experience == 80) || (userI.experience == 100)){
+        router.push(`/logro/${idT}`);
+      } else {
       router.push(`/contenido/${idU}`);
+      }
   }
 
   return (
@@ -285,8 +318,7 @@ export default function PPHeader() {
                         </Typography>
                         </Grid>
                         <Grid xs={5} className={classes.boxTemaTe}>
-                          <Button variant="contained" className={classes.btnC} onClick={() => contentsDetailA(temas.id)}>
-                            
+                          <Button variant="contained" className={classes.btnC} onClick={() => contentsDetailA(temas.id)}>                    
                               <Typography
                                 variant="h5"
                                 gutterBottom
@@ -296,6 +328,17 @@ export default function PPHeader() {
                               </Typography>
                             
                           </Button>
+                        </Grid>
+                        <Grid className={classes.contAlert}>
+                        <Collapse in={open}>
+                        <Typography
+                                variant="h5"
+                                gutterBottom
+                                className={classes.textL}
+                              >
+                                CARGANDO, ESPERE UN MOMENTO
+                              </Typography> 
+                        </Collapse>
                         </Grid>
                       </AccordionDetails>
                     </Accordion>

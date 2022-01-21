@@ -203,10 +203,10 @@ const LogroPage = () => {
   //Ordenando los datos de la tabla detailstheme y actualizando la informacion del siguiente tema, habilitandolo
   async function ThemeSearch() {
     try{
-        setOpen(true);
         var idA = id;
         var idAs = idA;
         if(idA < 6 ){
+          setOpen(true);
           const themeIdA = themeD[--idA].id;
           const themeIdS = themeD[id].id;
           const themeAdvanceA = themeD[idAs].theme_advance;
@@ -348,7 +348,7 @@ const LogroPage = () => {
                   gutterBottom
                   className={classes.textL}
                 >
-                  Presione aqui para desbloquear el siguiente tema
+                  Presione aqui para regresar a los temas
                 </Typography>          
             </Button>    
           </Grid>

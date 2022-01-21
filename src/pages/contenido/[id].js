@@ -54,12 +54,11 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 40
     },
     container: {
-        backgroundColor: "#fff",
         border: "1px solid #fff",
         backgroundColor: "#009A7E",
     },
     cont1: {
-        height: 700,
+        height: 800,
     },
     btnA: {
         float: "left",
@@ -90,7 +89,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     containerPregunta: {
-        height: "100%"
+        height: "100%",
+        marginBottom: 50
     }
 }));
 

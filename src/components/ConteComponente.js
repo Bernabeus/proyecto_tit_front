@@ -15,12 +15,25 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#113163",
+        paddingTop: 50,
+        paddingBottom: 50,
         marginTop: 30,
+        border: "3px solid #000",
+        borderRadius: 50,
+        marginLeft:30,
+        marginRight: 30,
     },
     contenido: {
         height: 500,
         alignItems: "center",
-        backgroundColor: "#009A7E"
+        backgroundColor: "#009A7E",
+        borderRadius: 50,
+        border: "3px solid #000",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingLeft: 15,
     },
     text: {
         fontFamily: "Rationale",
@@ -28,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
         color: "#fff",
     },
     img: {
-        width: "100%"
+        width: "100%",
+        marginRight: 20
     }
 }));
 
