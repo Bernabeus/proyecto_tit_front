@@ -21,7 +21,6 @@ import style from "@/styles/Main.module.css";
 import Achievements from "src/api/achievement";
 import ThemeDetails from "src/api/themeDetails";
 import Collapse from '@material-ui/core/Collapse';
-const url = "http://localhost:8000/storage";
 import Locked from "@/components/Locked";
 import User from "../../api/user";
 import ContentDetails from "../../api/contentDetails";
@@ -178,13 +177,7 @@ const LogroPage = () => {
         try{
             const achievementI = await Achievements.achievement(id);
             let aImage = achievementI.data.image;
-            let imgUrl = aImage.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            setAchiImage(url + imgUrl);
+            setAchiImage(aImage);
             setAchievement(achievementI.data);
             achievementItems(achievementI.data);
         }catch(error){
@@ -387,3 +380,8 @@ const LogroPage = () => {
 };
 
 export default LogroPage;
+
+
+/*
+
+<Image src={achiImage ? achiImage: defecto} height={350} width={300} />*/

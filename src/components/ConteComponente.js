@@ -8,7 +8,6 @@ import Image from "next/image";
 import "@fontsource/rationale";
 import Content from "../api/content";
 import defecto from "../../public/images/defecto.png";
-const url = "http://localhost:8000/storage";
 
 const useStyles = makeStyles((theme) => ({   
     containerCont: {
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 30,
     },
     contenido: {
-        height: 500,
+        height: "100%",
         alignItems: "center",
         backgroundColor: "#009A7E",
         borderRadius: 50,
@@ -61,13 +60,7 @@ const ConteComponente = (props) => {
         try {
             const contentTh = await Content.content(id);
             let cImage = contentTh.data.image;
-            let imgUrl = cImage.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            setContentImage(url + imgUrl);
+            setContentImage(cImage);
             setContentsTheme(contentTh.data);
         } catch(error){
     
@@ -88,7 +81,7 @@ const ConteComponente = (props) => {
                 </Box>
             </Grid>
             <Grid item xs={4} className={classes.contenido}>
-                <Typography variant="h5" gutterBottom className={classes.text}>
+                <Typography variant="h6" gutterBottom className={classes.text}>
                 {contentsTheme && contentsTheme.description}
                 </Typography>
             </Grid>
@@ -97,3 +90,4 @@ const ConteComponente = (props) => {
 };
 
 export default ConteComponente;
+

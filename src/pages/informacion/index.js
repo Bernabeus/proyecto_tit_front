@@ -195,7 +195,7 @@ const InformationPage = () => {
                     <Typography variant="h6" gutterBottom className={classes.textList}><LightbulbIcon />Gana experiencia con cada tema completado.</Typography>
                     <Typography variant="h6" gutterBottom className={classes.textList}><PublishedWithChangesIcon />Avanza con los temas en modo básico, intermedio y avanzado.</Typography>
                     <Typography variant="h6" gutterBottom className={classes.textList}><StarIcon />Consigue insignias con cada tema completado.</Typography>
-                    <Typography variant="h6" gutterBottom className={classes.textList}><ShowChartIcon />Sube de rango y alcanza el rango de experto.</Typography>
+                    <Typography variant="h6" gutterBottom className={classes.textList}><ShowChartIcon />Sube de rango y alcanza el rango de Capitán General en la Ciberseguridad.</Typography>
                 </Grid>
             </Grid>
         </Grid>

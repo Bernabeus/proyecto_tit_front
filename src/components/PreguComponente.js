@@ -410,7 +410,7 @@ const PreguComponente = () => {
                 <Grid xs={1}></Grid>
                 <Grid xs={4}>
                 <Typography
-                    variant="h3"
+                    variant="h5"
                     gutterBottom
                     className={classes.textP}
                 >
