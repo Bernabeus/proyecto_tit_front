@@ -58,7 +58,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#009A7E",
     },
     cont1: {
-        height: 800,
+        height: "100%",
+        marginBottom: 30
     },
     btnA: {
         float: "left",

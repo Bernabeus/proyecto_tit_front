@@ -15,7 +15,6 @@ import Themes from "@/components/ThemeComponent.js";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import AchievementDetails from "src/api/achievementDetails";
 import Achievements from "src/api/achievement";
-const url = "http://localhost:8000/storage";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -74,14 +73,7 @@ export default function PerfilBody() {
         try{
             const achievementI = await Achievements.achievement(dataAch.achievement_id);
             let aImage = achievementI.data.image;
-            
-            let imgUrl = aImage.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            imgUrl = imgUrl.slice(1);
-            setAchiImage(url + imgUrl);
+            setAchiImage(aImage);
         }catch(error){
         }
     }
@@ -107,11 +99,10 @@ export default function PerfilBody() {
                         <Grid xs={12} className={classes.boxP}>
                             {achievementEx != 0 ? (
                                  <Box>
-                                    <Image
+                                   <Image
                                     src={achiImage ? achiImage: defecto} 
                                     height={250}
-                                    width={250} 
-                                    />
+                                    width={250} />
                                 </Box>
                             ): (
                                 <Box>
@@ -162,3 +153,7 @@ export default function PerfilBody() {
     </React.Fragment>
     );
 };
+
+/*
+ 
+                                    />*/
