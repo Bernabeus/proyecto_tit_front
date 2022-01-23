@@ -100,6 +100,7 @@ export default function contentPage() {
             const contentDetail = await Content.contentTheme(idT);
             setContentAll(contentDetail.data);
         }catch(error){   
+            console.log();
         } 
       }
 
