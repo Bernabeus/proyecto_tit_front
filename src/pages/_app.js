@@ -5,7 +5,6 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { AuthProvider } from "@/contexts/auth";
 import theme from "@/styles/theme";
-import Logout from "@/components/Logout";
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
