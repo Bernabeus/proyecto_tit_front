@@ -26,7 +26,7 @@ import User from "../../api/user";
 import ContentDetails from "../../api/contentDetails";
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   containerC: {
     height: "100%"
   },
@@ -119,6 +119,7 @@ const LogroPage = () => {
       setUser(response.data);
       return response;
     } catch (error) {
+      console.log();
     }
   }
 
@@ -134,9 +135,6 @@ const LogroPage = () => {
           }
           return 0
         });
-        var idActual = id;
-        idActual = --idActual;
-        const themeAdvanceA = arrayTheme[idActual].theme_advance;
 
         if(user.experience == 16 && id == 1){
           setLockedAchievement(true);
@@ -159,7 +157,7 @@ const LogroPage = () => {
         AchievementInf();
         setThemeD(arrayTheme);
       }catch(error){
-
+        console.log();
       }
     }
 
@@ -172,6 +170,7 @@ const LogroPage = () => {
             setAchievement(achievementI.data);
             achievementItems(achievementI.data);
         }catch(error){
+          console.log();
         }
     }
     //Creando un arreglo con los items de logros
@@ -201,17 +200,18 @@ const LogroPage = () => {
           ThemeCompleteFinal(themeAdvanceA, themeIdA);
         }
     }catch(error){
+      console.log();
     }
   }
 
   async function ThemeCompleteFinal(themeAdvanceA, themeIdA) {
-    var idS = id;
     const dataA = {
       theme_id: id,
       theme_advance: 'Terminado', 
     };
     const themeA = await ThemeDetails.update(themeIdA, dataA);
     router.push("/perfil");
+    return themeA;
   }
 
     async function ThemeComplete(themeAdvanceA, themeIdA, themeIdS) {
@@ -226,13 +226,16 @@ const LogroPage = () => {
       };
       
       const themeA = await ThemeDetails.update(themeIdA, dataA);
+
       themeNex(themeIdS, dataS);
+      return themeA;
     }
 
     async function themeNex(themeIdS, dataS) {
       const themeS = await ThemeDetails.update(themeIdS, dataS);
       contentsDetailA();
       router.push("/perfil");
+      return themeS;
     }
 
     //actualizar posicion actual del tema al terminarlo
@@ -255,8 +258,9 @@ const LogroPage = () => {
             };  
          const content = await ContentDetails.update(Content.id, data); 
         ExpUser();
+        
+      return content;
       } 
-      
   }
 
   async function ExpUser(){
@@ -266,6 +270,7 @@ const LogroPage = () => {
             experience: exp
         };
         const userA = await User.update(userId, data);
+        return userA;
     }
 
 

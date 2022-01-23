@@ -19,7 +19,7 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Button from "@material-ui/core/Button";
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     cont: {
         height: 160,
         backgroundColor: "#113163",
@@ -103,15 +103,7 @@ const useStyles = makeStyles((theme) => ({
 const InformationPage = () => {
 
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     return (
         <Grid item={true} container>
@@ -123,7 +115,7 @@ const InformationPage = () => {
                     width={160} 
                     />
                 </Grid>
-                <Grid item={true} xs={7}>
+                <Grid xs={7} >
                 <Typography variant="h4" gutterBottom className={classes.title}>
                     Información general del curso
                 </Typography>
