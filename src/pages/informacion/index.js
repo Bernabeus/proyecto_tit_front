@@ -19,7 +19,7 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Button from "@material-ui/core/Button";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     cont: {
         height: 160,
         backgroundColor: "#113163",
@@ -99,11 +99,13 @@ const useStyles = makeStyles(() => ({
 
 }));
 
+function redirectPerfil(){
+    location.replace("/perfil");
+}
+
 
 const InformationPage = () => {
-
     const classes = useStyles();
-
 
     return (
         <Grid item={true} container>
@@ -121,13 +123,11 @@ const InformationPage = () => {
                 </Typography>
                 </Grid>
                 <Grid item={true} xs={2} >
-                <a href="/perfil"  className={style.etA}>
-                    <Button variant="contained" className={classes.btnC}>
+                    <Button variant="contained" className={classes.btnC} onClick={() => redirectPerfil()}>
                     <Typography variant="h6" gutterBottom className={classes.textBtn}>
                                  Ir a la pagina principal
                                 </Typography>  
-                    </Button>            
-                </a>
+                    </Button> 
 
                     <Divider className={classes.dividerTransparent} />
                     </Grid>

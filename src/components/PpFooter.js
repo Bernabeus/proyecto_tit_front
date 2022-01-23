@@ -6,7 +6,6 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import FacebookIcon from "@material-ui/icons/Facebook";
 import MailIcon from "@material-ui/icons/Mail";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { useAuth } from "@/contexts/auth";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from "./Loading";
@@ -37,7 +36,7 @@ export default function Ppfooter() {
                 <Container>
                 <Grid container spacing={0} className={style.footer}>
                     <Grid item={true} xs={12} sm={6} className={classes.cont}>
-                        <Typography variant="h3" gutterBottom className={style.text}>
+                        <Typography variant="h3" gutterBottom className={classes.text}>
                             CONTÁCTANOS
                         </Typography>
                     </Grid>
