@@ -114,21 +114,21 @@ const InformationPage = () => {
     };
 
     return (
-        <Grid container>
-            <Grid container item xs={12} className={classes.cont}>
-                <Grid xs={2} className={classes.img}> 
+        <Grid item={true} container>
+            <Grid item={true} container item xs={12} className={classes.cont}>
+                <Grid item={true} xs={2} className={classes.img}> 
                 <Image
                     src={logo} 
                     height={160}
                     width={160} 
                     />
                 </Grid>
-                <Grid xs={7}>
+                <Grid item={true} xs={7}>
                 <Typography variant="h4" gutterBottom className={classes.title}>
                     Información general del curso
                 </Typography>
                 </Grid>
-                <Grid xs={2} >
+                <Grid item={true} xs={2} >
                 <a href="/perfil"  className={style.etA}>
                     <Button variant="contained" className={classes.btnC}>
                     <Typography variant="h6" gutterBottom className={classes.textBtn}>
@@ -142,12 +142,12 @@ const InformationPage = () => {
                 
             </Grid>
             
-            <Grid item xs={12} className={classes.titleCover}>
+            <Grid item={true} xs={12} className={classes.titleCover}>
                 <Typography variant="h4" gutterBottom className={classes.contentOne}>
                     ¡El curso que necesitas para saber sobre ciberseguridad!
                 </Typography>
             </Grid>
-            <Grid item xs={12} className={classes.coverPhoto}>
+            <Grid item={true} xs={12} className={classes.coverPhoto}>
                 <Image
                     src={portada}
                     height={300}
@@ -155,7 +155,7 @@ const InformationPage = () => {
                 />
                 <Divider className={classes.dividerTransparent} />
             </Grid>
-            <Grid item xs={12} className={classes.contentStyle}>
+            <Grid item={true} xs={12} className={classes.contentStyle}>
                 <Typography variant="h5" gutterBottom className={classes.contentOne}>
                     La ciberseguridad tiene como objetivo principal proteger los datos, muchos de ellos confidenciales, evitando el robo de los mismos, los ataques cibernéticos y las usurpaciones de identidad.
                     Tener un conocimiento básico de ciberseguridad te ayudará a proteger tus sistemas contra diversas amenazas como el ramsomware, malware, entre otros. Así, tus datos y redes estarán seguras evitando el
@@ -163,7 +163,7 @@ const InformationPage = () => {
                 </Typography>
 
             </Grid>
-            <Grid item xs={12}>
+            <Grid item={true} xs={12}>
 
                 <Divider className={classes.dividerTransparent} />
 
@@ -172,25 +172,25 @@ const InformationPage = () => {
                 </Typography>
 
             </Grid>
-            <Grid item xs={12} className={classes.contentStyle} >
+            <Grid item={true} xs={12} className={classes.contentStyle} >
                 <Typography variant="h5" gutterBottom className={classes.textList}><SecurityIcon />Conozceras qué es la ciberseguridad y su impacto en la actualidad.</Typography>
                 <Typography variant="h5" gutterBottom className={classes.textList}><NoEncryptionIcon />Conozceras las amenazas, los ataques y las vulnerabilidades más comunes.</Typography>
                 <Typography variant="h5" gutterBottom className={classes.textList}><AddModeratorIcon /> Obtendras información sobre cómo las empresas protegen sus operaciones de los ataques.</Typography>
                 <Typography variant="h5" gutterBottom className={classes.textList}><VpnKeyIcon />Conozceras las últimas tendencias laborales y por qué sigue creciendo el campo de la ciberseguridad.</Typography>
             </Grid>
-            <Grid item xs={12} className={classes.bannerContent}>
+            <Grid item={true} item xs={12} className={classes.bannerContent}>
                 <Divider className={classes.dividerTransparent} />
                 <Typography variant="h4" gutterBottom className={classes.bannerTitle}>¿Cómo funciona el curso?</Typography>
             </Grid>
-            <Grid container >
-                <Grid item xs={12} md={6} lg={6} className={classes.imageBanner}>
+            <Grid item={true} container >
+                <Grid item={true} xs={12} md={6} lg={6} className={classes.imageBanner}>
                     <Image
                         src={banner}
                         height={300}
                         width={650}
                     />
                 </Grid>
-                <Grid item xs={12} md={6} lg={6} className={classes.contentStyle}>
+                <Grid item={true} xs={12} md={6} lg={6} className={classes.contentStyle}>
                 <Typography variant="h5" gutterBottom className={classes.textList}>Características del curso</Typography>
                     <Typography variant="h6" gutterBottom className={classes.textList}><LightbulbIcon />Gana experiencia con cada tema completado.</Typography>
                     <Typography variant="h6" gutterBottom className={classes.textList}><PublishedWithChangesIcon />Avanza con los temas en modo básico, intermedio y avanzado.</Typography>

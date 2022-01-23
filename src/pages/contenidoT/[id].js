@@ -87,7 +87,6 @@ export default function contentPage() {
         try{
             const idT = id;
             const theme = await Theme.theme(idT);
-            console.log("tema", theme);
             contentsDetailA(idT);
             setThemeT(theme.data);
             
@@ -118,20 +117,20 @@ export default function contentPage() {
         <CssBaseline />
         <div className={style.container}>
             <Container >
-            <Grid container spacing={0} className={classes.headerH}>
-            <Grid xs={1}></Grid>
-            <Grid xs={2} className={classes.img}> 
+            <Grid item={true} container className={classes.headerH}>
+            <Grid item={true} xs={1}></Grid>
+            <Grid item={true} xs={2} className={classes.img}> 
                 <Image
                     src={logo} 
                     height={160}
                     width={160} 
                     /></Grid>
-                <Grid xs={7} className={classes.containerH}>
+                <Grid item={true} xs={7} className={classes.containerH}>
                     <Typography variant="h4" gutterBottom className={classes.textH}>
                     Contenidos del tema: {themeT && themeT.title}
                     </Typography>
                 </Grid>
-                <Grid xs={1} className={classes.gridH}>
+                <Grid item={true} xs={1} className={classes.gridH}>
                     <IconButton
                         aria-label="more"
                         aria-controls="long-menu"
@@ -157,14 +156,14 @@ export default function contentPage() {
                         </MenuItem>
                     </Menu>
                     </Grid>
-                    <Grid xs={1}></Grid>
+                    <Grid item={true} xs={1}></Grid>
             </Grid>   
-            <Grid spacing={0} className={classes.container}>
-                <Grid spacing={0} className={classes.cont1}>
-                    <Grid style={{ marginBottom: '50px'}}>
+            <Grid item={true} className={classes.container}>
+                <Grid item={true} className={classes.cont1}>
+                    <Grid item={true} style={{ marginBottom: '50px'}}>
                     {contentAll.map((cont, index) => (
-                        <Grid className={classes.containerContent}  style={{ marginLeft: '70px', marginRight: '70px' }}>
-                            <Grid style={{ marginLeft: '70px', marginRight: '70px', marginTop: '20px', marginBottom: '20px' }}>
+                        <Grid item={true} key={index} className={classes.containerContent}  style={{ marginLeft: '70px', marginRight: '70px' }}>
+                            <Grid item={true} style={{ marginLeft: '70px', marginRight: '70px', marginTop: '20px', marginBottom: '20px' }}>
                             <Typography variant="h4" gutterBottom className={classes.textT}>
                                 Contenido {index + 1}
                             </Typography> 

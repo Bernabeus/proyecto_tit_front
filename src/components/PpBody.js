@@ -134,13 +134,13 @@ const Ppbody = () => {
     };
 
     const modIn = (
-        <Grid style={modalStyle} className={classes.paper}>
+        <Grid item={true} style={modalStyle} className={classes.paper}>
             <LoginPage />
         </Grid>
     );
 
     const modRe = (
-        <Grid style={modalStyle} className={classes.paper}>
+        <Grid item={true} style={modalStyle} className={classes.paper}>
             <RegisterPage />
         </Grid>
     );
@@ -149,12 +149,12 @@ const Ppbody = () => {
     <React.Fragment>
         <CssBaseline />
             <Container >
-            <Grid container spacing={0} className={classes.container}>
-            <Grid xs={12}>
+            <Grid item={true} container spacing={0} className={classes.container}>
+            <Grid item={true} xs={12}>
                         <Box className={classes.box2}></Box>
                     </Grid>
-                <Grid container spacing={2} className={classes.buttons}>
-                    <Grid item={true} xs={12} sm={6}>
+                <Grid item={true} container spacing={2} className={classes.buttons}>
+                    <Grid item={true} item={true} xs={12} sm={6}>
                         <Button variant="outlined" color="primary" className={classes.buttonIn} onClick={handleOpenI}>
                             Iniciar Sesión
                         </Button>
@@ -167,7 +167,7 @@ const Ppbody = () => {
                         {modIn}
                         </Modal>
                     </Grid>
-                    <Grid item={true} xs={12} sm={6}>
+                    <Grid item={true} item={true} xs={12} sm={6}>
                         <Button variant="contained" color="primary" className={classes.buttonRe} onClick={handleOpenR}>
                             Registrarse
                         </Button>
@@ -181,14 +181,14 @@ const Ppbody = () => {
                         </Modal>
                     </Grid>
                 </Grid>
-                <Grid item={true} xs={12}>
+                <Grid item={true} item={true} xs={12}>
                         <Box className={classes.box2}></Box>
                     </Grid>
-                <Grid item={true} xs={6}>
+                <Grid item={true} item={true} xs={6}>
                     <Box className={classes.box}></Box>
                 </Grid>
-                <Grid container spacing={0} className={classes.box1}>
-                    <Grid item={true} xs={12} sm={4}>
+                <Grid item={true} container spacing={0} className={classes.box1}>
+                    <Grid item={true} item={true} xs={12} sm={4}>
                         <Box className={classes.Box1}>
                             <Image
                             src={ruta4} 
@@ -197,7 +197,7 @@ const Ppbody = () => {
                             />
                         </Box>
                     </Grid>
-                    <Grid item={true} xs={12} sm={4}>
+                    <Grid item={true} item={true} xs={12} sm={4}>
                         <Box className={classes.Box}>
                             <Image
                             src={ruta2} 
@@ -206,7 +206,7 @@ const Ppbody = () => {
                             />
                         </Box>
                     </Grid>
-                    <Grid item={true} xs={12} sm={4}>
+                    <Grid item={true} item={true} xs={12} sm={4}>
                         <Box className={classes.Box2}>
                             <Image
                             src={ruta3} 
@@ -215,7 +215,7 @@ const Ppbody = () => {
                             />
                         </Box>
                     </Grid>
-                    <Grid item={true} xs={12} className={classes.img}>
+                    <Grid item={true} item={true} xs={12} className={classes.img}>
                         <Box className={classes.Box3}>
                             <Image
                             src={ruta1} 
@@ -225,30 +225,30 @@ const Ppbody = () => {
                         </Box>
                     </Grid>
                 </Grid>
-                <Grid item={true} xs={12}>
+                <Grid item={true} item={true} xs={12}>
                         <Box className={classes.box2}></Box>
                     </Grid>
-                <Grid container spacing={0}>
-                    <Grid item={true} xs={12} sm={6}></Grid>
-                    <Grid item={true} xs={12} sm={6}>
+                <Grid item={true} container spacing={0}>
+                    <Grid item={true} item={true} xs={12} sm={6}></Grid>
+                    <Grid item={true} item={true} xs={12} sm={6}>
                         <Box className={classes.box2}></Box>
                     </Grid>
                 </Grid>
-            <Grid container spacing={0}>
-                <Grid item={true} xs={12} sm={6}>
+            <Grid item={true} container spacing={0}>
+                <Grid item={true} item={true} xs={12} sm={6}>
                     <Typography variant="h2" gutterBottom className={classes.text1}>
                         NUESTRO CURSO
                     </Typography>
                 </Grid>
-                <Grid item={true} xs={12} sm={6} className={classes.box3}>
+                <Grid item={true} item={true} xs={12} sm={6} className={classes.box3}>
                     <Typography variant="h3" gutterBottom className={classes.text2}>
                         Es perfecto para obtener conocimientos sobre ciberseguridad
                         y mejora tu protección.
                     </Typography>
                 </Grid>
             </Grid>
-            <Grid container spacing={0}>
-                <Grid item={true} xs={12} className={classes.img1}>
+            <Grid item={true} container spacing={0}>
+                <Grid item={true} item={true} xs={12} className={classes.img1}>
                     <Box className={classes.Box4}>
                         <Image
                         src={ruta5} 

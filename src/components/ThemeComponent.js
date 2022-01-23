@@ -274,7 +274,7 @@ export default function PPHeader() {
       {themeDet[5] &&
       <div>
         {themeDet[themeDet.length-1].theme_advance === 'Terminado' && 
-      <Grid  className={classes.cont1} style={{ marginLeft: '55px', marginRight: '35px' }}>
+      <Grid item={true}  className={classes.cont1} style={{ marginLeft: '55px', marginRight: '35px' }}>
         <Typography variant="h3" className={classes.textB}>
             FELICIDADES POR COMPLETAR EL CURSO DE FUNDAMENTOS DE CIBERSEGURIDAD
         </Typography>
@@ -284,7 +284,7 @@ export default function PPHeader() {
       }
       
       {themeDiff.map((tema) => (
-        <Accordion className={classes.accord}>
+        <Accordion key={tema} className={classes.accord}>
           <AccordionSummary className={classes.headingT}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -297,9 +297,9 @@ export default function PPHeader() {
           {theme.map((temas, index) => (
             <AccordionDetails className={classes.accordC} key={temas.id}>
               {themeDet[index] ? (
-              <Grid  className={classes.grid}>
+              <Grid item={true}  className={classes.grid}>
                 {temas.difficulty === tema ? (
-                    <Grid spacing={0} className={classes.grid}> 
+                    <Grid item={true} className={classes.grid}> 
                   {themeDet[index].theme_advance === 'Iniciado' ? (
                       <Accordion className={classes.accordTema}>
                       <AccordionSummary className={classes.accordTemaTitulo}
@@ -312,12 +312,12 @@ export default function PPHeader() {
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails className={classes.accordTemaTe}>
-                        <Grid xs={7} className={classes.boxTemaCont}>
+                        <Grid item={true} xs={7} className={classes.boxTemaCont}>
                         <Typography variant="h4" className={classes.textB}>
                         {temas.description}
                         </Typography>
                         </Grid>
-                        <Grid xs={5} className={classes.boxTemaTe}>
+                        <Grid item={true} xs={5} className={classes.boxTemaTe}>
                           <Button variant="contained" className={classes.btnC} onClick={() => contentsDetailA(temas.id)}>                    
                               <Typography
                                 variant="h5"
@@ -329,7 +329,7 @@ export default function PPHeader() {
                             
                           </Button>
                         </Grid>
-                        <Grid className={classes.contAlert}>
+                        <Grid item={true} className={classes.contAlert}>
                         <Collapse in={open}>
                         <Typography
                                 variant="h5"
@@ -372,12 +372,12 @@ export default function PPHeader() {
                       
                     </AccordionSummary>
                     <AccordionDetails className={classes.accordTemaTeF}>
-                      <Grid xs={7} className={classes.boxTemaCont}>
+                      <Grid item={true} xs={7} className={classes.boxTemaCont}>
                       <Typography variant="h4" className={classes.textB}>
                         Ingresa aqui para volver a mirar los contenidos de este tema.
                       </Typography>
                       </Grid>
-                      <Grid xs={5} className={classes.boxTemaTe}>
+                      <Grid item={true} xs={5} className={classes.boxTemaTe}>
                       <Link href={`/contenidoT/${temas.id}`}>
                         <Button variant="contained" className={classes.btnC}>
                             <Typography

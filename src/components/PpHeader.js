@@ -69,9 +69,9 @@ export default function PPHeader() {
     <React.Fragment>
         <CssBaseline />
             <Container className={styles.header}>
-            <Grid container spacing={0} className={classes.container}>
-                <Grid item={true} xs={12} sm={6} className={classes.titleL}>
-                    <Grid className={classes.img}>
+            <Grid item={true} container spacing={0} className={classes.container}>
+                <Grid item={true} item={true} xs={12} sm={6} className={classes.titleL}>
+                    <Grid item={true} className={classes.img}>
                 <Image
                     src={logo} 
                     height={160}
@@ -79,8 +79,8 @@ export default function PPHeader() {
                     />
                     </Grid>
                 </Grid>
-                <Grid item={true} xs={12} sm={6} className={classes.titleO}>
-                <Grid className={classes.img1}>
+                <Grid item={true} item={true} xs={12} sm={6} className={classes.titleO}>
+                <Grid item={true} className={classes.img1}>
                     <Image
                     src={logo1} 
                     height={180}
@@ -88,22 +88,22 @@ export default function PPHeader() {
                     />
                     </Grid>
                 </Grid>
-                <Grid item={true} xs={12} sm={6} className={classes.title3}>
+                <Grid item={true} item={true} xs={12} sm={6} className={classes.title3}>
                     <Typography variant="h3" className={classes.title1}>
                         Apre
                     </Typography>
                 </Grid>
-                <Grid item={true} xs={12} sm={6} className={classes.title2}>
+                <Grid item={true} item={true} xs={12} sm={6} className={classes.title2}>
                     <Typography variant="h3" className={classes.text}>
                         nde!
                     </Typography>
                 </Grid>
-                <Grid item={true} xs={12} sm={6} className={classes.title}>
+                <Grid item={true} item={true} xs={12} sm={6} className={classes.title}>
                     <Typography variant="h3" className={classes.text}>
                     Fundamentos de ciberseguridad
                     </Typography>
                 </Grid>
-                <Grid item={true} xs={12} sm={6} className={classes.title4}>
+                <Grid item={true} item={true} xs={12} sm={6} className={classes.title4}>
                     <Typography variant="h3" className={classes.text}>
                             de forma sencilla!
                     </Typography>

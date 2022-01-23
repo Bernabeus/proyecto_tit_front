@@ -76,13 +76,13 @@ export default function ContenidoHeader() {
         <React.Fragment>
         <CssBaseline />
             <Container>
-            <Grid container spacing={0} className={classes.header}>
-                <Grid xs={11} className={classes.container}>
+            <Grid item={true} container spacing={0} className={classes.header}>
+                <Grid item={true} xs={11} className={classes.container}>
                     <Typography variant="h3" gutterBottom className={classes.text}>
                     {themeT && themeT.data.title}
                     </Typography>
                 </Grid>
-                <Grid xs={1} className={classes.grid}>
+                <Grid item={true} xs={1} className={classes.grid}>
                     <IconButton
                         aria-label="more"
                         aria-controls="long-menu"

@@ -39,11 +39,11 @@ export default function Locked() {
         <React.Fragment>
         <CssBaseline />
             <Container>
-            <Grid spacing={0}>
-                <Grid container className={classes.container}>
-                    <Grid xs={12} >
+            <Grid item={true}>
+                <Grid item={true} container className={classes.container}>
+                    <Grid item={true} xs={12} >
                     </Grid>
-                    <Grid xs={12} className={classes.cont}>
+                    <Grid item={true} xs={12} className={classes.cont}>
                     <Button className={classes.button} >
                         <Link href="/perfil">
                         <Typography
