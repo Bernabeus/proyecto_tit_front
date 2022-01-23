@@ -169,7 +169,7 @@ const LoginPage = () => {
 
           <FormControl 
           {...field}
-                sx={{ m: 2, width: '36ch' }}
+                sx={{ m: 2, width: '33ch' }}
                    variant="filled"
                    className={classes.textfieldF}
                 >
