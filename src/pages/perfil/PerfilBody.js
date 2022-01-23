@@ -16,7 +16,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import AchievementDetails from "src/api/achievementDetails";
 import Achievements from "src/api/achievement";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     container: {
         backgroundColor: "#fff",
         border: "1px solid #000000",
@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         alignContent: "center",
         textAlign: "center",
-        alignContent: "center"
     },
     text: {
         fontFamily: "Rationale",
@@ -66,6 +65,7 @@ export default function PerfilBody() {
             setAchievementEx(achievement.data.length);
         }
         catch(error){
+            console.log("");
         }
     }
 
@@ -75,6 +75,7 @@ export default function PerfilBody() {
             let aImage = achievementI.data.image;
             setAchiImage(aImage);
         }catch(error){
+            console.log("");
         }
     }
 
@@ -85,6 +86,7 @@ export default function PerfilBody() {
           setUserI(response.data);
           return response;
         } catch (error) {
+            console.log("");
         }
     }
 
@@ -93,7 +95,7 @@ export default function PerfilBody() {
         <CssBaseline />
             <Container >
             <Grid item={true} className={classes.container}>
-                <Grid item={true}  className={classes.cont1} style={{ marginLeft: '35px', marginRight: '35px' }}>
+                <Grid item={true} className={classes.cont1} style={{ marginLeft: '35px', marginRight: '35px' }}>
                 <Grid item={true} container className={classes.contP}>
                     <Grid item={true} container item={true} xs={4} className={classes.contP1}>
                         <Grid item={true} xs={12} className={classes.boxP}>

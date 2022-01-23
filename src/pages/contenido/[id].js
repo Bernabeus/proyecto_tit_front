@@ -26,7 +26,7 @@ import User from "../../api/user";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     headerH: {
         textAlign: "center",
         background: "#113163",
@@ -154,7 +154,7 @@ export default function contentPage() {
 
     function contentNow(idC) {
        const content = ContentDetails.update(idC, contentDetailA); 
-        
+        return content;
     }
 
     async function getAuthenticatedUser() {
@@ -163,6 +163,7 @@ export default function contentPage() {
       contentTheme(response.data);
       return response;
     } catch (error) {
+        console.log("Algo sucedio mal!!");
     }
   }
 
@@ -188,8 +189,7 @@ export default function contentPage() {
             }
             return 0
           });
-          var idThemeAc = idT;
-          idThemeAc = --idThemeAc;
+
           
             if(user.experience == 0 && id == 1){
                 setLockedContent(true);
@@ -262,8 +262,10 @@ export default function contentPage() {
             }
     
           themeInf(idT);
+          return arrayTheme;
         }catch(error){
-  
+        console.log("Algo sucedio mal!!");
+            
         }
       }
 
@@ -280,6 +282,7 @@ export default function contentPage() {
             setContentDetailA(data);
             return theme;
         }catch(error){
+        console.log("Algo sucedio mal!!");
             
         }
     }

@@ -46,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 40
     },
     container: {
-        backgroundColor: "#fff",
         border: "1px solid #fff",
         backgroundColor: "#009A7E",
     },
@@ -76,7 +75,7 @@ export default function contentPage() {
     const { id } = router.query;
     const [contentAll, setContentAll] = useState([]);
     const [themeT, setThemeT] = useState(null);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
 
 
     useEffect(() => {
@@ -92,7 +91,7 @@ export default function contentPage() {
             
             return theme;
         }catch(error){
-            
+            console.log();
         }
     }
 
