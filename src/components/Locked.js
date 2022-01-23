@@ -6,31 +6,36 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "next/link";
 import { Button } from "@material-ui/core";
+import style from "@/styles/Loading.module.css";
 
 const useStyles = makeStyles((theme) => ({
-    text: {
+    textL: {
         fontFamily: "Rationale",
         color: "#000",
     },
     container: {
         height: 900,
-        backgroundColor: "#B7B1B1",
         display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+        alignItems: "center",
+        justifyContent: "center",
     },
     button: {
         marginTop: 45,
-    background: "#009A7E",
-    textAlign: "center",
-    fontFamily: "Rationale"
+        background: "#009A7E",
+        textAlign: "center",
+        fontFamily: "Rationale"
     },
     cont: {
         display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    loadi:{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
     }
-
+    
 }));
 
 export default function Locked() {
@@ -41,7 +46,29 @@ export default function Locked() {
             <Container>
             <Grid item={true}>
                 <Grid item={true} container className={classes.container}>
-                    <Grid item={true} xs={12} >
+                    <Grid item={true} xs={12} className={classes.loadi}>
+                        <div className={style.loaderContainer}>
+                            <div className={style.loader}></div>
+                            <div className={style.loader2}></div>
+                        </div>
+                    </Grid>
+                    <Grid >
+                        <Grid className={classes.loadi}>
+                            <Typography
+                                variant="h4"
+                                gutterBottom
+                                className={classes.textL}
+                            >
+                            Cargando.......
+                            </Typography>
+                            </Grid>
+                            <Typography
+                                variant="h4"
+                                gutterBottom
+                                className={classes.textL}
+                            >
+                            Si la página continua de esta forma, entonces regrese a los temas.
+                            </Typography>
                     </Grid>
                     <Grid item={true} xs={12} className={classes.cont}>
                     <Button className={classes.button} >

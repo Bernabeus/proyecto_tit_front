@@ -104,12 +104,10 @@ export default function contentPage() {
     const [contentDetailA, setContentDetailA] = useState([]);
     const [themeT, setThemeT] = useState(null);
     const [contTheme, setContTheme] = useState([]);
-    const [day, setDay] = useState(null);
     const [lockedContent, setLockedContent] = useState(false);
 
     useEffect(() => {
         getAuthenticatedUser();
-        dateN();
       }, [id]);
 
       useEffect(() => {
@@ -128,24 +126,6 @@ export default function contentPage() {
     const handleChangeComponent = (state) => {
         setStateComponent(state);
     }
-
-    async function dateN() {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-    
-        if (dd < 10) {
-          dd = "0" + dd;
-        }
-    
-        if (mm < 10) {
-          mm = "0" + mm;
-        }
-    
-        today = yyyy + "/" + mm + "/" + dd;
-        setDay(today);
-      }
     
     async function contentsDetailA() {
         const contentDetail = await ContentDetails.contentsDetailsAll();
@@ -154,16 +134,15 @@ export default function contentPage() {
 
     function contentNow(idC) {
        const content = ContentDetails.update(idC, contentDetailA); 
-        return content;
+    
     }
 
     async function getAuthenticatedUser() {
     try {
       const response = await User.getAuthenticatedUser();
       contentTheme(response.data);
-      return response;
     } catch (error) {
-        console.log("Algo sucedio mal!!");
+        console.log();
     }
   }
 
@@ -173,7 +152,7 @@ export default function contentPage() {
             themeDetailA(contTheme.data.theme_id, user);
             setContTheme(contTheme.data);
         } catch(error){
-
+            console.log();
         }
       }
 
@@ -189,8 +168,7 @@ export default function contentPage() {
             }
             return 0
           });
-
-          
+  
             if(user.experience == 0 && id == 1){
                 setLockedContent(true);
             }
@@ -264,12 +242,11 @@ export default function contentPage() {
           themeInf(idT);
           return arrayTheme;
         }catch(error){
-        console.log("Algo sucedio mal!!");
+        console.log();
             
         }
       }
 
-    
     async function themeInf(idT) {
         try{
             const theme = await Theme.theme(idT);
@@ -277,12 +254,11 @@ export default function contentPage() {
             const data = {
                 content_id: id,
                 theme_id: theme.data.id,
-                date: day,
               };  
             setContentDetailA(data);
             return theme;
         }catch(error){
-        console.log("Algo sucedio mal!!");
+        console.log();
             
         }
     }
