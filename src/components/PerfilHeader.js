@@ -24,21 +24,21 @@ export default function PerfilHeader() {
         <React.Fragment>
         <CssBaseline />
             <Container>
-            <Grid container spacing={0} className={classes.header}>
-                <Grid xs={5}>
+            <Grid item={true} container spacing={0} className={classes.header}>
+                <Grid item={true} xs={5}>
 
                 </Grid>
-                <Grid xs={2} className={classes.img}> 
+                <Grid item={true} xs={2} className={classes.img}> 
                 <Image
                     src={logo} 
                     height={160}
                     width={160} 
                     /></Grid>
-                <Grid xs={4} >
+                <Grid item={true} xs={4} >
                     
                 </Grid>
                 
-                <Grid xs={1}><Logout /></Grid>
+                <Grid item={true} xs={1}><Logout /></Grid>
             </Grid>
         </Container>
     </React.Fragment>

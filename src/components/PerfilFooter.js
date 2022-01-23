@@ -24,8 +24,8 @@ export default function PerfilFooter() {
         <React.Fragment>
         <CssBaseline />
             <Container>
-            <Grid container spacing={0} className={style.footer}>
-                <Grid item xs={12} className={classes.container}>
+            <Grid item={true} container spacing={0} className={style.footer}>
+                <Grid item={true} item xs={12} className={classes.container}>
                     <Typography variant="h5" gutterBottom className={classes.text}>
                         Escuela de Formación de Tecnólogos - Escuela Politécnica Nacional
                     </Typography>

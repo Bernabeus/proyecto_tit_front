@@ -110,7 +110,7 @@ export default function contentPage() {
     useEffect(() => {
         getAuthenticatedUser();
         dateN();
-      }, [id, day]);
+      }, [id]);
 
       useEffect(() => {
 
@@ -290,20 +290,20 @@ export default function contentPage() {
         <div className={style.container}>
             <Container >
             {lockedContent == true ? 
-            <Grid>
-            <Grid container spacing={0} className={classes.headerH}>
-            <Grid xs={2} className={classes.img}> 
+            <Grid item={true}>
+            <Grid item={true} container className={classes.headerH}>
+            <Grid item={true}  xs={2} className={classes.img}> 
                 <Image
                     src={logo} 
                     height={160}
                     width={160} 
                     /></Grid>
-                <Grid xs={9} className={classes.containerH}>
+                <Grid item={true} xs={9} className={classes.containerH}>
                     <Typography variant="h3" gutterBottom className={classes.textH}>
                     {themeT && themeT.title}
                     </Typography>
                 </Grid>
-                <Grid xs={1} className={classes.gridH}>
+                <Grid item={true} xs={1} className={classes.gridH}>
                     <IconButton
                         aria-label="more"
                         aria-controls="long-menu"
@@ -331,57 +331,57 @@ export default function contentPage() {
                     </Grid>
             </Grid>
                 {stateComponent === 1 ? 
-                <Grid spacing={0} className={classes.container}>
-                <Grid spacing={0} className={classes.cont1}>
-                    <Grid>
-                    <Grid className={classes.buttonS}>
+                <Grid item={true} className={classes.container}>
+                <Grid item={true} className={classes.cont1}>
+                    <Grid item={true}>
+                    <Grid item={true} className={classes.buttonS}>
                         <Button variant="contained" onClick={() =>  handleChangeComponent(2) } className={classes.btnS}>
                             Siguiente
                         </Button>
                     </Grid>  
                     </Grid> 
-                    <Grid container className={classes.seccion}>
+                    <Grid item={true} container className={classes.seccion}>
                         <Typography variant="h4" gutterBottom className={classes.text}>
                         <ArrowForwardIosIcon style={{ fontSize: 20 }} />
                             SECCION DEL CONTENIDO
                         </Typography>    
                     </Grid> 
-                    <Grid container >
+                    <Grid item={true} container >
                          <ConteComponente />         
                     </Grid>
                 </Grid>
             </Grid>: 
-            <Grid spacing={0} className={classes.container}>
-            <Grid spacing={0} className={classes.containerPregunta}>
-            <Grid>
-                <Grid  className={classes.buttonA}>
+            <Grid item={true} className={classes.container}>
+            <Grid item={true} className={classes.containerPregunta}>
+            <Grid item={true}>
+                <Grid item={true}  className={classes.buttonA}>
                     <Button  variant="contained" onClick={() =>  handleChangeComponent(1) }  className={classes.btnA}>
                         Anterior
                     </Button>
                 </Grid>   
                 </Grid> 
-                <Grid container className={classes.seccion}>
+                <Grid item={true} container className={classes.seccion}>
                         <Typography variant="h4" gutterBottom className={classes.text}>
                         <ArrowForwardIosIcon style={{ fontSize: 20 }} />
                             SECCION DE LA PREGUNTA
                         </Typography>    
                     </Grid>  
-                <Grid container>
+                <Grid item={true} container>
                     <PreguComponente />     
                 </Grid>
             </Grid>
         </Grid>       
     }    
     </Grid>: 
-        <Grid>
-        <Grid container spacing={0} className={classes.headerH}>
-            <Grid xs={2} className={classes.img}> 
+        <Grid item={true}>
+        <Grid item={true} container className={classes.headerH}>
+            <Grid item={true} xs={2} className={classes.img}> 
                 <Image
                     src={logo} 
                     height={160}
                     width={160} 
                     /></Grid>
-                <Grid xs={10} className={classes.containerH}>             
+                <Grid item={true} xs={10} className={classes.containerH}>             
                 </Grid>
             </Grid>
         <Locked />

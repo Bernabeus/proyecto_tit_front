@@ -49,7 +49,7 @@ const Logout = () => {
 
 
   return (
-    <Grid className={classes.grid}> 
+    <Grid item={true} className={classes.grid}> 
       <IconButton
         aria-label="more"
         aria-controls="long-menu"

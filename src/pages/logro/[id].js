@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   cont1: {
     width: "100%",
     backgroundColor: "#B7B1B1",
-    alignItems: "center",
+    
     alignContent: "center",
     margin: "0 auto",
   },
@@ -52,12 +52,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Rationale",
   },
   textL: {
-    justifyContent: "left",
     fontFamily: "Rationale",
   },
   medal: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
   },
   btnS: {
@@ -69,20 +67,14 @@ const useStyles = makeStyles((theme) => ({
   box1: {
     background: "#B7B1B1",
   },
-  contText: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
   list: {
     marginTop: "-20px",
     //para centrar componentes
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
   },
   contButton: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
   },
   img: {
@@ -94,7 +86,6 @@ const useStyles = makeStyles((theme) => ({
   contAlert: {
     marginTop: 20,
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#000",
     color: "#fff",
@@ -285,12 +276,12 @@ const LogroPage = () => {
     
       <Container className={classes.containerC}>
         <CssBaseline />
-        <Grid spacing={0} direction="row"
-          justifyContent="center"
-          alignItems="stretch" className={classes.container}>
+        <Grid item={true} direction="row"
+          
+           className={classes.container}>
 
    
-          <Grid xs container className={classes.cont2}>
+          <Grid item={true} xs container className={classes.cont2}>
             <Image
               src={izq}
               height={1099}
@@ -300,20 +291,20 @@ const LogroPage = () => {
           </Grid>
 
           {lockedAchievement == true ? 
-          <Grid xs={8} container spacing={0} className={classes.cont1}>
-          <Grid xs={12}>
+          <Grid item={true} xs={8} container className={classes.cont1}>
+          <Grid item={true} xs={12}>
             <Typography variant="h3" gutterBottom className={classes.text}>
             {achievement && achievement.title}
             </Typography>
           </Grid>
-          <Grid xs={12} className={classes.medal}>
+          <Grid item={true} xs={12} className={classes.medal}>
             <Image src={achiImage ? achiImage: defecto} height={350} width={300} />
           </Grid>
-          <Grid xs={12} className={classes.contText}>
+          <Grid item={true} xs={12} className={classes.contText}>
             <Typography variant="h3" gutterBottom className={classes.text}>
               Ahora sabes:
             </Typography>
-            <Grid className={classes.list}>
+            <Grid item={true} className={classes.list}>
               <List className={classes.text}>
               {achievementI.map((logro, index) => (
                 <ListItem key={index}> 
@@ -334,7 +325,7 @@ const LogroPage = () => {
               </List>
             </Grid>
           </Grid>
-          <Grid xs={12} className={classes.contButton}>    
+          <Grid item={true} xs={12} className={classes.contButton}>    
             <Button variant="contained" className={classes.btnS} onClick={() =>  ThemeSearch() }>          
                 <Typography
                   variant="h5"
@@ -345,8 +336,8 @@ const LogroPage = () => {
                 </Typography>          
             </Button>    
           </Grid>
-          <Grid xs={12}>
-          <Grid className={classes.contAlert}>
+          <Grid item={true} xs={12}>
+          <Grid item={true} className={classes.contAlert}>
           <Collapse in={open}>
           <Typography
                   variant="h5"
@@ -362,7 +353,7 @@ const LogroPage = () => {
         <Locked />
         }
 
-          <Grid xs container className={classes.cont2} >
+          <Grid item={true} xs container className={classes.cont2} >
             <Image 
             className={classes.img}
             src={der} 

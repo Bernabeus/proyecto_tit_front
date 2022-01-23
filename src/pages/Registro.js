@@ -168,12 +168,12 @@ const RegisterPage = () => {
   
 
     return (
-        <Grid spacing={0} className={classes.fields}>
+        <Grid item={true} className={classes.fields}>
         <Typography variant="h4" gutterBottom className={classes.text}>
                 Registro
             </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid>
+            <Grid item={true}>
             <Controller
                 name="name"
                 control={control}
@@ -190,7 +190,7 @@ const RegisterPage = () => {
             />          
             <p style={{ color:"#ff0000" }}>{errors.name?.message}</p>
             </Grid>
-            <Grid>
+            <Grid item={true}>
                 <Controller
                     name="email"
                     control={control}
@@ -208,7 +208,7 @@ const RegisterPage = () => {
                 />
                 <p style={{ color:"#ff0000" }}>{errors.email?.message}</p>
             </Grid>
-            <Grid className={classes.contr}>
+            <Grid item={true} className={classes.contr}>
             <Controller
                 name="password"
                 control={control}
@@ -250,7 +250,7 @@ const RegisterPage = () => {
             />
             <p style={{ color:"#ff0000" }}>{errors.password?.message}</p>
             </Grid>
-            <Grid className={classes.contr2}>
+            <Grid item={true} className={classes.contr2}>
 
             <Controller
                 name="password_confirmation"

@@ -138,7 +138,6 @@ const useStyles = makeStyles((theme) => ({
       contAlert: {
     marginTop: 20,
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#000",
     color: "#fff",
@@ -404,11 +403,11 @@ const PreguComponente = () => {
     }
       
     return (
-    <Grid container>
-        <Grid container className={classes.containerPreg}>
-            <Grid xs={12} className={classes.pregunta}>
-                <Grid xs={1}></Grid>
-                <Grid xs={4}>
+    <Grid item={true} container>
+        <Grid item={true} container className={classes.containerPreg}>
+            <Grid item={true} xs={12} className={classes.pregunta}>
+                <Grid item={true} xs={1}></Grid>
+                <Grid item={true} xs={4}>
                 <Typography
                     variant="h5"
                     gutterBottom
@@ -417,13 +416,13 @@ const PreguComponente = () => {
                     Pregunta: {contents && contents.question} 
                 </Typography>
                 </Grid>
-                <Grid xs={7}>
+                <Grid item={true} xs={7}>
                 <form onSubmit={handleSubmit}>
                 {stateRes === 1 ?
-                    <Grid className={classes.radioGr}>
+                    <Grid item={true} className={classes.radioGr}>
                     <RadioGroup defaultValue="" value={value} onChange={handleRadioChange}  name="customized-radios">
-                    {contentsA.map((contenido) => (
-                        <FormControlLabel value={contenido} control={<StyledRadio />} label={
+                    {contentsA.map((contenido, index) => (
+                        <FormControlLabel value={contenido} key={index} control={<StyledRadio />} label={
                         <Typography
                         variant="h5"
                         gutterBottom
@@ -436,10 +435,10 @@ const PreguComponente = () => {
                     </RadioGroup>
 
                     </Grid>:
-                        <Grid className={classes.radioGr}>
+                        <Grid item={true} className={classes.radioGr}>
                         <RadioGroup defaultValue="" value="disabled" onChange={handleRadioChange}  name="customized-radios">
-                        {contentsA.map((contenido) => (
-                            <FormControlLabel value={contenido} control={<StyledRadio />} label={
+                        {contentsA.map((contenido, index) => (
+                            <FormControlLabel value={contenido} key={index} control={<StyledRadio />} label={
                             <Typography
                             variant="h5"
                             gutterBottom
@@ -454,7 +453,7 @@ const PreguComponente = () => {
                         </Grid>
                     
                     }
-                    <Grid item={true} xs={6} className={classes.btnPreg}>
+                    <Grid item={true} item={true} xs={6} className={classes.btnPreg}>
                         <Button type="submit" variant="contained" disabled={btnDisabled} className={classes.btn} >
                                 <Typography
                                 variant="h5"
@@ -470,7 +469,7 @@ const PreguComponente = () => {
             </Grid>
 
             {option === 2 ? 
-                <Grid xs={12} className={classes.respuesta}>
+                <Grid item={true} xs={12} className={classes.respuesta}>
                 <Typography
                 variant="h4"
                 gutterBottom
@@ -486,8 +485,8 @@ const PreguComponente = () => {
                     {contents && contents.feedback}
                 </Typography>
                 { nextContent === true ?
-                <Grid>
-                    <Grid className={classes.btnSig}>
+                <Grid item={true}>
+                    <Grid item={true} className={classes.btnSig}>
                     <Typography
                         variant="h4"
                         gutterBottom
@@ -496,7 +495,7 @@ const PreguComponente = () => {
                             TEMA COMPLETADO
                         </Typography>
                     </Grid>
-                    <Grid>
+                    <Grid item={true}>
                     <Button variant="contained" className={classes.btnC} onClick={() => achievementD()}>
                         <Typography
                         variant="h5"
@@ -507,7 +506,7 @@ const PreguComponente = () => {
                         </Typography>
                     </Button>
                     </Grid>
-                    <Grid className={classes.contAlert}>
+                    <Grid item={true} className={classes.contAlert}>
                         <Collapse in={open}>
                         <Typography
                                 variant="h5"
@@ -520,8 +519,8 @@ const PreguComponente = () => {
                         </Grid>
                 </Grid>
                 :
-                <Grid className={classes.btnSig}> 
-                <Grid>
+                <Grid item={true} className={classes.btnSig}> 
+                <Grid item={true}>
                 <Button variant="contained" className={classes.btnC} onClick={() => contentNext()}>
                     <Typography
                     variant="h5"
@@ -532,7 +531,7 @@ const PreguComponente = () => {
                     </Typography>
                 </Button>
                 </Grid>
-                <Grid className={classes.contAlert}>
+                <Grid item={true} className={classes.contAlert}>
                         <Collapse in={open}>
                         <Typography
                                 variant="h5"
@@ -546,7 +545,7 @@ const PreguComponente = () => {
                     </Grid>
                         }
              </Grid>
-             : option === 1 ? <Grid xs={12} className={classes.respuesta}>
+             : option === 1 ? <Grid item={true} xs={12} className={classes.respuesta}>
              <Typography
                  variant="h4"
                  gutterBottom

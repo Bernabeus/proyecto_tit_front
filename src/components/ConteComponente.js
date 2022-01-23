@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
         paddingLeft: 15,
+        paddingTop: 20
     },
     text: {
         fontFamily: "Rationale",
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ConteComponente = (props) => {
+const ConteComponente = () => {
     const classes = useStyles();
     const router = useRouter();
     const { id } = router.query;
@@ -69,8 +70,8 @@ const ConteComponente = (props) => {
 
 
   return (
-        <Grid container className={classes.containerCont}>
-            <Grid container item={true} xs={6} className={classes.img}>
+        <Grid item={true} container className={classes.containerCont}>
+            <Grid item={true} container item={true} xs={6} className={classes.img}>
                 <Box>
                 <Image
               src={contentImage ? contentImage : defecto}
@@ -80,7 +81,7 @@ const ConteComponente = (props) => {
             />
                 </Box>
             </Grid>
-            <Grid item xs={4} className={classes.contenido}>
+            <Grid item={true} item xs={4} className={classes.contenido}>
                 <Typography variant="h6" gutterBottom className={classes.text}>
                 {contentsTheme && contentsTheme.description}
                 </Typography>

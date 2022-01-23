@@ -92,11 +92,11 @@ export default function PerfilBody() {
     <React.Fragment>
         <CssBaseline />
             <Container >
-            <Grid className={classes.container}>
-                <Grid  className={classes.cont1} style={{ marginLeft: '35px', marginRight: '35px' }}>
-                <Grid container className={classes.contP}>
-                    <Grid container item={true} xs={4} className={classes.contP1}>
-                        <Grid xs={12} className={classes.boxP}>
+            <Grid item={true} className={classes.container}>
+                <Grid item={true}  className={classes.cont1} style={{ marginLeft: '35px', marginRight: '35px' }}>
+                <Grid item={true} container className={classes.contP}>
+                    <Grid item={true} container item={true} xs={4} className={classes.contP1}>
+                        <Grid item={true} xs={12} className={classes.boxP}>
                             {achievementEx != 0 ? (
                                  <Box>
                                    <Image
@@ -116,7 +116,7 @@ export default function PerfilBody() {
                             } 
                         </Grid>
                     </Grid>
-                    <Grid xs={8}>
+                    <Grid item={true} xs={8}>
                         <Grid item={true} xs={12}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
                                 Nombre: {user && user.name}

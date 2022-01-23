@@ -131,7 +131,7 @@ const LoginPage = () => {
     };
 
     return (
-        <Grid className={classes.fields}>
+        <Grid item={true} className={classes.fields}>
             <Typography variant="h4" gutterBottom className={classes.text}>
                 Inicio Sesión
             </Typography>
@@ -139,7 +139,7 @@ const LoginPage = () => {
             onSubmit={handleSubmit(onFinishLog)}
             className={classes.formplace}
           >
-            <Grid>
+            <Grid item={true}>
               <Controller
                 name="email"
                 control={control}
@@ -156,10 +156,10 @@ const LoginPage = () => {
               />
               <p style={{ color:"#ff0000" }}> {errors.email?.message}</p>
             </Grid>
-                <Grid>
+                <Grid item={true}>
                 
                 </Grid>
-            <Grid>
+            <Grid item={true}>
               <Controller variant="outlined"
                 name="password"
                 control={control}
@@ -209,7 +209,7 @@ const LoginPage = () => {
                 ))}
             </ul>
             )}
-            <Grid>
+            <Grid item={true}>
               <Button type="submit" variant="outlined" className={classes.button}>
                 Iniciar Sesión
               </Button>
