@@ -40,18 +40,19 @@ const useStyles = makeStyles(() => ({
   },
   cont1: {
     width: "100%",
-    backgroundColor: "#B7B1B1",
+    backgroundColor: "#009A7E",
     
     alignContent: "center",
     margin: "0 auto",
   },
   text: {
-    color: "#000",
+    color: "#fff",
     float: "center",
     textAlign: "center",
     fontFamily: "Rationale",
   },
   textL: {
+    color: "#fff",
     fontFamily: "Rationale",
   },
   medal: {
@@ -60,9 +61,10 @@ const useStyles = makeStyles(() => ({
   },
   btnS: {
     marginTop: 45,
-    background: "#009A7E",
+    background: "#113163",
     textAlign: "center",
     fontFamily: "Rationale",
+    borderRadius: 20
   },
   box1: {
     background: "#B7B1B1",
@@ -337,7 +339,7 @@ const LogroPage = () => {
                   gutterBottom
                   className={classes.textL}
                 >
-                  Presione aqui para regresar a los temas
+                  Presione aqui para regresar a la página principal
                 </Typography>          
             </Button>    
           </Grid>

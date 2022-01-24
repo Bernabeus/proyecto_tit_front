@@ -53,6 +53,8 @@ const useStyles = makeStyles((theme) => ({
   },
   btnC: {
     background: "#000",
+    borderRadius: 30,
+    border: "2px solid #fff",
     textAlign: "center",
     width: 150,
     fontFamily: "Rationale",
@@ -312,12 +314,12 @@ export default function PPHeader() {
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails className={classes.accordTemaTe}>
-                        <Grid item={true} xs={7} className={classes.boxTemaCont}>
+                        <Grid xs={7} className={classes.boxTemaCont}>
                         <Typography variant="h4" className={classes.textB}>
                         {temas.description}
                         </Typography>
                         </Grid>
-                        <Grid item={true} xs={5} className={classes.boxTemaTe}>
+                        <Grid xs={3} className={classes.boxTemaTe}>
                           <Button variant="contained" className={classes.btnC} onClick={() => contentsDetailA(temas.id)}>                    
                               <Typography
                                 variant="h5"
@@ -329,7 +331,7 @@ export default function PPHeader() {
                             
                           </Button>
                         </Grid>
-                        <Grid item={true} className={classes.contAlert}>
+                        <Grid xs={2} className={classes.contAlert}>
                         <Collapse in={open}>
                         <Typography
                                 variant="h5"
