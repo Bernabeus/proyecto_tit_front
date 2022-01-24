@@ -46,11 +46,12 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
     },
     respuesta: {
-        backgroundColor: "#fff",
-        fontFamily: "Rationale",
+        backgroundColor: "#009A7E",
         marginBottom: 50,
         paddingTop: 20,
-        border: "3px solid #000",
+        paddingLeft: 20,
+        paddingBottom: 20,
+        border: "3px solid #fff",
         borderRadius: 50,
         marginLeft:30,
         marginRight: 30,
@@ -71,10 +72,11 @@ const useStyles = makeStyles((theme) => ({
         //alignitems: "center",
     },
     btnC: {
-        background: "#009A7E",
+        background: "#113163",
         textAlign: "center",
         width: 150,
         fontFamily: "Rationale",
+        borderRadius: 40,
     },
     radioGr:{
         marginLeft: 100
@@ -150,14 +152,20 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Rationale",
   },
   btnSig: {
-      display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingTop: 50,
   },
   textR: {
-      color:"#113163",
+      color:"#fff",
       fontFamily: "Rationale",
-  }
+  },
+  textRL: {
+    WebkitTextStroke: "1px #fff",
+    color:"#113163",
+    fontFamily: "Rationale",
+}
 }));
 
 function StyledRadio(props) {
@@ -270,6 +278,7 @@ const PreguComponente = () => {
 
     //Buscaba y determinaba el logro que seria dado
     async function achievementD() {
+        setOpen(true);
         const achievementDetail = await AchievementDetails.achievementsDetailsAll();
         createAchievementDetail(achievementDetail);
       }
@@ -294,7 +303,6 @@ const PreguComponente = () => {
 
     //subida de nivel,experiencia,rango y progreso al terminar un tema
     async function contentTerTheme(){
-        setOpen(true);
         const dataRank = [
             {
               rank:'Sargento en la Ciberseguridad',
@@ -356,8 +364,8 @@ const PreguComponente = () => {
     async function contentNext(){
         try{
         setOpen(true);
-         const response = await User.getAuthenticatedUser();
-        userExpe(response.data);
+            const response = await User.getAuthenticatedUser();
+            userExpe(response.data);
         }catch (error) {
     }
         
@@ -488,14 +496,14 @@ const PreguComponente = () => {
                 <Grid item={true}>
                     <Grid item={true} className={classes.btnSig}>
                     <Typography
-                        variant="h4"
+                        variant="h3"
                         gutterBottom
-                        className={classes.textR}
+                        className={classes.textRL}
                         >
                             TEMA COMPLETADO
                         </Typography>
                     </Grid>
-                    <Grid item={true}>
+                    <Grid item={true} className={classes.btn}>
                     <Button variant="contained" className={classes.btnC} onClick={() => achievementD()}>
                         <Typography
                         variant="h5"

@@ -52,7 +52,7 @@ export default function Locked() {
                             <div className={style.loader2}></div>
                         </div>
                     </Grid>
-                    <Grid >
+                    <Grid>
                         <Grid className={classes.loadi}>
                             <Typography
                                 variant="h4"
