@@ -1,4 +1,4 @@
-Esos son las pasos para la instalación y uso del codigo.
+Esos son las pasos para la instalación y uso del código.
 
 ## Descargar
 
@@ -6,7 +6,7 @@ Copiar la Url en donde se indica en la siguiente imagen:
 
 ![image](https://user-images.githubusercontent.com/58036212/151187724-e6294586-9ed1-4d4d-9b52-10da1d2047cf.png)
 
-Luego abrir la linea de comando para ingresar el comando:
+Luego abrir la línea de comando para ingresar el comando:
 
 ```bash
 git clone <url>
@@ -22,13 +22,13 @@ cd proyecto_tit_front
 
 ## Instalación del proyecto
 
-Ahora es necesario instalar todas las dependencias necesarias para oder correr el proyecto, para la cual se usara el comando:
+Ahora es necesario instalar todas las dependencias necesarias para correr el proyecto, para la cual se usara el comando:
 
 ```bash
 npm install
 ```
 
-Cuando termine su instalacion y teniendo todo lo necesario para ejecutar un proyecto de Next.js se debera ejecutar el servidor de desarrollo con el comando:
+Cuando termine su instalación y teniendo todo lo necesario para ejecutar un proyecto de Next.js se deberá ejecutar el servidor de desarrollo con el comando:
 
 ```bash
 npm run dev
