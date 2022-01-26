@@ -1,4 +1,4 @@
-Esos son las pasos para la instalación y uso del código.
+Estos son las pasos para la instalación y uso del código.
 
 ## Descargar
 
