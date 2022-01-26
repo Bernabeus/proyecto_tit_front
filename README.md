@@ -20,7 +20,7 @@ Luego ingresar a la carpeta con el comando:
 cd proyecto_tit_front
 ```
 
-## Instalacion del proyecto
+## Instalación del proyecto
 
 Ahora es necesario instalar todas las dependencias necesarias para oder correr el proyecto, para la cual se usara el comando:
 
