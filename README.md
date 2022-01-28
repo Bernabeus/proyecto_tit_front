@@ -1,15 +1,15 @@
-Estos son las pasos para la instalación y uso del código.
+Pasos para el uso del proyecto.
 
-## Descargar
+## Descarga del proyecto
 
-Copiar la Url en donde se indica en la siguiente imagen:
+Copiar la URL:
 
 ![image](https://user-images.githubusercontent.com/58036212/151187724-e6294586-9ed1-4d4d-9b52-10da1d2047cf.png)
 
-Luego abrir la línea de comando para ingresar el comando:
+Luego una la línea de comandos para ingresar el comando con la URL copiada anteriormente:
 
 ```bash
-git clone <url>
+git clone <URL>
 ```
 
 Para realizar una copia local del proyecto en el computador.
@@ -22,7 +22,7 @@ cd proyecto_tit_front
 
 ## Instalación del proyecto
 
-Ahora es necesario instalar todas las dependencias necesarias para correr el proyecto, para la cual se usara el comando:
+Ahora es necesario instalar todas las dependencias necesarias para correr el proyecto, por lo que cual es necesario el comando:
 
 ```bash
 npm install
