@@ -6,13 +6,13 @@ Copiar la URL:
 
 ![image](https://user-images.githubusercontent.com/58036212/151187724-e6294586-9ed1-4d4d-9b52-10da1d2047cf.png)
 
-Luego una la línea de comandos para ingresar el comando con la URL copiada anteriormente:
+Luego abrir una la línea de comandos para ingresar el comando con la URL copiada anteriormente:
 
 ```bash
 git clone <URL>
 ```
 
-Para realizar una copia local del proyecto en el computador.
+Todo esto se realiza para generar una copia local del proyecto en el computador.
 
 Luego ingresar a la carpeta con el comando:
 
