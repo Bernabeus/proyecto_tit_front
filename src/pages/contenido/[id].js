@@ -26,18 +26,28 @@ import User from "../../api/user";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowDropDownCircleRoundedIcon from "@material-ui/icons/ArrowDropDownCircleRounded";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     headerH: {
         textAlign: "center",
         background: "#113163",
-        height: 160,
         alignContent: "center",
         border: "1px solid #fff",
     },
     textH: {
         fontFamily: "Rationale",
         color: "#fff",
-        marginRight: 140
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '7vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '5vw'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '5vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '4vw'
+      }
     },
     containerH: {
         marginTop: 50
@@ -64,9 +74,33 @@ const useStyles = makeStyles(() => ({
     btnA: {
         float: "left",
         fontFamily: "Rationale",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '4vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '3.5vw'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '2.5vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '2vw'
+      }
     },
     btnS: {
         fontFamily: "Rationale",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '4vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '3.5vw'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '2.5vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '2vw'
+      }
     },
     buttonS: {
         float: "right",
@@ -79,12 +113,6 @@ const useStyles = makeStyles(() => ({
     },
     cont2: {
         height: 100,
-    },
-    text: {
-        marginTop: 20,
-        fontFamily: "Rationale",
-        textAlign: "center",
-        color: "#fff",
     },
     seccion: {
         justifyContent: "center",
@@ -277,12 +305,12 @@ export default function contentPage() {
                     height={160}
                     width={160} 
                     /></Grid>
-                <Grid item={true} xs={9} className={classes.containerH}>
+                <Grid item={true} xs={8} className={classes.containerH}>
                     <Typography variant="h3" gutterBottom className={classes.textH}>
                     {themeT && themeT.title}
                     </Typography>
                 </Grid>
-                <Grid item={true} xs={1} className={classes.gridH}>
+                <Grid item={true} xs={2} className={classes.gridH}>
                     <IconButton
                         aria-label="more"
                         aria-controls="long-menu"
@@ -320,9 +348,9 @@ export default function contentPage() {
                     </Grid>  
                     </Grid> 
                     <Grid item={true} container className={classes.seccion}>
-                        <Typography variant="h4" gutterBottom className={classes.text}>
+                        <Typography variant="h4" gutterBottom className={classes.textH}>
                         <ArrowForwardIosIcon style={{ fontSize: 20 }} />
-                            SECCION DEL CONTENIDO
+                            Sección del contenido
                         </Typography>    
                     </Grid> 
                     <Grid item={true} container >
@@ -340,9 +368,9 @@ export default function contentPage() {
                 </Grid>   
                 </Grid> 
                 <Grid item={true} container className={classes.seccion}>
-                        <Typography variant="h4" gutterBottom className={classes.text}>
+                        <Typography variant="h4" gutterBottom className={classes.textH}>
                         <ArrowForwardIosIcon style={{ fontSize: 20 }} />
-                            SECCION DE LA PREGUNTA
+                            Sección de la pregunta
                         </Typography>    
                     </Grid>  
                 <Grid item={true} container>

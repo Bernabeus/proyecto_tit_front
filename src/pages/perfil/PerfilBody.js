@@ -16,16 +16,15 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import AchievementDetails from "src/api/achievementDetails";
 import Achievements from "src/api/achievement";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         backgroundColor: "#fff",
         border: "1px solid #000000",
     },
-    cont1: {
-        display: "flex",
-        alignItems: "center",
-        margin: "0 auto",      
-        height: 400,
+    contP2: {
+        paddingRight: 20,
+        paddingLeft: 20,
+        paddingTop: 10
     },
     contP: {
         backgroundColor: "#009A7E",
@@ -37,13 +36,28 @@ const useStyles = makeStyles(() => ({
     },
     text: {
         fontFamily: "Rationale",
-        color: "#fff"
+        color: "#fff",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '3vh'
+        },
+        [theme.breakpoints.up('sm')]: {
+            fontSize: '4vw'
+        },
+        [theme.breakpoints.up('md')]: {
+          fontSize: '2.5vw'
+      },
+      [theme.breakpoints.up('lg')]: {
+        fontSize: '2.5vw'
+    }
     },
     boxP: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
     },
+    progr: {
+        backgroundColor: "#fff"
+    }
 }));
 
 export default function PerfilBody() {
@@ -95,9 +109,40 @@ export default function PerfilBody() {
         <CssBaseline />
             <Container >
             <Grid item={true} className={classes.container}>
-                <Grid item={true} className={classes.cont1} style={{ marginLeft: '35px', marginRight: '35px' }}>
+                <Grid item={true} className={classes.cont1} style={{ marginLeft: '35px', marginRight: '35px', marginTop: '35px', marginBottom: '35px' }}>
                 <Grid item={true} container className={classes.contP}>
-                    <Grid item={true} container item={true} xs={4} className={classes.contP1}>
+
+                <Grid item={true} xs className={classes.contP2}>
+                        <Grid item={true} xs={12}>
+                            <Typography gutterBottom className={classes.text}>
+                                Nombre: {user && user.name}
+                            </Typography>
+                        </Grid>
+                        <Grid item={true} xs={12} className={classes.text23}>
+                            <Typography variant="h4" gutterBottom className={classes.text}>
+                                Experiencia: 
+                                <LinearProgress variant="determinate" color="secondary" className={classes.progr} value={user ? user.experience: ''} ></LinearProgress>
+                            </Typography>
+                            
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <Typography variant="h4" gutterBottom className={classes.text}>
+                                Rango: {userI ? userI.rank: ''}
+                            </Typography>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <Typography variant="h4" gutterBottom className={classes.text}>
+                                Nivel: {userI ? userI.level: ''}
+                            </Typography>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <Typography variant="h4" gutterBottom className={classes.text}>
+                                Progreso del curso: {userI ? userI.progress: '' }%
+                            </Typography>
+                        </Grid>
+                    </Grid>
+
+                    <Grid item={true} container className={classes.contP1}>
                         <Grid item={true} xs={12} className={classes.boxP}>
                             {achievementEx != 0 ? (
                                  <Box>
@@ -118,35 +163,7 @@ export default function PerfilBody() {
                             } 
                         </Grid>
                     </Grid>
-                    <Grid item={true} xs={8}>
-                        <Grid item={true} xs={12}>
-                            <Typography variant="h4" gutterBottom className={classes.text}>
-                                Nombre: {user && user.name}
-                            </Typography>
-                        </Grid>
-                        <Grid item={true} xs={12} className={classes.text23}>
-                            <Typography variant="h4" gutterBottom className={classes.text}>
-                                Experiencia: 
-                                <LinearProgress variant="determinate" className={classes.progr} value={user ? user.experience: ''} ></LinearProgress>
-                            </Typography>
-                            
-                        </Grid>
-                        <Grid item={true} xs={12}>
-                            <Typography variant="h4" gutterBottom className={classes.text}>
-                                Rango: {userI ? userI.rank: ''}
-                            </Typography>
-                        </Grid>
-                        <Grid item={true} xs={12}>
-                            <Typography variant="h4" gutterBottom className={classes.text}>
-                                Nivel: {userI ? userI.level: ''}
-                            </Typography>
-                        </Grid>
-                        <Grid item={true} xs={12}>
-                            <Typography variant="h4" gutterBottom className={classes.text}>
-                                Progreso del curso: {userI ? userI.progress: '' }%
-                            </Typography>
-                        </Grid>
-                    </Grid>
+                    
                     </Grid>
                 </Grid>
                 <Themes />

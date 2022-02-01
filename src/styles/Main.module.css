@@ -1,5 +1,7 @@
-.header {
-    font-family: Rationale;
+.headerF {
+    background-image: url("../../public/images/fondoH.png");
+    background-size: 100% 100%;
+    
 }
 
 .container {
@@ -27,4 +29,9 @@
 .Typography {
     font-family: Rationale;
     color: #fff;
+}
+
+.textT {
+    
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }

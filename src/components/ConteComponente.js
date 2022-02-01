@@ -11,12 +11,12 @@ import defecto from "../../public/images/defecto.png";
 
 const useStyles = makeStyles((theme) => ({   
     containerCont: {
-        display: "flex",
-        justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#113163",
         paddingTop: 50,
         paddingBottom: 50,
+        paddingLeft: 20,
+        paddingRight: 20,
         marginTop: 30,
         border: "3px solid #000",
         borderRadius: 50,
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 30,
     },
     contenido: {
-        height: "100%",
+        //height: "100%",
         alignItems: "center",
         backgroundColor: "#009A7E",
         borderRadius: 50,
@@ -32,17 +32,34 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        paddingTop: 20,
+        paddingBottom: 20,
         paddingLeft: 15,
-        paddingTop: 20
+        paddingRight: 15,
     },
     text: {
         fontFamily: "Rationale",
         alignItems: "center",
         color: "#fff",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '4vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '3vh'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '3.5vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '3.5vh'
+      }
     },
     img: {
         width: "100%",
-        marginRight: 20
+        height: "100%",
+        marginRight: 20,
+        paddingBottom: 5,
+        alignItems: "center"
     }
 }));
 
@@ -70,22 +87,23 @@ const ConteComponente = () => {
 
 
   return (
-        <Grid item={true} container className={classes.containerCont}>
-            <Grid item={true} container item={true} xs={6} className={classes.img}>
-                <Box>
+        <Grid item={true} container className={classes.containerCont}>     
+            <Grid>
+            <Grid xs className={classes.img}>
                 <Image
               src={contentImage ? contentImage : defecto}
               height={500}
               width={600}
               className={classes.imgT}
             />
-                </Box>
+            </Grid> 
             </Grid>
-            <Grid item={true} item xs={4} className={classes.contenido}>
+            <Grid xs className={classes.contenido}>
                 <Typography variant="h6" gutterBottom className={classes.text}>
                 {contentsTheme && contentsTheme.description}
                 </Typography>
             </Grid>
+            
         </Grid>
   );
 };
