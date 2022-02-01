@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         height: 140,
     },
     img: {
-        marginTop: "-15px"
+        marginTop: "-15px",
     }
 }));
 
@@ -28,17 +28,17 @@ export default function PerfilHeader() {
                 <Grid item={true} xs={5}>
 
                 </Grid>
-                <Grid item={true} xs={2} className={classes.img}> 
+                <Grid item={true} xs={3} className={classes.img}> 
                 <Image
                     src={logo} 
-                    height={160}
-                    width={160} 
+                    height={170}
+                    width={170} 
                     /></Grid>
-                <Grid item={true} xs={4} >
+                <Grid item={true} xs={2} >
                     
                 </Grid>
                 
-                <Grid item={true} xs={1}><Logout /></Grid>
+                <Grid item={true} xs={2}><Logout /></Grid>
             </Grid>
         </Container>
     </React.Fragment>

@@ -6,10 +6,10 @@ import "@fontsource/rationale";
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Image from "next/image";
-import ruta1 from "../../public/images/imagen1.jpg";
-import ruta2 from "../../public/images/imagen7.jpg";
-import ruta3 from "../../public/images/imagen2.jpg";
-import ruta4 from "../../public/images/imagen4.jpg";
+import ruta1 from "../../public/images/imagen1.png";
+import ruta2 from "../../public/images/imagen7.png";
+import ruta3 from "../../public/images/imagen2.png";
+import ruta4 from "../../public/images/imagen4.png";
 import ruta5 from "../../public/images/imagen5.jpg";
 import Modal from "@material-ui/core/Modal";
 import Typography from '@material-ui/core/Typography';
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
         border: "3px solid #000000"
     },
     Box1: {
-        textAlign: "right",
+        textAlign: "right",   
     },
     img: {
         marginTop: "-10px",
@@ -69,16 +69,18 @@ const useStyles = makeStyles((theme) => ({
     },
     text1: {
         fontFamily: "Rationale",
-        marginLeft: "80px",
-        marginTop: "60px",
-        color: "#113163"
+        color: "#113163",
+        fontSize: "7vw",
+        display: "flex",
+        justifyContent: "center",
     },
     text2: {
         fontFamily: "Rationale",
         marginTop: "20px",
         marginLeft: "60px",
         marginRight: "60px",
-        textAlign: "justify"
+        textAlign: "justify",
+        fontSize: "4.5vw"
     },
     container: {
         backgroundColor: "#fff",
@@ -91,6 +93,10 @@ const useStyles = makeStyles((theme) => ({
     },
     box3: {
         background: "#113163",
+        paddingBottom: 30
+    },
+    box4: {
+        alignItems: "center"
     }
 }));
 
@@ -154,7 +160,7 @@ const Ppbody = () => {
                         <Box className={classes.box2}></Box>
                     </Grid>
                 <Grid item={true} container spacing={2} className={classes.buttons}>
-                    <Grid item={true} item={true} xs={12} sm={6}>
+                    <Grid item={true} xs={12} sm={6}>
                         <Button variant="outlined" color="primary" className={classes.buttonIn} onClick={handleOpenI}>
                             Iniciar Sesión
                         </Button>
@@ -167,7 +173,7 @@ const Ppbody = () => {
                         {modIn}
                         </Modal>
                     </Grid>
-                    <Grid item={true} item={true} xs={12} sm={6}>
+                    <Grid item={true} xs={12} sm={6}>
                         <Button variant="contained" color="primary" className={classes.buttonRe} onClick={handleOpenR}>
                             Registrarse
                         </Button>
@@ -181,14 +187,14 @@ const Ppbody = () => {
                         </Modal>
                     </Grid>
                 </Grid>
-                <Grid item={true} item={true} xs={12}>
+                <Grid item={true} xs={12}>
                         <Box className={classes.box2}></Box>
                     </Grid>
-                <Grid item={true} item={true} xs={6}>
+                <Grid item={true} xs={6}>
                     <Box className={classes.box}></Box>
                 </Grid>
                 <Grid item={true} container spacing={0} className={classes.box1}>
-                    <Grid item={true} item={true} xs={12} sm={4}>
+                    <Grid item={true} xs={4}>
                         <Box className={classes.Box1}>
                             <Image
                             src={ruta4} 
@@ -197,25 +203,21 @@ const Ppbody = () => {
                             />
                         </Box>
                     </Grid>
-                    <Grid item={true} item={true} xs={12} sm={4}>
-                        <Box className={classes.Box}>
+                    <Grid item={true} xs={4}>
                             <Image
                             src={ruta2} 
-                            height={351}
-                            width={412} 
+                            height={350}
+                            width={410} 
                             />
-                        </Box>
                     </Grid>
-                    <Grid item={true} item={true} xs={12} sm={4}>
-                        <Box className={classes.Box2}>
+                    <Grid item={true} xs={4}>
                             <Image
                             src={ruta3} 
                             height={350}
                             width={370} 
                             />
-                        </Box>
                     </Grid>
-                    <Grid item={true} item={true} xs={12} className={classes.img}>
+                    <Grid item={true} xs={12} className={classes.img}>
                         <Box className={classes.Box3}>
                             <Image
                             src={ruta1} 
@@ -225,30 +227,31 @@ const Ppbody = () => {
                         </Box>
                     </Grid>
                 </Grid>
-                <Grid item={true} item={true} xs={12}>
+                <Grid item={true} xs={12}>
                         <Box className={classes.box2}></Box>
                     </Grid>
                 <Grid item={true} container spacing={0}>
-                    <Grid item={true} item={true} xs={12} sm={6}></Grid>
-                    <Grid item={true} item={true} xs={12} sm={6}>
+                    <Grid item={true} xs={12} sm={6}></Grid>
+                    <Grid item={true} xs={12} sm={6}>
                         <Box className={classes.box2}></Box>
                     </Grid>
                 </Grid>
-            <Grid item={true} container spacing={0}>
-                <Grid item={true} item={true} xs={12} sm={6}>
+            <Grid item={true} container spacing={0} className={classes.box4}>
+                <Grid item={true} xs={6} className={classes.box4}>
                     <Typography variant="h2" gutterBottom className={classes.text1}>
                         NUESTRO CURSO
                     </Typography>
+                    
                 </Grid>
-                <Grid item={true} item={true} xs={12} sm={6} className={classes.box3}>
+                <Grid item={true} xs={6} className={classes.box3}>
                     <Typography variant="h3" gutterBottom className={classes.text2}>
                         Es perfecto para obtener conocimientos sobre ciberseguridad
-                        y mejora tu protección.
+                        y mejorar tu protección.
                     </Typography>
                 </Grid>
             </Grid>
             <Grid item={true} container spacing={0}>
-                <Grid item={true} item={true} xs={12} className={classes.img1}>
+                <Grid item={true} xs={12} className={classes.img1}>
                     <Box className={classes.Box4}>
                         <Image
                         src={ruta5} 

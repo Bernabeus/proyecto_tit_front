@@ -26,7 +26,7 @@ import User from "../../api/user";
 import ContentDetails from "../../api/contentDetails";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   containerC: {
     height: "100%"
   },
@@ -50,11 +50,53 @@ const useStyles = makeStyles(() => ({
     float: "center",
     textAlign: "center",
     fontFamily: "Rationale",
+    
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '7vw'
+    },
+    [theme.breakpoints.up('sm')]: {
+        fontSize: '5vw'
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '3.3vw'
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '3vw'
+}
   },
   textL: {
     color: "#fff",
     fontFamily: "Rationale",
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '6vw'
+    },
+    [theme.breakpoints.up('sm')]: {
+        fontSize: '4vw'
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '3.3vw'
   },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '2vw'
+}
+  },
+textB: {
+  color: "#fff",
+  fontFamily: "Rationale",
+  [theme.breakpoints.up('xs')]: {
+    fontSize: '1.1vh'
+  },
+  [theme.breakpoints.up('sm')]: {
+      fontSize: '2.5vw'
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2vw'
+},
+[theme.breakpoints.up('lg')]: {
+  fontSize: '1.8vw'
+}
+},
+  
   medal: {
     display: "flex",
     justifyContent: "center",
@@ -71,7 +113,6 @@ const useStyles = makeStyles(() => ({
   },
   list: {
     marginTop: "-20px",
-    //para centrar componentes
     display: "flex",
     justifyContent: "center",
   },
@@ -79,13 +120,8 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     justifyContent: "center",
   },
-  img: {
-      height: "100%",
-  },
-  cont2: {
-    height: "100%",
-  },
   contAlert: {
+    //width: "50%",
     marginTop: 20,
     display: "flex",
     justifyContent: "center",
@@ -93,7 +129,6 @@ const useStyles = makeStyles(() => ({
     color: "#fff",
     marginLeft: 150,
     marginRight: 150,
-    //height: 50
   }
 }));
 
@@ -286,14 +321,11 @@ const LogroPage = () => {
         <Grid item={true} direction="row"
           
            className={classes.container}>
-
-   
-          <Grid item={true} xs container className={classes.cont2}>
+          <Grid item={true} xs container>
             <Image
               src={izq}
               height={1099}
               width={205}
-              className={classes.img}
             />
           </Grid>
 
@@ -337,7 +369,7 @@ const LogroPage = () => {
                 <Typography
                   variant="h5"
                   gutterBottom
-                  className={classes.textL}
+                  className={classes.textB}
                 >
                   Presione aqui para regresar a la página principal
                 </Typography>          
@@ -349,7 +381,7 @@ const LogroPage = () => {
           <Typography
                   variant="h5"
                   gutterBottom
-                  className={classes.textL}
+                  className={classes.textB}
                 >
                   Desbloqueando nuevo tema, espere un momento
                 </Typography> 
@@ -359,10 +391,8 @@ const LogroPage = () => {
         </Grid>: 
         <Locked />
         }
-
-          <Grid item={true} xs container className={classes.cont2} >
+          <Grid item={true} xs container>
             <Image 
-            className={classes.img}
             src={der} 
             height={1099} 
             width={205} 

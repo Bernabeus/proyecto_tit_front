@@ -3,9 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Image from "next/image";
-import style from "@/styles/Main.module.css";
 import portada from "../../../public/images/portadaInfo.jpg";
-import banner from "../../../public/images/banner.jpg";
+import banner from "../../../public/images/imagen5.png";
+import banner1 from "../../../public/images/imagen1.png";
+import logro1 from "../../../public/images/t1B.png";
+import logro2 from "../../../public/images/t2B.png";
+import logro3 from "../../../public/images/t1I.png";
+import logro4 from "../../../public/images/t2I.png";
+import logro5 from "../../../public/images/t1A.png";
+import logro6 from "../../../public/images/t2A.png";
 import Divider from "@material-ui/core/Divider";
 import NoEncryptionIcon from '@mui/icons-material/NoEncryption';
 import SecurityIcon from '@mui/icons-material/Security';
@@ -37,8 +43,18 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "center",
         backgroundColor: "#113163",
         textDecorationLine: "underline",
-        marginTop: "-15px",
-        marginLeft: "-60px",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '4.5vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '4vw'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '3.5vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '3vw'
+      }
     },
     titleCover: {
         fontFamily: "Rationale",
@@ -74,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "center",
         color: "#113163",
         fontFamily: "Rationale",
+        
     },
     bannerContent: {
         textAlign: "center",
@@ -95,6 +112,18 @@ const useStyles = makeStyles((theme) => ({
     textBtn: {
         color: "#fff",
         fontFamily: "Rationale",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '2.5vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '2vw'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '1.5vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '1.3vw'
+      }
     }
 
 }));
@@ -177,7 +206,7 @@ const InformationPage = () => {
             <Grid item={true} container >
                 <Grid item={true} xs={12} md={6} lg={6} className={classes.imageBanner}>
                     <Image
-                        src={banner}
+                        src={banner1}
                         height={300}
                         width={650}
                     />
@@ -188,6 +217,94 @@ const InformationPage = () => {
                     <Typography variant="h6" gutterBottom className={classes.textList}><PublishedWithChangesIcon />Avanza con los temas en modo básico, intermedio y avanzado.</Typography>
                     <Typography variant="h6" gutterBottom className={classes.textList}><StarIcon />Consigue insignias con cada tema completado.</Typography>
                     <Typography variant="h6" gutterBottom className={classes.textList}><ShowChartIcon />Sube de rango y alcanza el rango de Capitán General en la Ciberseguridad.</Typography>
+                </Grid>
+            </Grid>
+            <Grid item={true} item xs={12} className={classes.bannerContent}>
+                <Divider className={classes.dividerTransparent} />
+                <Typography variant="h4" gutterBottom className={classes.bannerTitle}>Logros del curso</Typography>
+            </Grid>
+            <Grid item={true} container >
+                <Grid item={true} xs={12} md={6} lg={6} className={classes.contentStyle}>
+                    <Typography variant="h5" gutterBottom className={classes.textList}>Al completar un tema se desbloqueará un logro con su respectiva medalla, estas son:</Typography>
+                    <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
+                    <Grid>
+                    <Image
+                        src={logro1}
+                        height={70}
+                        width={70}
+                    />
+                    </Grid>
+                    <Grid >
+                    <Typography variant="h6" gutterBottom className={classes.textList}>Del primer tema con la dificultad Básico.<br />Rango obtenido: Sargento en la Ciberseguridad</Typography>
+                    </Grid>                 
+                    </Grid>
+                    <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
+                    <Grid>
+                    <Image
+                        src={logro2}
+                        height={70}
+                        width={70}
+                    />
+                    </Grid>
+                    <Grid>
+                    <Typography variant="h6" gutterBottom className={classes.textList}>Del segundo tema con la dificultad Básico.<br />Rango obtenido: Subteniente en la Ciberseguridad</Typography>
+                    </Grid>
+                    </Grid>
+                    <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
+                    <Grid>
+                    <Image
+                        src={logro3}
+                        height={70}
+                        width={70}
+                    />
+                    </Grid>
+                    <Grid>
+                    <Typography variant="h6" gutterBottom className={classes.textList}>Del primer tema con la dificultad Intermedio.<br />Rango obtenido: Coronel en la Ciberseguridad</Typography>
+                    </Grid>
+                    </Grid>
+                    <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
+                    <Grid>
+                    <Image
+                        src={logro4}
+                        height={70}
+                        width={70}
+                    />
+                    </Grid>
+                    <Grid>
+                    <Typography variant="h6" gutterBottom className={classes.textList}>Del segundo tema con la dificultad Intermedio.<br />Rango obtenido: Teniente en la Ciberseguridad</Typography>
+                    </Grid>
+                    </Grid>
+                    <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
+                    <Grid>
+                    <Image
+                        src={logro5}
+                        height={70}
+                        width={70}
+                    />
+                    </Grid>
+                    <Grid>
+                    <Typography variant="h6" gutterBottom className={classes.textList}>Del primer tema con la dificultad Avanzado.<br />Rango obtenido: Coronel en la Ciberseguridad</Typography>
+                    </Grid>
+                    </Grid>
+                    <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
+                    <Grid>
+                    <Image
+                        src={logro6}
+                        height={70}
+                        width={70}
+                    />
+                    </Grid>
+                    <Grid>
+                    <Typography variant="h6" gutterBottom className={classes.textList}>Del segundo tema con la dificultad Avanzado.<br />Rango obtenido: Capitán General en la Ciberseguridad</Typography>
+                    </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item={true} xs={12} md={6} lg={6} className={classes.imageBanner}>
+                    <Image
+                        src={banner}
+                        height={570}
+                        width={650}
+                    />
                 </Grid>
             </Grid>
         </Grid>

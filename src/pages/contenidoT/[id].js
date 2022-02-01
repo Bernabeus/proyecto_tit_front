@@ -22,14 +22,26 @@ const useStyles = makeStyles((theme) => ({
     headerH: {
         textAlign: "center",
         background: "#113163",
-        height: 160,
+        //height: 160,
         alignContent: "center",
         border: "1px solid #fff",
     },
     textH: {
         fontFamily: "Rationale",
         color: "#fff",
-        marginRight: 140
+        //marginRight: 140,
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '6vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '4.2vw'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '4vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '3vw'
+      }
     },
     containerH: {
         marginTop: 50,
@@ -57,14 +69,39 @@ const useStyles = makeStyles((theme) => ({
         border: "3px solid #000",
         borderRadius: 50,
         background: "#113163",
-
+        marginRight: 50,
+        marginLeft: 50
     },
     textT: {
         color: "#009A7E",
         fontFamily: "Rationale",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '5vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '3.5vw'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '4vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '2.5vw'
+      }
     },
     textC: {
         fontFamily: "Rationale",
+        [theme.breakpoints.up('xs')]: {
+            fontSize: '4vw'
+          },
+          [theme.breakpoints.up('sm')]: {
+              fontSize: '3.2vw'
+          },
+          [theme.breakpoints.up('md')]: {
+            fontSize: '3.5vw'
+        },
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '2vw'
+      }
     }
 
 }));
@@ -125,12 +162,12 @@ export default function contentPage() {
                     height={160}
                     width={160} 
                     /></Grid>
-                <Grid item={true} xs={7} className={classes.containerH}>
+                <Grid item={true} xs={6} className={classes.containerH}>
                     <Typography variant="h4" gutterBottom className={classes.textH}>
                     Contenidos del tema: {themeT && themeT.title}
                     </Typography>
                 </Grid>
-                <Grid item={true} xs={1} className={classes.gridH}>
+                <Grid item={true} xs={2} className={classes.gridH}>
                     <IconButton
                         aria-label="more"
                         aria-controls="long-menu"
@@ -156,14 +193,13 @@ export default function contentPage() {
                         </MenuItem>
                     </Menu>
                     </Grid>
-                    <Grid item={true} xs={1}></Grid>
             </Grid>   
             <Grid item={true} className={classes.container}>
                 <Grid item={true} className={classes.cont1}>
                     <Grid item={true} style={{ marginBottom: '50px'}}>
                     {contentAll.map((cont, index) => (
-                        <Grid item={true} key={index} className={classes.containerContent}  style={{ marginLeft: '70px', marginRight: '70px' }}>
-                            <Grid item={true} style={{ marginLeft: '70px', marginRight: '70px', marginTop: '20px', marginBottom: '20px' }}>
+                        <Grid  key={index} className={classes.containerContent}>
+                            <Grid style={{ marginLeft: '20px', marginRight: '20px', marginTop: '20px', marginBottom: '20px' }}>
                             <Typography variant="h4" gutterBottom className={classes.textT}>
                                 Contenido {index + 1}
                             </Typography> 

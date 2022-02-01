@@ -9,15 +9,19 @@ import { Button } from "@material-ui/core";
 import style from "@/styles/Loading.module.css";
 
 const useStyles = makeStyles((theme) => ({
+    cp:{    
+        border: "1px solid #fff",
+    },
     textL: {
         fontFamily: "Rationale",
-        color: "#000",
+        color: "#fff",
     },
     container: {
-        height: 900,
+        height: 1000,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#000",
     },
     button: {
         marginTop: 45,
@@ -29,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        
     },
     loadi:{
         display: "flex",
@@ -44,14 +49,8 @@ export default function Locked() {
         <React.Fragment>
         <CssBaseline />
             <Container>
-            <Grid item={true}>
+            <Grid item={true} className={classes.cp}>
                 <Grid item={true} container className={classes.container}>
-                    <Grid item={true} xs={12} className={classes.loadi}>
-                        <div className={style.loaderContainer}>
-                            <div className={style.loader}></div>
-                            <div className={style.loader2}></div>
-                        </div>
-                    </Grid>
                     <Grid>
                         <Grid className={classes.loadi}>
                             <Typography
@@ -59,7 +58,7 @@ export default function Locked() {
                                 gutterBottom
                                 className={classes.textL}
                             >
-                            Cargando.......
+                            Cargando datos.......
                             </Typography>
                             </Grid>
                             <Typography
@@ -67,8 +66,14 @@ export default function Locked() {
                                 gutterBottom
                                 className={classes.textL}
                             >
-                            Si la página continua de esta forma, entonces regrese a los temas.
+                            Si la página continua de esta forma presione el botón para regresar a los temas.
                             </Typography>
+                    </Grid>
+                    <Grid item={true} xs={12} className={classes.loadi}>
+                        <div className={style.loaderContainer}>
+                            <div className={style.loader}></div>
+                            <div className={style.loader2}></div>
+                        </div>
                     </Grid>
                     <Grid item={true} xs={12} className={classes.cont}>
                     <Button className={classes.button} >

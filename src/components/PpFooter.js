@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/auth";
 import { makeStyles } from "@material-ui/core/styles";
 import Loading from "./Loading";
 import style from "@/styles/Main.module.css";
+import Link from "next/link";
 import Footer from "./PerfilFooter";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +45,9 @@ export default function Ppfooter() {
                         <Grid container spacing={0}>
                             <Grid item={true} xs={12}>
                                 <Box>
+                                    <Link  href="https://www.facebook.com">
                                     <FacebookIcon className={classes.icons} fontSize="large" />
+                                    </Link>
                                     <MailIcon className={classes.icons} fontSize="large" />
                                 </Box>
                             </Grid>

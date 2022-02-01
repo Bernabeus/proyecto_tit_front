@@ -20,6 +20,7 @@ import StarIcon from '@material-ui/icons/Star';
 import { useRouter } from "next/router";
 import User from "../api/user";
 import Collapse from '@material-ui/core/Collapse';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,13 +57,40 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 30,
     border: "2px solid #fff",
     textAlign: "center",
-    width: 150,
     fontFamily: "Rationale",
   },
   textB: {
     textAlign: "center",
     fontFamily: "Rationale",
     color: "#fff",
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '3.5vh'
+    },
+    [theme.breakpoints.up('sm')]: {
+        fontSize: '6vw'
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '5vw'
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '3.5vw'
+}
+  },
+  textBt: {
+    fontFamily: "Rationale",
+    color: "#fff",
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '2vh'
+    },
+    [theme.breakpoints.up('sm')]: {
+        fontSize: '3.5vw'
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '2.5vw'
+  },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '2.5vw'
+}
   },
   textBD: {
     fontFamily: "Rationale",
@@ -127,20 +155,27 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Rationale",
 },
 contAlert: {
-    marginTop: 20,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#000",
-    color: "#fff",
-    marginLeft: 150,
-    marginRight: 150,
-    //height: 50
+    
   },
   textL: {
-    justifyContent: "left",
+    color: "#fff",
     fontFamily: "Rationale",
+    [theme.breakpoints.up('xs')]: {
+      fontSize: '2.8vh'
+    },
+    [theme.breakpoints.up('sm')]: {
+        fontSize: '4.2vw'
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '3vw'
   },
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '2.5vw'
+}
+  },
+  boxTemaTe: {
+
+  }
 }));
 
 export default function PPHeader() {
@@ -314,32 +349,26 @@ export default function PPHeader() {
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails className={classes.accordTemaTe}>
-                        <Grid xs={7} className={classes.boxTemaCont}>
-                        <Typography variant="h4" className={classes.textB}>
+                        <Grid xs className={classes.boxTemaCont}>
+                        <Typography variant="h4" className={classes.textL}>
                         {temas.description}
                         </Typography>
                         </Grid>
-                        <Grid xs={3} className={classes.boxTemaTe}>
+                        <Grid xs className={classes.boxTemaTe}>
                           <Button variant="contained" className={classes.btnC} onClick={() => contentsDetailA(temas.id)}>                    
                               <Typography
                                 variant="h5"
                                 gutterBottom
-                                className={classes.textB}
+                                className={classes.textBt}
                               >
                                 INGRESAR AL TEMA
                               </Typography>
                             
                           </Button>
                         </Grid>
-                        <Grid xs={2} className={classes.contAlert}>
+                        <Grid xs className={classes.contAlert}>
                         <Collapse in={open}>
-                        <Typography
-                                variant="h5"
-                                gutterBottom
-                                className={classes.textL}
-                              >
-                                CARGANDO, ESPERE UN MOMENTO
-                              </Typography> 
+                        <CircularProgress color="inherit" />
                         </Collapse>
                         </Grid>
                       </AccordionDetails>
@@ -375,7 +404,7 @@ export default function PPHeader() {
                     </AccordionSummary>
                     <AccordionDetails className={classes.accordTemaTeF}>
                       <Grid item={true} xs={7} className={classes.boxTemaCont}>
-                      <Typography variant="h4" className={classes.textB}>
+                      <Typography variant="h4" className={classes.textL}>
                         Ingresa aqui para volver a mirar los contenidos de este tema.
                       </Typography>
                       </Grid>
@@ -385,7 +414,7 @@ export default function PPHeader() {
                             <Typography
                               variant="h5"
                               gutterBottom
-                              className={classes.textB}
+                              className={classes.textBt}
                             >
                               Ingresar
                             </Typography>
