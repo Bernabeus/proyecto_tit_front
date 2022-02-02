@@ -56,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center"
     },
     progr: {
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        height: 20
     }
 }));
 
@@ -121,7 +122,7 @@ export default function PerfilBody() {
                         <Grid item={true} xs={12} className={classes.text23}>
                             <Typography variant="h4" gutterBottom className={classes.text}>
                                 Experiencia: 
-                                <LinearProgress variant="determinate" color="secondary" className={classes.progr} value={user ? user.experience: ''} ></LinearProgress>
+                                <LinearProgress variant="determinate" color="secondary" className={classes.progr} value={userI ? userI.experience: ''} ></LinearProgress>
                             </Typography>
                             
                         </Grid>

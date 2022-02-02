@@ -227,74 +227,74 @@ const InformationPage = () => {
                 <Grid item={true} xs={12} md={6} lg={6} className={classes.contentStyle}>
                     <Typography variant="h5" gutterBottom className={classes.textList}>Al completar un tema se desbloqueará un logro con su respectiva medalla, estas son:</Typography>
                     <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
-                    <Grid>
+                    <Grid xs={12} md={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <Image
                         src={logro1}
                         height={70}
                         width={70}
                     />
                     </Grid>
-                    <Grid >
+                    <Grid xs={12} md={8}>
                     <Typography variant="h6" gutterBottom className={classes.textList}>Del primer tema con la dificultad Básico.<br />Rango obtenido: Sargento en la Ciberseguridad</Typography>
                     </Grid>                 
                     </Grid>
                     <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
-                    <Grid>
+                    <Grid  xs={12} md={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <Image
                         src={logro2}
                         height={70}
                         width={70}
                     />
                     </Grid>
-                    <Grid>
+                    <Grid xs={12} md={8}>
                     <Typography variant="h6" gutterBottom className={classes.textList}>Del segundo tema con la dificultad Básico.<br />Rango obtenido: Subteniente en la Ciberseguridad</Typography>
                     </Grid>
                     </Grid>
                     <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
-                    <Grid>
+                    <Grid xs={12} md={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <Image
                         src={logro3}
                         height={70}
                         width={70}
                     />
                     </Grid>
-                    <Grid>
+                    <Grid xs={12} md={8}>
                     <Typography variant="h6" gutterBottom className={classes.textList}>Del primer tema con la dificultad Intermedio.<br />Rango obtenido: Coronel en la Ciberseguridad</Typography>
                     </Grid>
                     </Grid>
                     <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
-                    <Grid>
+                    <Grid xs={12} md={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <Image
                         src={logro4}
                         height={70}
                         width={70}
                     />
                     </Grid>
-                    <Grid>
+                    <Grid xs={12} md={8}>
                     <Typography variant="h6" gutterBottom className={classes.textList}>Del segundo tema con la dificultad Intermedio.<br />Rango obtenido: Teniente en la Ciberseguridad</Typography>
                     </Grid>
                     </Grid>
                     <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
-                    <Grid>
+                    <Grid xs={12} md={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <Image
                         src={logro5}
                         height={70}
                         width={70}
                     />
                     </Grid>
-                    <Grid>
+                    <Grid xs={12} md={8}>
                     <Typography variant="h6" gutterBottom className={classes.textList}>Del primer tema con la dificultad Avanzado.<br />Rango obtenido: Coronel en la Ciberseguridad</Typography>
                     </Grid>
                     </Grid>
                     <Grid container style={{ display: 'flex', justifyContent: 'center'}}>
-                    <Grid>
+                    <Grid xs={12} md={2} style={{display: 'flex', justifyContent: 'center'}}>
                     <Image
                         src={logro6}
                         height={70}
                         width={70}
                     />
                     </Grid>
-                    <Grid>
+                    <Grid xs={12} md={8}>
                     <Typography variant="h6" gutterBottom className={classes.textList}>Del segundo tema con la dificultad Avanzado.<br />Rango obtenido: Capitán General en la Ciberseguridad</Typography>
                     </Grid>
                     </Grid>

@@ -153,10 +153,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 100,
     textAlign: "center",
     fontFamily: "Rationale",
+    paddingLeft: 25,
+    paddingRigth: 25,
+
 },
-contAlert: {
-    
-  },
   textL: {
     color: "#fff",
     fontFamily: "Rationale",
@@ -170,11 +170,8 @@ contAlert: {
       fontSize: '3vw'
   },
   [theme.breakpoints.up('lg')]: {
-    fontSize: '2.5vw'
+    fontSize: '2vw'
 }
-  },
-  boxTemaTe: {
-
   }
 }));
 
