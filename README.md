@@ -39,3 +39,7 @@ yarn dev
 Posterior a ello abrimos la URl [http://localhost:3000](http://localhost:3000) desde cualquier navegador para ver el resultado. 
 
 Una sugerencia es tener desactivado un bloqueador de cookies para enviar los datos al servidor de heroku en el cual esta desplegado el API REST del backend.
+
+## DESPLIEGUE EN VERCEL
+Para acceder al sitio web desplegado en Vercel ingrese al siguiente enlace:
+https://ciberseccourse.vercel.app
